@@ -1,5 +1,25 @@
-{{page-title "FrontendFm"}}
+{{page-title "Shop backoffice"}}
 
-<h2 id="title">Welcome to Ember</h2>
+<BsNavbar as |navbar|>
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    <LinkTo @route="index" class="navbar-brand">
+      Backoffice
+    </LinkTo>
+  </div>
+  <navbar.content class="container">
+    <navbar.nav as |nav|>
+      <nav.item>
+        <nav.link-to @route="index">Home</nav.link-to>
+      </nav.item>
+      <nav.item>
+        <nav.link-to @route="index">Product groups</nav.link-to>
+      </nav.item>
+      <nav.item>
+        <nav.link-to @route="index">Products</nav.link-to>
+      </nav.item>
+    </navbar.nav>
+  </navbar.content>
+</BsNavbar>
 
 {{outlet}}
