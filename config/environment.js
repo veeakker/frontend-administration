@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'frontend-fm',
+    modulePrefix: 'freddie',
     environment,
     rootURL: '/',
     locationType: 'auto',

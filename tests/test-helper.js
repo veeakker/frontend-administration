@@ -1,5 +1,5 @@
-import Application from 'frontend-fm/app';
-import config from 'frontend-fm/config/environment';
+import Application from 'freddie/app';
+import config from 'frieddie/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';

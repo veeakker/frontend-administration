@@ -1,8 +1,8 @@
 {
-  "name": "frontend-fm",
+  "name": "freddie",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for frontend-fm goes here",
+  "description": "Backoffice application for the webshop",
   "repository": "",
   "license": "MIT",
   "author": "",
