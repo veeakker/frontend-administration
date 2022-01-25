@@ -1,3 +1,5 @@
-import Route from '@ember/routing/route';
+import DataTableRoute from 'ember-data-table/route';
 
-export default class ProductsRoute extends Route {}
+export default class ProductsRoute extends DataTableRoute {
+  modelName = 'product';
+}

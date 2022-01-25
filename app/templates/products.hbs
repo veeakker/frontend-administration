@@ -2,6 +2,22 @@
 
 <div class="container">
   <h1>Products</h1>
+
+  <BsTable
+    @content={{@model}}
+    @fields="plu label isEnabled"
+    @isLoading={{this.isLoadingModel}}
+    @filter={{this.filter}}
+    @sort={{this.sort}}
+    @page={{this.page}}
+    @size={{this.size}}
+    @autoSearch={{true}}
+    @lineNumbers={{true}}
+    @updatePage={{fn (mut this.page)}}
+    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
+    @updateFilter={{fn (mut this.filter)}}
+    @updateSort={{fn (mut this.sort)}}>
+  </BsTable>
 </div>
 
 {{outlet}}
