@@ -1,2 +1,11 @@
 @import "ember-bootstrap/bootstrap";
-@import "ember-data-table"
+
+.sortable {
+  &.sorted.asc:after { content: "↓"; }
+  &.sorted.desc:after { content: "↑"; }
+
+  &:hover:after { color: darkgrey; }
+  &:hover:after { content: "↓"; }
+  &.sorted.asc:hover:after { content: "↓↑"; }
+  &.sorted.desc:hover:after { content: "↑"; color: lightgrey; }
+}
