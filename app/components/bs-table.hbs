@@ -15,6 +15,7 @@
   @updatePageSize={{@updatePageSize}} {{!-- change to size or vice-versa? --}}
   @updateFilter={{@updateFilter}}
   @updateSort={{@updateSort}}
+  @link={{@link}}
   as |dt|>
   {{!-- START: search --}}
   {{#if dt.enableSearch}}
@@ -118,6 +119,9 @@
                     </header.ThSortable>
                   {{/each}}
                 {{/if}}
+                {{#if header.linkedRoute}}
+                  <th>{{!-- link --}}</th>
+                {{/if}}
               </tr>
             </thead>
           {{/if}}
@@ -148,7 +152,7 @@
                           {{on "click" row.onClickRow}}>
                           {{#if row.enableSelection}}
                             <td class="center">
-                              {{input type="checkbox" checked=row.isSelected click=row.toggleSelected}}
+                              {{input type="checkbox" checked=row.isSelected click=row.toggleSelected }}
                             </td>
                           {{/if}}
                           {{#if row.enableLineNumbers}}
@@ -165,11 +169,7 @@
                                   {{else if (has-block "data-cell")}}
                                     {{yield cell to="data-cell"}}
                                   {{else}}
-                                    {{#if cell.linkedRoute}}
-                                      {{#link-to cell.linkedRoute cell.item tagName="td"}}{{cell.value}}{{/link-to}}
-                                    {{else}}
-                                      <td>{{cell.value}}</td>
-                                    {{/if}}
+                                    <td>{{cell.value}}</td>
                                   {{/if}}
                                 </dataCells.DataCell>
                               {{/if}}
@@ -189,6 +189,9 @@
                               {{/each}}
                             {{/if}}
                           </row.DataCells>
+                          {{#if row.linkedRoute}}
+                            <LinkTo @route={{row.linkedRoute}} @model={{row.item}}>Open</LinkTo>
+                          {{/if}}
                         </tr>
                       {{/if}}
                     </body.Row>

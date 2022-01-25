@@ -7,6 +7,8 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('products');
+  this.route('products', function () {
+    this.route('show', { path: "/:product" });
+  });
   this.route('product-groups');
 });
