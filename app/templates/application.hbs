@@ -1,6 +1,6 @@
 {{page-title "Shop backoffice"}}
 
-<BsNavbar as |navbar|>
+<BsNavbar @type="dark" class="bg-dark"  as |navbar|>
   <div class="navbar-header">
     {{navbar.toggle}}
     <LinkTo @route="index" class="navbar-brand">
@@ -21,5 +21,7 @@
     </navbar.nav>
   </navbar.content>
 </BsNavbar>
+
+<div class="mt-4"></div>
 
 {{outlet}}
