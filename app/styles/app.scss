@@ -1,4 +1,5 @@
 @import "ember-bootstrap/bootstrap";
+@import "bootstrap-icons";
 
 .sortable {
   &.sorted.asc:after { content: "↓"; }

@@ -8,6 +8,16 @@ module.exports = function (defaults) {
       bootstrapVersion: 5,
       importBootstrapCSS: false,
     },
+    sassOptions: {
+      includePaths: ['node_modules/bootstrap-icons/font/'],
+    },
+  });
+
+  app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff', {
+    destDir: 'assets/fonts',
+  });
+  app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2', {
+    destDir: 'assets/fonts',
   });
 
   // Use `app.import` to add additional libraries to the generated
