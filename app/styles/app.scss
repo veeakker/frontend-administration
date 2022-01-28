@@ -2,11 +2,37 @@
 @import "bootstrap-icons";
 
 .sortable {
-  &.sorted.asc:after { content: "↓"; }
-  &.sorted.desc:after { content: "↑"; }
+  /* &.sorted.asc:after { content: "↓"; } */
+  /* &.sorted.desc:after { content: "↑"; } */
+  &:after {
+    /* from bootstrap-icons bi */
+    display: inline-block;
+    font-family: $bootstrap-icons-font !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-  &:hover:after { color: darkgrey; }
-  &:hover:after { content: "↓"; }
-  &.sorted.asc:hover:after { content: "↓↑"; }
-  &.sorted.desc:hover:after { content: "↑"; color: lightgrey; }
+  &.sorted.asc:after {
+    color: inherit;
+    content: "\f575";
+  }
+  &.sorted.desc:after {
+    color: inherit;
+    content: "\f57b";
+  }
+  &:hover:after {
+    color: grey;
+    content: "\f575";
+  }
+}
+
+h1>small {
+  color: grey;
+  font-size: 1.5rem;
 }

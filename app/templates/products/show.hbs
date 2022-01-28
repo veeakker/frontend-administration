@@ -1,7 +1,30 @@
 {{page-title "Show"}}
 
 <div class="container">
-  <h1>{{@model.label}}</h1>
+  <h1>{{@model.label}}<small>, product in detail</small></h1>
+
+  <div class="row">
+    <div class="col-12 col-md-8 bg-white h-100 p5 border rounded-3">
+      <DetailsCard>
+        <:title>Details</:title>
+        <:body as |Dt Dd|>
+          <Dt>plu</Dt><Dd>{{@model.plu}}</Dd>
+          <Dt>enabled</Dt><Dd>{{@model.isEnabled}}</Dd>
+          <Dt>label</Dt><Dd>{{@model.label}}</Dd>
+          <Dt>altLabel</Dt><Dd>{{@model.altLabel}}</Dd>
+          <Dt>description</Dt><Dd>{{@model.description}}</Dd>
+          <Dt>ingredientsText</Dt><Dd>{{@model.ingredientsText}}</Dd>
+          <Dt>allergensText</Dt><Dd>{{{@model.allergensText}}}</Dd>
+          <Dt>nutricionDataText</Dt><Dd>{{{@model.nutricionDataText}}}</Dd>
+          <Dt>sortIndex</Dt><Dd>{{@model.sortIndex}}</Dd>
+          <Dt>productLabels</Dt><Dd>{{@model.productLabels}}</Dd>{{!-- TODO: render these in a nicer way --}}
+        </:body>
+      </DetailsCard>
+    </div>
+    <div class="col-12 col-md-4">
+      World
+    </div>
+  </div>
 </div>
 
 {{outlet}}

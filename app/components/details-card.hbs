@@ -1,0 +1,8 @@
+<div class="card-body">
+  {{#if (has-block "title")}}
+    <h5 class="">{{yield to="title"}}</h5>
+  {{/if}}
+  <dl class="row">
+    {{yield (component "details-card/dt") (component "details-card/dd") to="body"}}
+  </dl>
+</div>

@@ -190,7 +190,11 @@
                             {{/if}}
                           </row.DataCells>
                           {{#if row.linkedRoute}}
-                            <LinkTo @route={{row.linkedRoute}} @model={{row.item}}>Open</LinkTo>
+                            <td>
+                              <LinkTo @route={{row.linkedRoute}} @model={{row.item}}>
+                                <i class="bi bi-file-earmark-richtext" aria-label="detail" />
+                              </LinkTo>
+                            </td>
                           {{/if}}
                         </tr>
                       {{/if}}
