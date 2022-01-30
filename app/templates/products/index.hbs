@@ -33,7 +33,7 @@
       {{#if (eq cell.label "unitPrice")}}
         {{#let cell.value.value cell.value.unit as |euros unit|}}
           {{#if (and euros unit)}}
-            &euro; {{euros}} per {{unit}}
+            &euro; {{euros}} per {{human-unit unit}}
           {{else}}
             none
           {{/if}}
