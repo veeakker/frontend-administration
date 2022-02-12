@@ -18,24 +18,24 @@
     @updatePage={{fn (mut this.page)}}
     @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
     @updateFilter={{fn (mut this.filter)}}
-    @link="products.show"
     @updateSort={{fn (mut this.sort)}}
+    @links="products.edit:edit:pencil products.show:open:file-earmark-richtext"
     @customHeaders="unitPrice"
-    @customFields="unitPrice">
+    @customFields="unitPrice"
+    @rowLink="products.show"
+    >
     <:data-header as |header|>
       {{#if (eq header.label "unitPrice")}}
-        <th>Price</th>
-      {{else}}
-        <th>{{header.label}}</th>
+        <th>Price</th></:data-header></BsTable>
       {{/if}}
     </:data-header>
     <:data-cell as |cell|>
       {{#if (eq cell.label "unitPrice")}}
         {{#let cell.value.value cell.value.unit as |euros unit|}}
           {{#if (and euros unit)}}
-            &euro; {{euros}} per {{human-unit unit}}
+            <td>&euro; {{euros}} per {{human-unit unit}}</td>
           {{else}}
-            none
+            <td>none</td>
           {{/if}}
         {{/let}}
       {{/if}}

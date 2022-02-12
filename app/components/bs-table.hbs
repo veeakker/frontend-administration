@@ -17,7 +17,9 @@
   @updateSort={{@updateSort}}
   @customHeaders={{@customHeaders}}
   @customFields={{@customFields}}
-  @link={{@link}}
+  @links={{@links}}
+  @onClickRow={{@onClickRow}}
+  @rowLink={{@rowLink}}
   as |dt|>
   {{!-- START: search --}}
   {{#if dt.enableSearch}}
@@ -125,8 +127,12 @@
                     </header.ThSortable>
                   {{/each}}
                 {{/if}}
-                {{#if header.linkedRoute}}
-                  <th>{{!-- link --}}</th>
+                {{#if (has-block "actions-header")}}
+                  {{yield header to="actions-header"}}
+                {{else}}
+                  {{#if header.hasLinks}}
+                    <th></th>
+                  {{/if}}
                 {{/if}}
               </tr>
             </thead>
@@ -199,12 +205,23 @@
                               {{/each}}
                             {{/if}}
                           </row.DataCells>
-                          {{#if row.linkedRoute}}
-                            <td>
-                              <LinkTo @route={{row.linkedRoute}} @model={{row.item}}>
-                                <i class="bi bi-file-earmark-richtext" aria-label="detail" />
-                              </LinkTo>
-                            </td>
+                          {{#if (has-block "actions")}}
+                            {{yield row to="actions"}}
+                          {{else}}
+                            {{#if row.linkedRoutes}}
+                              <td>
+                                {{#each row.linkedRoutes as |linkedRoute|}}
+                                  <LinkTo @route={{linkedRoute.route}} @model={{row.item}}>
+                                    {{#if linkedRoute.icon}}
+                                      <i class={{concat "bi bi-" linkedRoute.icon}}
+                                        aria-label={{or linkedRoute.label "detail"}} />
+                                    {{else}}
+                                      {{or linkedRoute.label linkedRoute.route}}
+                                    {{/if}}
+                                  </LinkTo>
+                                {{/each}}
+                              </td>
+                            {{/if}}
                           {{/if}}
                         </tr>
                       {{/if}}
@@ -230,80 +247,78 @@
 
   {{!-- START: pagination --}}
   <dt.Pagination as |pagination|>
-    {{#if @content}}
-      {{#if (has-block "pagination")}}
-        {{yield pagination to="pagination"}}
-      {{else}}
-        <nav aria-label="Table pagination" class="row">
-          {{#if pagination.hasMultiplePages}}
-            <ul class="pagination col">
-              <li class={{concat "page-item" (if pagination.isFirstPage " disabled" "")}}>
-                <button
-                  class="page-link"
-                  disabled={{pagination.isFirstPage}}
-                  type="button"
-                  {{on "click" (fn pagination.updatePage pagination.links.first)}}>
-                  &laquo;
-                </button>
-              </li>
-              <li class={{concat "page-item" (if pagination.isFirstPage " disabled" "")}}>
-                <button
-                  class="page-link"
-                  type="button"
-                  disabled={{pagination.isFirstPage}}
-                  {{on "click" (fn pagination.updatePage pagination.links.prev)}}>
-                  Previous
-                </button>
-              </li>
-              <li class={{concat "page-item" (if pagination.isLastPage " disabled" "")}}>
-                <button
-                  type="button"
-                  class="page-link"
-                  disabled={{pagination.isLastPage}}
-                  {{on "click" (fn pagination.updatePage pagination.links.next)}}>
-                  Next
-                </button>
-              </li>
-              <li class={{concat "page-item" (if pagination.isLastPage " disabled" "")}}>
-                <button
-                  type="button"
-                  class="page-link"
-                  disabled={{pagination.isLastPage}}
-                  {{on "click" (fn pagination.updatePage pagination.links.last)}}>
-                  &raquo;
-                </button>
-              </li>
-            </ul>
+    {{#if (has-block "pagination")}}
+      {{yield pagination to="pagination"}}
+    {{else}}
+      <nav aria-label="Table pagination" class="row">
+        {{#if pagination.hasMultiplePages}}
+          <ul class="pagination col">
+            <li class={{concat "page-item" (if pagination.isFirstPage " disabled" "")}}>
+              <button
+                class="page-link"
+                disabled={{pagination.isFirstPage}}
+                type="button"
+                {{on "click" (fn pagination.updatePage pagination.links.first)}}>
+                &laquo;
+              </button>
+            </li>
+            <li class={{concat "page-item" (if pagination.isFirstPage " disabled" "")}}>
+              <button
+                class="page-link"
+                type="button"
+                disabled={{pagination.isFirstPage}}
+                {{on "click" (fn pagination.updatePage pagination.links.prev)}}>
+                Previous
+              </button>
+            </li>
+            <li class={{concat "page-item" (if pagination.isLastPage " disabled" "")}}>
+              <button
+                type="button"
+                class="page-link"
+                disabled={{pagination.isLastPage}}
+                {{on "click" (fn pagination.updatePage pagination.links.next)}}>
+                Next
+              </button>
+            </li>
+            <li class={{concat "page-item" (if pagination.isLastPage " disabled" "")}}>
+              <button
+                type="button"
+                class="page-link"
+                disabled={{pagination.isLastPage}}
+                {{on "click" (fn pagination.updatePage pagination.links.last)}}>
+                &raquo;
+              </button>
+            </li>
+          </ul>
+        {{/if}}
+        <div class="col align-items-center">
+          Displaying {{pagination.startItem}}-{{pagination.endItem}}
+          {{#if pagination.hasTotal}} of {{pagination.total}}{{/if}}
+          {{#if pagination.sizeOptions}}
+            |
+            <BsDropdown as |dd|>
+              <dd.button @type="secondary" @outline={{true}}>{{pagination.pageSize}}</dd.button>
+              <dd.menu as |menu|>
+                {{#each pagination.sizeOptions as |sizeOption|}}
+                  <menu.item>
+                    {{#if (eq pagination.pageSize sizeOption)}}
+                      <span class="dropdown-item active">{{sizeOption}}</span>
+                    {{else}}
+                      <span
+                        class="dropdown-item"
+                        role="link"
+                        {{on "click" (fn pagination.setSizeOption sizeOption)}}>
+                        {{sizeOption}}
+                      </span>
+                    {{/if}}
+                  </menu.item>
+                {{/each}}
+              </dd.menu>
+            </BsDropdown>
+            per page
           {{/if}}
-          <div class="col align-items-center">
-            Displaying {{pagination.startItem}}-{{pagination.endItem}}
-            {{#if pagination.total}} of {{pagination.total}}{{/if}}
-            {{#if pagination.sizeOptions}}
-              |
-              <BsDropdown as |dd|>
-                <dd.button @type="secondary" @outline={{true}}>{{pagination.size}}</dd.button>
-                <dd.menu as |menu|>
-                  {{#each pagination.sizeOptions as |sizeOption|}}
-                    <menu.item>
-                      {{#if (eq pagination.size sizeOption)}}
-                        <span class="dropdown-item active">{{sizeOption}}</span>
-                      {{else}}
-                        <span
-                          class="dropdown-item"
-                          role="link"
-                          {{on "click" (fn pagination.setSizeOption sizeOption)}}>
-                          {{sizeOption}}
-                        </span>
-                      {{/if}}
-                    </menu.item>
-                  {{/each}}
-                </dd.menu>
-              </BsDropdown>
-              per page
-            {{/if}}
-          </div>
-        </nav>
-      {{/if}}
+        </div>
+      </nav>
     {{/if}}
   </dt.Pagination>
   {{!-- END: pagination --}}
