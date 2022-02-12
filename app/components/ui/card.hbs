@@ -1,0 +1,20 @@
+<div class="p-2" ...attributes>
+  <div class="card-body bg-white h-100 border rounded-3">
+    {{#if (or (has-block "title") @title)}}
+      <h5 class="card-title p-2">
+        {{#if (has-block "title")}}
+          {{yield to="title"}}
+        {{else}}
+          {{@title}}
+        {{/if}}
+      </h5>
+    {{/if}}
+    <dl class="row m-3">
+      {{#if (has-block "body")}}
+        {{yield to="body"}}
+      {{else}}
+        {{yield to="default"}}
+      {{/if}}
+    </dl>
+  </div>
+</div>

@@ -2,12 +2,12 @@ import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import fetchProp from '../utils/decorators/fetch-prop';
 
 export default class ProductModel extends Model {
-  @attr() label;
-  @attr() altLabel;
-  @attr() description;
-  @attr() ingredientsText;
-  @attr() allergensText;
-  @attr() nutricionDataText;
+  @attr('string') label;
+  @attr('string') altLabel;
+  @attr('string') description;
+  @attr('string') ingredientsText;
+  @attr('string') allergensText;
+  @attr('string') nutricionDataText;
   @attr('number') sortIndex;
   @attr('number') plu;
   @attr('uri-set') productLabels;

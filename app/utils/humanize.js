@@ -3,6 +3,9 @@
  */
 export default function humanize(string) {
   return string
-    .replace(/([^A-Z])([A-Z])/g, (_match, first, second) => `${first} ${second}`)
+    .replace(
+      /([^A-Z])([A-Z])/g,
+      (_match, first, second) => `${first} ${second}`
+    )
     .toLowerCase();
 }

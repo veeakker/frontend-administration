@@ -4,25 +4,26 @@
   <h1>{{@model.label}}<small>, product in detail</small></h1>
 
   <div class="row">
-    <div class="col-12 col-md-8 bg-white h-100 p5 border rounded-3">
-      <DetailsCard @resource={{@model}}>
-        <:title>Details</:title>
-        <:body as |C|>
-          <C.Property @property="plu" @label="PLU" />
-          <C.Property @property="isEnabled" />
-          <C.Property @property="label" />
-          <C.Property @property="altLabel" />
-          <C.Property @property="description" />
-          <C.Property @property="ingredientsText">{{{@model.ingredientsText}}}</C.Property>
-          <C.Property @property="allergensText">{{{@model.allergensText}}}</C.Property>
-          <C.Property @property="nutricionDataText">{{{@model.nutricionDataText}}}</C.Property>
-          <C.Property @property="sortIndex" />
-          <C.Property @property="productLabels" />
-        </:body>
-      </DetailsCard>
-    </div>
+    <DetailsCard @resource={{@model}} class="col-12 col-md-8">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="plu" @label="PLU" />
+        <C.Property @property="label" />
+        <C.Property @property="altLabel" />
+        <C.Property @property="unitPrice" @label="Unit Price"><Product::Price @value={{@model.unitPrice}} /></C.Property>
+        <C.Property @property="description" />
+        <C.Property @property="ingredientsText" @label="Ingredients">{{{@model.ingredientsText}}}</C.Property>
+        <C.Property @property="allergensText" @label="Allergens">{{{@model.allergensText}}}</C.Property>
+        <C.Property @property="nutricionDataText" @label="Nutricion data">{{{@model.nutricionDataText}}}</C.Property>
+        <C.Property @property="sortIndex" />
+        <C.Property @property="productLabels" />
+        <C.Property @property="isEnabled" />
+      </:body>
+    </DetailsCard>
     <div class="col-12 col-md-4">
-      World
+      <div class="bg-white h-100 p5 border rounded-3">
+        World
+      </div>
     </div>
   </div>
 </div>
