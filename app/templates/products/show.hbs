@@ -5,19 +5,19 @@
 
   <div class="row">
     <div class="col-12 col-md-8 bg-white h-100 p5 border rounded-3">
-      <DetailsCard>
+      <DetailsCard @resource={{@model}}>
         <:title>Details</:title>
-        <:body as |Dt Dd|>
-          <Dt>plu</Dt><Dd>{{@model.plu}}</Dd>
-          <Dt>enabled</Dt><Dd>{{@model.isEnabled}}</Dd>
-          <Dt>label</Dt><Dd>{{@model.label}}</Dd>
-          <Dt>altLabel</Dt><Dd>{{@model.altLabel}}</Dd>
-          <Dt>description</Dt><Dd>{{@model.description}}</Dd>
-          <Dt>ingredientsText</Dt><Dd>{{@model.ingredientsText}}</Dd>
-          <Dt>allergensText</Dt><Dd>{{{@model.allergensText}}}</Dd>
-          <Dt>nutricionDataText</Dt><Dd>{{{@model.nutricionDataText}}}</Dd>
-          <Dt>sortIndex</Dt><Dd>{{@model.sortIndex}}</Dd>
-          <Dt>productLabels</Dt><Dd>{{@model.productLabels}}</Dd>{{!-- TODO: render these in a nicer way --}}
+        <:body as |C|>
+          <C.Property @property="plu" @label="PLU" />
+          <C.Property @property="isEnabled" />
+          <C.Property @property="label" />
+          <C.Property @property="altLabel" />
+          <C.Property @property="description" />
+          <C.Property @property="ingredientsText">{{{@model.ingredientsText}}}</C.Property>
+          <C.Property @property="allergensText">{{{@model.allergensText}}}</C.Property>
+          <C.Property @property="nutricionDataText">{{{@model.nutricionDataText}}}</C.Property>
+          <C.Property @property="sortIndex" />
+          <C.Property @property="productLabels" />
         </:body>
       </DetailsCard>
     </div>

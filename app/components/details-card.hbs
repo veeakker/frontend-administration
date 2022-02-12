@@ -3,6 +3,10 @@
     <h5 class="">{{yield to="title"}}</h5>
   {{/if}}
   <dl class="row">
-    {{yield (component "details-card/dt") (component "details-card/dd") to="body"}}
+    {{yield (hash
+        Dt=(component "details-card/dt")
+        Dd=(component "details-card/dd")
+        Property=(component "details-card/property" resource=@resource))
+        to="body"}}
   </dl>
 </div>
