@@ -50,7 +50,11 @@
     <Ui::Card @title="Product groups" class="col-12 col-md-6">
       <ul>
         {{#each @model.productGroups as |productGroup|}}
-          <li>{{productGroup.label}}</li>
+          <li>
+            <LinkTo @route="product-groups.show" @model={{productGroup}}>
+              {{productGroup.label}}
+            </LinkTo>
+          </li>
         {{/each}}
       </ul>
     </Ui::Card>

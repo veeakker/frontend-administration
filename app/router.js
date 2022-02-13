@@ -11,5 +11,7 @@ Router.map(function () {
     this.route('show', { path: '/:product_id' });
     this.route('edit', { path: '/:product_id/edit' });
   });
-  this.route('product-groups');
+  this.route('product-groups', function () {
+    this.route('show', { path: '/product-groups/:product_group_id' });
+  });
 });

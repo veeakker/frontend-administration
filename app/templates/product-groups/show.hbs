@@ -1,0 +1,67 @@
+{{page-title "Show"}}
+
+<div class="container">
+  <h1>{{@model.label}}<small>, product group in detail</small></h1>
+
+  <div class="row">
+    <DetailsCard @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
+      <C.Property @property="label" />
+      <C.Property @property="sortIndex" />
+    </DetailsCard>
+  </div>
+
+  <div class="row">
+    <Ui::Card @title="Products" class="col-12 col-md-6" as |C|>
+      <C.Section @title="Spotlight">
+        {{#if @model.spotlightProducts}}
+          <ul>
+            {{#each @model.spotlightProducts as |product|}}
+              <li>
+                <LinkTo @route="products.show" @model={{product}}>{{product.label}}</LinkTo>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          None
+        {{/if}}
+      </C.Section>
+      <C.Section @title="All">
+        {{#if @model.products}}
+          <ul>
+            {{#each @model.products as |product|}}
+              <li>
+                <LinkTo @route="products.show" @model={{product}}>{{product.label}}</LinkTo>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          None
+        {{/if}}
+      </C.Section>
+    </Ui::Card>
+    <Ui::Card @title="Nesting" class="col-12 col-md-6" as |C|>
+      <C.Section @title="parent group">
+        {{#if @model.parentGroup}}
+          <LinkTo @route="product-groups.show" @model={{@model.parentGroup}}>{{@model.parentGroup.label}}</LinkTo>
+        {{else}}
+          None
+        {{/if}}
+      </C.Section>
+      <C.Section @title="nested groups">
+        {{#if @model.childGroups}}
+          <ul>
+            {{#each @model.childGroups as |child|}}
+              <li>
+                <LinkTo @route="product-groups.show" @model={{child}}>{{child.label}}</LinkTo>
+              </li>
+            {{/each}}
+          </ul>
+        {{else}}
+          None
+        {{/if}}
+      </C.Section>
+    </Ui::Card>
+  </div>
+</div>
+
+{{outlet}}

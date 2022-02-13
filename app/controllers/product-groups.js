@@ -1,3 +1,3 @@
-import DataTableController from 'ember-data-table/controller';
+import Controller from '@ember/controller';
 
-export default class ProductGroupsController extends DataTableController {}
+export default class ProductGroupsController extends Controller {}

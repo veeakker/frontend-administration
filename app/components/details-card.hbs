@@ -2,13 +2,23 @@
   <:title>
     {{#if (has-block "title")}}
       {{yield to="title"}}
+    {{else}}
+      {{@title}}
     {{/if}}
   </:title>
   <:body>
-    {{yield (hash
-        Dt=(component "details-card/dt")
-        Dd=(component "details-card/dd")
-        Property=(component "details-card/property" resource=@resource))
-        to="body"}}
+    {{#if (has-block "body")}}
+      {{yield (hash
+          Dt=(component "details-card/dt")
+          Dd=(component "details-card/dd")
+          Property=(component "details-card/property" resource=@resource))
+          to="body"}}
+    {{else}}
+      {{yield (hash
+          Dt=(component "details-card/dt")
+          Dd=(component "details-card/dd")
+          Property=(component "details-card/property" resource=@resource))
+          to="default"}}
+    {{/if}}
   </:body>
 </Ui::Card>
