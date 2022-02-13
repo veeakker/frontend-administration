@@ -1,19 +1,12 @@
 @import "ember-bootstrap/bootstrap";
 @import "bootstrap-icons";
 
-@font-face {
-  /* As per https://google-webfonts-helper.herokuapp.com/fonts/lexend-deca?subsets=latin */
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('/assets/fonts/lexend-deca-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/assets/fonts/lexend-deca-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+@import "./lexend-font";
 
 :root {
   --freddie-accent-color: lightgray; /* var(--bs-teal); */
   --bs-body-font-family: "Lexend Deca", sans-serif;
+  --bs-body-font-weight: 300;
 }
 
 .card-body {
