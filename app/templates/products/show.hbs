@@ -10,21 +10,42 @@
         <C.Property @property="plu" @label="PLU" />
         <C.Property @property="label" />
         <C.Property @property="altLabel" />
-        <C.Property @property="unitPrice" @label="Unit Price"><Product::Price @value={{@model.unitPrice}} /></C.Property>
+        <C.Property @property="unitPrice" @label="Unit Price"><Product::UnitPrice @value={{@model.unitPrice}} /></C.Property>
+        <C.Property @property="targetUnit" @label="Unit Amount">{{@model.targetUnit.value}} {{human-unit @model.targetUnit.unit}}</C.Property>
         <C.Property @property="description" />
         <C.Property @property="ingredientsText" @label="Ingredients">{{{@model.ingredientsText}}}</C.Property>
         <C.Property @property="allergensText" @label="Allergens">{{{@model.allergensText}}}</C.Property>
         <C.Property @property="nutricionDataText" @label="Nutricion data">{{{@model.nutricionDataText}}}</C.Property>
         <C.Property @property="sortIndex" />
-        <C.Property @property="productLabels" />
+        <C.Property @property="productLabels">
+          {{#each @model.productLabels as |uri|}}
+            {{#let (product/label-info uri) as |label|}}
+              <img src={{label.image}} alt={{label.label}} />
+            {{/let}}
+          {{/each}}
+        </C.Property>
         <C.Property @property="isEnabled" />
       </:body>
     </DetailsCard>
-    <div class="col-12 col-md-4">
-      <div class="bg-white h-100 p5 border rounded-3">
-        World
-      </div>
-    </div>
+    <Ui::Card @title="Preview" class="col-12 col-md-4">
+      {{#if @model.thumbnail}}
+        <img src={{@model.thumbnail.downloadUrl}} alt={{concat @model.label " on white background"}} />
+      {{/if}}
+    </Ui::Card>
+    <Ui::Card @title="Prices" class="col-12 col-md-6">
+      <ul>
+        {{#each @model.offerings as |offering|}}
+          <li><Product::Price @offering={{offering}} /></li>
+        {{/each}}
+      </ul>
+    </Ui::Card>
+    <Ui::Card @title="Product groups" class="col-12 col-md-6">
+      <ul>
+        {{#each @model.productGroups as |productGroup|}}
+          <li>{{productGroup.label}}</li>
+        {{/each}}
+      </ul>
+    </Ui::Card>
   </div>
 </div>
 

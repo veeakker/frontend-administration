@@ -1,7 +1,1 @@
-{{#let @value.value @value.unit as |euros unit|}}
-  {{#if (and euros unit)}}
-    <td>&euro; {{euros}} per {{human-unit unit}}</td>
-  {{else}}
-    <td>{{or @default "none"}}</td>
-  {{/if}}
-{{/let}}
+&euro; {{@offering.unitPrice.value}} per {{@offering.typeAndQuantity.value}} {{human-unit @offering.typeAndQuantity.unit}}

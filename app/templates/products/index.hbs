@@ -30,7 +30,7 @@
     </:data-header>
     <:data-cell as |cell|>
       {{#if (eq cell.label "unitPrice")}}
-        <Product::Price @value={{@value}} />
+        <Product::UnitPrice @value={{cell.value}} />
       {{/if}}
     </:data-cell>
   </BsTable>
