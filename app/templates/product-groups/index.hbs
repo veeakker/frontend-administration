@@ -3,7 +3,7 @@
 <div class="container">
   <h1>Product groups</h1>
 
-  <BsTable
+  <Ui::Table
     @content={{@model}}
     @fields="label parentGroup.label"
     @isLoading={{this.isLoadingModel}}
@@ -27,7 +27,7 @@
         parent
       </th>
     </:data-header>
-  </BsTable>
+  </Ui::Table>
 </div>
 
 {{outlet}}

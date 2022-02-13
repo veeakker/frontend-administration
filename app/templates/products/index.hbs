@@ -5,7 +5,7 @@
     <h1>Products <small>as a list</small></h1>
   </div>
 
-  <BsTable
+  <Ui::Table
     @content={{@model}}
     @fields="plu label isEnabled unitPrice"
     @isLoading={{this.isLoadingModel}}
@@ -35,7 +35,7 @@
         </td>
       {{/if}}
     </:data-cell>
-  </BsTable>
+  </Ui::Table>
 </div>
 
 {{outlet}}

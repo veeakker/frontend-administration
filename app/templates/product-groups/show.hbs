@@ -4,10 +4,10 @@
   <h1>{{@model.label}}<small>, product group in detail</small></h1>
 
   <div class="row">
-    <DetailsCard @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
+    <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
       <C.Property @property="label" />
       <C.Property @property="sortIndex" />
-    </DetailsCard>
+    </Ux::DetailsCard>
   </div>
 
   <div class="row">
@@ -15,9 +15,9 @@
       <C.Section @title="Spotlight">
         {{#if @model.spotlightProducts}}
           <ul>
-            {{#each @model.spotlightProducts as |product|}}
+            {{#each @model.spotlightProducts as |spotlight|}}
               <li>
-                <Ui::Link @model={{product}} />
+                <Ux::Link @model={{spotlight.product}} />
               </li>
             {{/each}}
           </ul>
@@ -30,7 +30,7 @@
           <ul>
             {{#each @model.products as |product|}}
               <li>
-                <Ui::Link @model={{product}} />
+                <Ux::Link @model={{product}} />
               </li>
             {{/each}}
           </ul>
@@ -42,7 +42,7 @@
     <Ui::Card @title="Nesting" class="col-12 col-md-6" as |C|>
       <C.Section @title="parent group">
         {{#if @model.parentGroup}}
-          <Ui::Link @model={{@model.parentGroup}} />
+          <Ux::Link @model={{@model.parentGroup}} />
         {{else}}
           None
         {{/if}}
@@ -52,7 +52,7 @@
           <ul>
             {{#each @model.childGroups as |child|}}
               <li>
-                <Ui::Link @model={{child}} />
+                <Ux::Link @model={{child}} />
               </li>
             {{/each}}
           </ul>

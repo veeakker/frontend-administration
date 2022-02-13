@@ -1,8 +1,0 @@
-<DetailsCard::Dt>{{this.label}}</DetailsCard::Dt>
-<DetailsCard::Dd>
-  {{#if (has-block)}}
-    {{yield}}
-  {{else}}
-    {{get @resource @property}}
-  {{/if}}
-</DetailsCard::Dd>

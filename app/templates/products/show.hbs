@@ -4,7 +4,7 @@
   <h1>{{@model.label}}<small>, product in detail</small></h1>
 
   <div class="row">
-    <DetailsCard @resource={{@model}} class="col-12 col-md-8">
+    <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8">
       <:title>Details</:title>
       <:body as |C|>
         <C.Property @property="plu" @label="PLU" />
@@ -24,7 +24,7 @@
         </C.Property>
         <C.Property @property="isEnabled" />
       </:body>
-    </DetailsCard>
+    </Ux::DetailsCard>
     <Ui::Card @title="Preview" class="col-12 col-md-4">
       {{#if @model.thumbnail}}
         <img src={{@model.thumbnail.downloadUrl}} alt={{concat @model.label " on white background"}} />
@@ -51,7 +51,7 @@
       <ul>
         {{#each @model.productGroups as |productGroup|}}
           <li>
-            <Ui::Link @model={{productGroup}} />
+            <Ux::Link @model={{productGroup}} />
           </li>
         {{/each}}
       </ul>

@@ -1,0 +1,8 @@
+<Ux::DetailsCard::Dt>{{this.label}}</Ux::DetailsCard::Dt>
+<Ux::DetailsCard::Dd>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{get @resource @property}}
+  {{/if}}
+</Ux::DetailsCard::Dd>
