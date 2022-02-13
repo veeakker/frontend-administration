@@ -17,7 +17,7 @@
           <ul>
             {{#each @model.spotlightProducts as |product|}}
               <li>
-                <Ui::ResourceLink @resource={{product}} />
+                <Ui::Link @model={{product}} />
               </li>
             {{/each}}
           </ul>
@@ -30,7 +30,7 @@
           <ul>
             {{#each @model.products as |product|}}
               <li>
-                <Ui::ResourceLink @resource={{product}} />
+                <Ui::Link @model={{product}} />
               </li>
             {{/each}}
           </ul>
@@ -42,7 +42,7 @@
     <Ui::Card @title="Nesting" class="col-12 col-md-6" as |C|>
       <C.Section @title="parent group">
         {{#if @model.parentGroup}}
-          <Ui::ResourceLink @resource={{@model.parentGroup}} />
+          <Ui::Link @model={{@model.parentGroup}} />
         {{else}}
           None
         {{/if}}
@@ -52,7 +52,7 @@
           <ul>
             {{#each @model.childGroups as |child|}}
               <li>
-                <Ui::ResourceLink @resource={{child}} />
+                <Ui::Link @model={{child}} />
               </li>
             {{/each}}
           </ul>

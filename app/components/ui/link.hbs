@@ -1,6 +1,6 @@
 {{#if this.kindHasModel}}
-  <LinkTo @route={{this.route}} @model={{@resource}}>
-    {{get @resource this.linkProperty}}
+  <LinkTo @route={{this.route}} @model={{@model}}>
+    {{get @model this.linkProperty}}
   </LinkTo>
 {{else}}
   <LinkTo @route={{this.route}}></LinkTo>

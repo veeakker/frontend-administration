@@ -51,7 +51,7 @@
       <ul>
         {{#each @model.productGroups as |productGroup|}}
           <li>
-            <Ui::ResourceLink @resource={{productGroup}} />
+            <Ui::Link @model={{productGroup}} />
           </li>
         {{/each}}
       </ul>
