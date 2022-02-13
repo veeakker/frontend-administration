@@ -51,9 +51,7 @@
       <ul>
         {{#each @model.productGroups as |productGroup|}}
           <li>
-            <LinkTo @route="product-groups.show" @model={{productGroup}}>
-              {{productGroup.label}}
-            </LinkTo>
+            <Ui::ResourceLink @resource={{productGroup}} />
           </li>
         {{/each}}
       </ul>

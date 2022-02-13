@@ -1,6 +1,8 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import fetchProp from '../utils/decorators/fetch-prop';
+import link from '../decorators/link';
 
+@link()
 export default class ProductModel extends Model {
   @attr('string') label;
   @attr('string') altLabel;
