@@ -19,4 +19,17 @@
     margin: 0;
     padding: 5px;
   }
+
+  /* sections */
+  h6 {
+    margin-top: 1em;
+    padding-left: 0;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: solid 1px var(--freddie-accent-color);
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
 }

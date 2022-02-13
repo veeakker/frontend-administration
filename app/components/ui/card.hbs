@@ -11,9 +11,9 @@
     {{/if}}
     <dl class="row m-3">
       {{#if (has-block "body")}}
-        {{yield to="body"}}
+        {{yield (hash Section=(component "ui/card/section")) to="body"}}
       {{else}}
-        {{yield to="default"}}
+        {{yield (hash Section=(component "ui/card/section")) to="default"}}
       {{/if}}
     </dl>
   </div>

@@ -1,0 +1,7 @@
+{{#if (has-block "title")}}
+  <h6>{{yield to="title"}}</h6>
+{{else if @title}}
+  <h6>{{@title}}</h6>
+{{/if}}
+
+{{yield}}

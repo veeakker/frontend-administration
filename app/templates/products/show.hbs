@@ -10,8 +10,6 @@
         <C.Property @property="plu" @label="PLU" />
         <C.Property @property="label" />
         <C.Property @property="altLabel" />
-        <C.Property @property="unitPrice" @label="Unit Price"><Product::UnitPrice @value={{@model.unitPrice}} /></C.Property>
-        <C.Property @property="targetUnit" @label="Unit Amount">{{@model.targetUnit.value}} {{human-unit @model.targetUnit.unit}}</C.Property>
         <C.Property @property="description" />
         <C.Property @property="ingredientsText" @label="Ingredients">{{{@model.ingredientsText}}}</C.Property>
         <C.Property @property="allergensText" @label="Allergens">{{{@model.allergensText}}}</C.Property>
@@ -32,12 +30,22 @@
         <img src={{@model.thumbnail.downloadUrl}} alt={{concat @model.label " on white background"}} />
       {{/if}}
     </Ui::Card>
-    <Ui::Card @title="Prices" class="col-12 col-md-6">
-      <ul>
-        {{#each @model.offerings as |offering|}}
-          <li><Product::Price @offering={{offering}} /></li>
-        {{/each}}
-      </ul>
+    <Ui::Card @title="Prices" class="col-12 col-md-6" as |card|>
+      <card.Section @title="defaults">
+        <div class="row col-md-6 col-12">
+          Cost: <Product::UnitPrice @value={{@model.unitPrice}} />
+        </div>
+        <div class="row col-md-6 col-12">
+          Amount: {{@model.targetUnit.value}} {{human-unit @model.targetUnit.unit}}
+        </div>
+      </card.Section>
+      <card.Section @title="offers">
+        <ul>
+          {{#each @model.offerings as |offering|}}
+            <li><Product::Price @offering={{offering}} /></li>
+          {{/each}}
+        </ul>
+      </card.Section>
     </Ui::Card>
     <Ui::Card @title="Product groups" class="col-12 col-md-6">
       <ul>
