@@ -19,19 +19,30 @@
     @updateFilter={{fn (mut this.filter)}}
     @updateSort={{fn (mut this.sort)}}
     @links="products.edit:edit:pencil products.show:open:file-earmark-richtext"
-    @customHeaders="unitPrice"
-    @customFields="unitPrice"
+    @customHeaders="unitPrice isEnabled"
+    @customFields="unitPrice isEnabled"
     @rowLink="products.show"
     >
     <:data-header as |header|>
       {{#if (eq header.label "unitPrice")}}
         <th>Price</th>
+      {{else if (eq header.label "isEnabled")}}
+        <th
+          scope="col"
+          role="button" {{on "click" header.inverseSorting}}
+          class={{concat "sortable" (if header.isSorted (concat " sorted " header.order) "")}}>
+          Published?
+        </th>
       {{/if}}
     </:data-header>
     <:data-cell as |cell|>
       {{#if (eq cell.label "unitPrice")}}
         <td>
           <Product::UnitPrice @value={{cell.value}} />
+        </td>
+      {{else if (eq cell.label "isEnabled")}}
+        <td>
+          {{#if cell.value}}Yes{{else}}No{{/if}}
         </td>
       {{/if}}
     </:data-cell>
