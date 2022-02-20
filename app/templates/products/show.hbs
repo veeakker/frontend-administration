@@ -15,6 +15,9 @@
         <C.Property @property="allergensText" @label="Allergens">{{{@model.allergensText}}}</C.Property>
         <C.Property @property="nutricionDataText" @label="Nutricion data">{{{@model.nutricionDataText}}}</C.Property>
         <C.Property @property="sortIndex" />
+        <C.Property @property="isEnabled" @label="Published?">
+          {{#if @model.isEnabled}}Yes{{else}}No{{/if}}
+        </C.Property>
         <C.Property @property="productLabels">
           {{#each @model.productLabels as |uri|}}
             {{#let (product/label-info uri) as |label|}}
@@ -22,7 +25,6 @@
             {{/let}}
           {{/each}}
         </C.Property>
-        <C.Property @property="isEnabled" />
       </:body>
     </Ux::DetailsCard>
     <Ui::Card @title="Preview" class="col-12 col-md-4">
