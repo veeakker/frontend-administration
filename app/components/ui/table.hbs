@@ -58,7 +58,7 @@
   {{!-- START: menu --}}
   <dt.Menu as |General Selected|>
     {{#if (has-block "menu")}}
-      {{yield (hash General Selected)}}
+      {{yield (hash General Selected) to="menu"}}
     {{else}}
       {{#if dt.dataTable.enableSelection}}
         <div class="data-table-menu">
