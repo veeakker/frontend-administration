@@ -5,8 +5,9 @@
   {{else}}
     {{#if this.editing}}
       {{#if (is-property-type @resource @property "number")}}
-        <span>
+        <span class="input-group">
           <input {{on "input" (pipe (e/number-val) (set-prop @resource @property))}}
+            class="form-control"
             type="number"
             value={{get @resource @property}} />
           <BsButton
@@ -16,9 +17,10 @@
           </BsButton>
         </span>
       {{else if (is-property-type @resource @property "boolean")}}
-        <span>
+        <span class="input-group">
           <input {{on "input" (pipe (e/boolean-val) (set-prop @resource @property))}}
             type="checkbox"
+            class="form-control"
             checked={{get @resource @property}} />
           <BsButton
             {{on "click" (fn (mut this.editing) false)}}
@@ -26,10 +28,25 @@
             <i class="bi bi-check" />
           </BsButton>
         </span>
+      {{else if (is-property-type @resource @property "text")}}
+        <span class="input-group">
+          <textarea {{on "input" (pipe (e/str-val) (set-prop @resource @property))}}
+            {{on "change" (fn (mut this.editing) false)}}
+            class="form-control"
+            value={{get @resource @property}}>
+            {{get @resource @property}}
+          </textarea>
+          <BsButton
+            {{on "click" (fn (mut this.editing) false)}}
+            @type="primary">
+            <i class="bi bi-check" />
+          </BsButton>
+        </span>
       {{else}}
-        <span>
+        <span class="input-group">
           <input {{on "input" (pipe (e/str-val) (set-prop @resource @property))}}
             {{on "change" (fn (mut this.editing) false)}}
+            class="form-control"
             value={{get @resource @property}} />
           <BsButton
             {{on "click" (fn (mut this.editing) false)}}
@@ -43,8 +60,12 @@
         <span {{on "click" (fn (mut this.editing) true)}}>
           {{#if (get @resource @property)}}Yes{{else}}No{{/if}}
         </span>
+      {{else if (is-property-type @resource @property "text")}}
+        <span {{on "click" (fn (mut this.editing) true)}} style="min-width: 3em; min-height: 2em; display: inline-block">
+          {{{get @resource @property}}}
+        </span>
       {{else}}
-        <span {{on "click" (fn (mut this.editing) true)}}>
+        <span {{on "click" (fn (mut this.editing) true)}} style="min-width: 3em; min-height: 2em; display: inline-block">
           {{get @resource @property}}
         </span>
       {{/if}}

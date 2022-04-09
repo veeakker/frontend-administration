@@ -7,7 +7,7 @@ import { number, boolean, string, text } from '../decorators/attributes';
 export default class ProductModel extends Model {
   @string() label;
   @string() altLabel;
-  @string() description;
+  @text() description;
   @text() ingredientsText;
   @text() allergensText;
   @text() nutricionDataText;
