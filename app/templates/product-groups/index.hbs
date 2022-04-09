@@ -1,11 +1,11 @@
 {{page-title "Index"}}
 
 <div class="container">
-  <h1>Product groups</h1>
+  <h1>Product groups<small>, as list</small></h1>
 
   <Ui::Table
     @content={{@model}}
-    @fields="label parentGroup.label"
+    @fields="label sortIndex parentGroup.label"
     @isLoading={{this.isLoadingModel}}
     @filter={{this.filter}}
     @sort={{this.sort}}

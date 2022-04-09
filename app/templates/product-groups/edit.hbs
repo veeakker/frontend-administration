@@ -1,0 +1,18 @@
+{{page-title "Edit"}}
+
+<div class="container">
+  <h1>{{@model.label}}<small>, edit product group</small></h1>
+
+  <div class="row">
+    <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
+      <C.Dt>Label</C.Dt>
+      <C.Dd><Input @value={{@model.label}} /></C.Dd>
+      <C.Dt>Sort index</C.Dt>
+      <C.Dd><Input @value={{@model.sortIndex}} @type="number" /></C.Dd>
+    </Ux::DetailsCard>
+  </div>
+
+</div>
+
+
+{{outlet}}
