@@ -12,12 +12,17 @@
       <nav.item>
         <nav.link-to @route="index">Home</nav.link-to>
       </nav.item>
-      <nav.item>
-        <nav.link-to @route="product-groups">Product groups</nav.link-to>
-      </nav.item>
-      <nav.item>
-        <nav.link-to @route="products">Products</nav.link-to>
-      </nav.item>
+      <nav.dropdown as |dd|>
+        <dd.toggle>Products <span class="caret"></span></dd.toggle>
+        <dd.menu as |ddm|>
+          <ddm.item>
+            <ddm.link-to @route="product-groups">Product groups</ddm.link-to>
+          </ddm.item>
+          <ddm.item>
+            <ddm.link-to @route="products">Products</ddm.link-to>
+          </ddm.item>
+        </dd.menu>
+      </nav.dropdown>
       <nav.item>
         <nav.link-to @route="accounts">Accounts</nav.link-to>
       </nav.item>
