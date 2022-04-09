@@ -3,7 +3,7 @@
 <div class="container">
   <h1>{{@model.label}}<small>, edit product detail</small></h1>
 
-  <div class="row">
+  <form {{on "submit" (pipe (e/prevent-default) (call @model "save"))}} class="row">
     <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8">
       <:title>Details</:title>
       <:body as |C|>
@@ -21,7 +21,8 @@
       </:body>
     </Ux::DetailsCard>
     <Ui::Card @title="world" class="col-12 col-md-4">Yolo</Ui::Card>
-  </div>
+    <BsButton type="submit" @type="primary">Save</BsButton>
+  </form>
 </div>
 
 {{outlet}}

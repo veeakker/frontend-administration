@@ -3,6 +3,51 @@
   {{#if (has-block)}}
     {{yield}}
   {{else}}
-    {{get @resource @property}}
+    {{#if this.editing}}
+      {{#if (is-property-type @resource @property "number")}}
+        <span>
+          <input {{on "input" (pipe (e/number-val) (set-prop @resource @property))}}
+            type="number"
+            value={{get @resource @property}} />
+          <BsButton
+            {{on "click" (fn (mut this.editing) false)}}
+            @type="primary">
+            <i class="bi bi-check" />
+          </BsButton>
+        </span>
+      {{else if (is-property-type @resource @property "boolean")}}
+        <span>
+          <input {{on "input" (pipe (e/boolean-val) (set-prop @resource @property))}}
+            type="checkbox"
+            checked={{get @resource @property}} />
+          <BsButton
+            {{on "click" (fn (mut this.editing) false)}}
+            @type="primary">
+            <i class="bi bi-check" />
+          </BsButton>
+        </span>
+      {{else}}
+        <span>
+          <input {{on "input" (pipe (e/str-val) (set-prop @resource @property))}}
+            {{on "change" (fn (mut this.editing) false)}}
+            value={{get @resource @property}} />
+          <BsButton
+            {{on "click" (fn (mut this.editing) false)}}
+            @type="primary">
+            <i class="bi bi-check" />
+          </BsButton>
+        </span>
+      {{/if}}
+    {{else}}
+      {{#if (is-property-type @resource @property "boolean")}}
+        <span {{on "click" (fn (mut this.editing) true)}}>
+          {{#if (get @resource @property)}}Yes{{else}}No{{/if}}
+        </span>
+      {{else}}
+        <span {{on "click" (fn (mut this.editing) true)}}>
+          {{get @resource @property}}
+        </span>
+      {{/if}}
+    {{/if}}
   {{/if}}
 </Ux::DetailsCard::Dd>

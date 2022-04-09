@@ -1,19 +1,20 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import fetchProp from '../utils/decorators/fetch-prop';
 import link from '../decorators/link';
+import { number, boolean, string, text } from '../decorators/attributes';
 
 @link()
 export default class ProductModel extends Model {
-  @attr('string') label;
-  @attr('string') altLabel;
-  @attr('string') description;
-  @attr('string') ingredientsText;
-  @attr('string') allergensText;
-  @attr('string') nutricionDataText;
-  @attr('number') sortIndex;
-  @attr('number') plu;
+  @string() label;
+  @string() altLabel;
+  @string() description;
+  @text() ingredientsText;
+  @text() allergensText;
+  @text() nutricionDataText;
+  @number() sortIndex;
+  @number() plu;
   @attr('uri-set') productLabels;
-  @attr('boolean') isEnabled;
+  @boolean() isEnabled;
   @hasMany('product-group') productGroups;
   @hasMany('offering') offerings;
   @belongsTo('unit-price-specification') unitPrice;
