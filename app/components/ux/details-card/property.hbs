@@ -4,18 +4,11 @@
     {{yield}}
   {{else}}
     {{#if this.editing}}
-      {{#if (is-property-type @resource @property "number")}}
-        <span class="input-group">
-          <input {{on "input" (pipe (e/number-val) (set-prop @resource @property))}}
-            class="form-control"
-            type="number"
-            value={{get @resource @property}} />
-          <BsButton
-            {{on "click" (fn (mut this.editing) false)}}
-            @type="primary">
-            <i class="bi bi-check" />
-          </BsButton>
-        </span>
+      {{#if this.hasCustomEditComponent}}
+        {{component this.editComponentName
+            exitEditing=(fn (mut this.editing) false)
+            resource=@resource
+            property=@property}}
       {{else if (is-property-type @resource @property "boolean")}}
         <span class="input-group">
           <input {{on "input" (pipe (e/boolean-val) (set-prop @resource @property))}}

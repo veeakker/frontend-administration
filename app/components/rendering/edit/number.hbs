@@ -1,0 +1,11 @@
+<span class="input-group">
+  <input {{on "input" (pipe (e/number-val) (set-prop @resource @property))}}
+    class="form-control"
+    type="number"
+    value={{get @resource @property}} />
+  <BsButton
+    {{on "click" @exitEditing}}
+    @type="primary">
+    <i class="bi bi-check" />
+  </BsButton>
+</span>
