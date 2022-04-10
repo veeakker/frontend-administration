@@ -15,12 +15,33 @@ export default class DetailsCardPropertyComponent extends Component {
     return propertyType(this.args.resource, this.args.property);
   }
 
-  get editComponentName() {
+  get customShowComponent() {
+    const options = this.args.resource.constructor.propertyMeta;
+    return options && (options[this.args.property] || {}).show;
+  }
+
+  get implicitEditComponentName() {
     return this.renderType && `rendering/edit/${this.renderType}`;
   }
 
+  get hasImplicitEditComponent() {
+    this.componentExists(this.implicitEditComponentName);
+  }
+
+  get explicitEditComponentName() {
+    const options = this.args.resource.constructor.propertyMeta;
+    return options && (options[this.args.property] || {}).edit;
+  }
+
   get hasCustomEditComponent() {
-    return this.componentExists( this.editComponentName );
+    return this.explicitEditComponentName || this.hasImplicitEditComponent;
+  }
+
+  get customEditComponentName() {
+    return (
+      this.explicitEditComponentName ||
+      (this.hasImplicitEditComponent && this.implicitEditComponentName)
+    );
   }
 
   get showComponentName() {
@@ -40,11 +61,15 @@ export default class DetailsCardPropertyComponent extends Component {
    *
    * @param {string} name The path where the component can be found.
    */
-  componentExists( name ) {
+  componentExists(name) {
     // borrowed from https://github.com/xcambar/ember-cli-is-component
     const owner = getOwner(this);
     return !!owner
       .lookup('component-lookup:main')
       .componentFor(this.editComponentName, owner);
+  }
+
+  get renderLabel() {
+    return 'renderLabel' in this.args ? this.args.renderLabel : true;
   }
 }

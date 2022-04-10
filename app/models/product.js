@@ -1,7 +1,14 @@
-import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
+import Model, { attr } from '@ember-data/model';
 import fetchProp from '../decorators/fetch-prop';
 import link from '../decorators/link';
-import { number, boolean, string, text } from '../decorators/attributes';
+import {
+  number,
+  boolean,
+  string,
+  text,
+  belongsTo,
+  hasMany,
+} from '../decorators/attributes';
 
 @link()
 export default class ProductModel extends Model {
@@ -19,7 +26,12 @@ export default class ProductModel extends Model {
   @hasMany('offering') offerings;
   @belongsTo('unit-price-specification') unitPrice;
   @belongsTo('quantitative-value') targetUnit;
-  @belongsTo('file') thumbnail;
+  // @belongsTo('file') thumbnail;
+  @belongsTo('file', {
+    show: 'rendering/show/thumbnail',
+    edit: 'rendering/edit/thumbnail',
+  })
+  thumbnail;
 
   hasDirtyRelationships = false;
 

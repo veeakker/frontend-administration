@@ -1,11 +1,13 @@
-<Ux::DetailsCard::Dt>{{this.label}}</Ux::DetailsCard::Dt>
+{{#if this.renderLabel}}
+  <Ux::DetailsCard::Dt>{{this.label}}</Ux::DetailsCard::Dt>
+{{/if}}
 <Ux::DetailsCard::Dd>
   {{#if (has-block)}}
     {{yield}}
   {{else}}
     {{#if this.editing}}
       {{#if this.hasCustomEditComponent}}
-        {{component this.editComponentName
+        {{component this.customEditComponentName
             exitEditing=(fn (mut this.editing) false)
             resource=@resource
             property=@property}}
@@ -49,7 +51,12 @@
         </span>
       {{/if}}
     {{else}}
-      {{#if (is-property-type @resource @property "boolean")}}
+      {{#if this.customShowComponent}}
+        {{component this.customShowComponent
+            startEditing=(fn (mut this.editing) true)
+            resource=@resource
+            property=@property}}
+      {{else if (is-property-type @resource @property "boolean")}}
         <span {{on "click" (fn (mut this.editing) true)}}>
           {{#if (get @resource @property)}}Yes{{else}}No{{/if}}
         </span>

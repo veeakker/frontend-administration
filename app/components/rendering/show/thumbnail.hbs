@@ -1,0 +1,5 @@
+<span {{on "click" @startEditing}}>
+  {{#if @resource.thumbnail}}
+    <img src={{@resource.thumbnail.downloadUrl}} alt={{concat @resource.label " on white background"}} style="max-width: 100%" />
+  {{/if}}
+</span>
