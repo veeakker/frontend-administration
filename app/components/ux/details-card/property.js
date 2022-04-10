@@ -20,9 +20,30 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get hasCustomEditComponent() {
+    return this.componentExists( this.editComponentName );
+  }
+
+  get showComponentName() {
+    // although this is an interesting approach, perhaps we can make do
+    // with less magic and allow for custom rendering on the property
+    // level.  in order to make that happen, the property could indicate
+    // which property should be rendered for editing and showing if it
+    // would like to do so.  this would make rendering custom edit menus
+    // for related properties feasible too.  if we play this exactly
+    // right, we could even make it share an options object to that
+    // component which could help in further abstracting things.
+    return this.renderType && `rendering/show/${this.renderType}`;
+  }
+
+  /**
+   * Yields truthy iff the specified component name exists.
+   *
+   * @param {string} name The path where the component can be found.
+   */
+  componentExists( name ) {
     // borrowed from https://github.com/xcambar/ember-cli-is-component
     const owner = getOwner(this);
-    return owner
+    return !!owner
       .lookup('component-lookup:main')
       .componentFor(this.editComponentName, owner);
   }
