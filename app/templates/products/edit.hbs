@@ -3,7 +3,7 @@
 <div class="container">
   <h1>{{@model.label}}<small>, edit product detail</small></h1>
 
-  <form {{on "submit" (pipe (e/prevent-default) (call @model "save"))}} class="row">
+  <form {{on "submit" (e/pipe (e/prevent-default) (e/call @model "save"))}} class="row">
     <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8">
       <:title>Details</:title>
       <:body as |C|>

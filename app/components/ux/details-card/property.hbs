@@ -11,7 +11,7 @@
             property=@property}}
       {{else if (is-property-type @resource @property "boolean")}}
         <span class="input-group">
-          <input {{on "input" (pipe (e/boolean-val) (set-prop @resource @property))}}
+          <input {{on "input" (e/pipe (e/boolean-val) (e/set-prop @resource @property))}}
             type="checkbox"
             class="form-control"
             checked={{get @resource @property}} />
@@ -23,7 +23,7 @@
         </span>
       {{else if (is-property-type @resource @property "text")}}
         <span class="input-group">
-          <textarea {{on "input" (pipe (e/str-val) (set-prop @resource @property))}}
+          <textarea {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
             {{on "change" (fn (mut this.editing) false)}}
             class="form-control"
             value={{get @resource @property}}>
@@ -37,7 +37,7 @@
         </span>
       {{else}}
         <span class="input-group">
-          <input {{on "input" (pipe (e/str-val) (set-prop @resource @property))}}
+          <input {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
             {{on "change" (fn (mut this.editing) false)}}
             class="form-control"
             value={{get @resource @property}} />

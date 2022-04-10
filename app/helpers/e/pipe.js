@@ -1,6 +1,6 @@
 import { helper } from '@ember/component/helper';
 
-export default helper(function pipe(positional /*, named*/) {
+export default helper(function ePipe(positional /*, named*/) {
   return async (...args) => {
     const [firstFunctor, ...otherFunctors] = positional;
     let lastResult = await firstFunctor.apply(this, args);

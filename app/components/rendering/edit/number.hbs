@@ -1,5 +1,5 @@
 <span class="input-group">
-  <input {{on "input" (pipe (e/number-val) (set-prop @resource @property))}}
+  <input {{on "input" (e/pipe (e/number-val) (e/set-prop @resource @property))}}
     class="form-control"
     type="number"
     value={{get @resource @property}} />
