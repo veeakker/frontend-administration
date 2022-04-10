@@ -12,17 +12,19 @@
             resource=@resource
             property=@property}}
       {{else if (is-property-type @resource @property "boolean")}}
-        <span class="input-group">
-          <input {{on "input" (e/pipe (e/boolean-val) (e/set-prop @resource @property))}}
-            type="checkbox"
-            class="form-control"
-            checked={{get @resource @property}} />
+        <div class="input-group">
+          <div class="input-group-text">
+            <input {{on "input" (e/pipe (e/boolean-val) (e/set-prop @resource @property))}}
+              type="checkbox"
+              class="form-check-input"
+              checked={{get @resource @property}} />
+          </div>
           <BsButton
             {{on "click" (fn (mut this.editing) false)}}
             @type="primary">
-            <i class="bi bi-check" />
+            Confirm
           </BsButton>
-        </span>
+        </div>
       {{else if (is-property-type @resource @property "text")}}
         <span class="input-group">
           <textarea {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
