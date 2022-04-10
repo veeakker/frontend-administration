@@ -1,5 +1,5 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
-import fetchProp from '../utils/decorators/fetch-prop';
+import fetchProp from '../decorators/fetch-prop';
 import link from '../decorators/link';
 import { number, boolean, string, text } from '../decorators/attributes';
 
