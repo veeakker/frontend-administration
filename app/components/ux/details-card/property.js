@@ -37,7 +37,7 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get hasImplicitEditComponent() {
-    this.componentExists(this.implicitEditComponentName);
+    return this.componentExists(this.implicitEditComponentName);
   }
 
   get explicitEditComponentName() {
@@ -78,7 +78,7 @@ export default class DetailsCardPropertyComponent extends Component {
     const owner = getOwner(this);
     return !!owner
       .lookup('component-lookup:main')
-      .componentFor(this.editComponentName, owner);
+      .componentFor(name, owner);
   }
 
   get renderLabel() {

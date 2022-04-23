@@ -10,16 +10,53 @@
         <C.Property @property="plu" @label="PLU" />
         <C.Property @property="label" />
         <C.Property @property="altLabel" />
-        <C.Property @property="unitPrice" @label="Unit Price"><Product::UnitPrice @value={{@model.unitPrice}} /></C.Property>
         <C.Property @property="description" />
-        <C.Property @property="ingredientsText" @label="Ingredients">{{{@model.ingredientsText}}}</C.Property>
-        <C.Property @property="allergensText" @label="Allergens">{{{@model.allergensText}}}</C.Property>
-        <C.Property @property="nutricionDataText" @label="Nutricion data">{{{@model.nutricionDataText}}}</C.Property>
+        <C.Property @property="ingredientsText" @label="Ingredients" />
+        <C.Property @property="allergensText" @label="Allergens" />
+        <C.Property @property="nutricionDataText" @label="Nutricion data" />
         <C.Property @property="sortIndex" />
-        <C.Property @property="productLabels" />
-        <C.Property @property="isEnabled" />
+        <C.Property @property="isEnabled" @label="Published?" />
+        <C.Property @property="productLabels">
+          {{#each @model.productLabels as |uri|}}
+            {{#let (product/label-info uri) as |label|}}
+              <img src={{label.image}} alt={{label.label}} />
+            {{/let}}
+          {{/each}}
+        </C.Property>
       </:body>
     </Ux::DetailsCard>
+    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-4">
+      <:title>Preview</:title>
+      <:body as |C|>
+        <C.Property @renderLabel={{false}} @property="thumbnail" />
+      </:body>
+    </Ux::DetailsCard>
+    <Ui::Card @title="Prices" class="col-12 col-md-6" as |card|>
+      <card.Section @title="defaults">
+        <div class="row col-md-6 col-12">
+          Cost: <Product::UnitPrice @value={{@model.unitPrice}} />
+        </div>
+        <div class="row col-md-6 col-12">
+          Amount: {{@model.targetUnit.value}} {{human-unit @model.targetUnit.unit}}
+        </div>
+      </card.Section>
+      <card.Section @title="offers">
+        <ul>
+          {{#each @model.offerings as |offering|}}
+            <li><Product::Price @offering={{offering}} /></li>
+          {{/each}}
+        </ul>
+      </card.Section>
+    </Ui::Card>
+    <Ui::Card @title="Product groups" class="col-12 col-md-6">
+      <ul>
+        {{#each @model.productGroups as |productGroup|}}
+          <li>
+            <Ux::Link @model={{productGroup}} />
+          </li>
+        {{/each}}
+      </ul>
+    </Ui::Card>
     <Ui::Card @title="world" class="col-12 col-md-4">Yolo</Ui::Card>
     <BsButton type="submit" @type="primary">Save</BsButton>
   </form>
