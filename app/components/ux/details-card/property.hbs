@@ -8,7 +8,7 @@
     {{#if this.editing}}
       {{#if this.hasCustomEditComponent}}
         {{component this.customEditComponentName
-            exitEditing=(fn (mut this.editing) false)
+            exitEditing=this.stopEditing
             resource=@resource
             property=@property}}
       {{else if (is-property-type @resource @property "boolean")}}
@@ -20,7 +20,7 @@
               checked={{get @resource @property}} />
           </div>
           <BsButton
-            {{on "click" (fn (mut this.editing) false)}}
+            {{on "click" this.stopEditing}}
             @type="primary">
             Confirm
           </BsButton>
@@ -28,13 +28,13 @@
       {{else if (is-property-type @resource @property "text")}}
         <span class="input-group">
           <textarea {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
-            {{on "change" (fn (mut this.editing) false)}}
+            {{on "change" this.stopEditing}}
             class="form-control"
             value={{get @resource @property}}>
             {{get @resource @property}}
           </textarea>
           <BsButton
-            {{on "click" (fn (mut this.editing) false)}}
+            {{on "click" this.stopEditing}}
             @type="primary">
             <i class="bi bi-check" />
           </BsButton>
@@ -42,11 +42,11 @@
       {{else}}
         <span class="input-group">
           <input {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
-            {{on "change" (fn (mut this.editing) false)}}
+            {{on "change" this.stopEditing}}
             class="form-control"
             value={{get @resource @property}} />
           <BsButton
-            {{on "click" (fn (mut this.editing) false)}}
+            {{on "click" this.stopEditing}}
             @type="primary">
             <i class="bi bi-check" />
           </BsButton>
@@ -55,19 +55,19 @@
     {{else}}
       {{#if this.customShowComponent}}
         {{component this.customShowComponent
-            startEditing=(fn (mut this.editing) true)
+            startEditing=this.startEditing
             resource=@resource
             property=@property}}
       {{else if (is-property-type @resource @property "boolean")}}
-        <span {{on "click" (fn (mut this.editing) true)}}>
+        <span {{on "click" this.startEditing}}>
           {{#if (get @resource @property)}}Yes{{else}}No{{/if}}
         </span>
       {{else if (is-property-type @resource @property "text")}}
-        <span {{on "click" (fn (mut this.editing) true)}} style="min-width: 3em; min-height: 2em; display: inline-block">
+        <span {{on "click" this.startEditing}} style="min-width: 3em; min-height: 2em; display: inline-block">
           {{{get @resource @property}}}
         </span>
       {{else}}
-        <span {{on "click" (fn (mut this.editing) true)}} style="min-width: 3em; min-height: 2em; display: inline-block">
+        <span {{on "click" this.startEditing}} style="min-width: 3em; min-height: 2em; display: inline-block">
           {{get @resource @property}}
         </span>
       {{/if}}

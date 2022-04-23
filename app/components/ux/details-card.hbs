@@ -11,13 +11,13 @@
       {{yield (hash
           Dt=(component "ux/details-card/dt")
           Dd=(component "ux/details-card/dd")
-          Property=(component "ux/details-card/property" resource=@resource))
+          Property=(component "ux/details-card/property" resource=@resource editable=@editable))
           to="body"}}
     {{else}}
       {{yield (hash
           Dt=(component "ux/details-card/dt")
           Dd=(component "ux/details-card/dd")
-          Property=(component "ux/details-card/property" resource=@resource))
+          Property=(component "ux/details-card/property" resource=@resource editable=@editable))
           to="default"}}
     {{/if}}
   </:body>

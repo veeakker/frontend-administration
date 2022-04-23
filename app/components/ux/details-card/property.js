@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import Component from '@glimmer/component';
 import humanize from 'freddie/utils/humanize';
@@ -6,6 +7,17 @@ import { getOwner } from '@ember/application';
 
 export default class DetailsCardPropertyComponent extends Component {
   @tracked editing = false;
+
+  @action
+  startEditing() {
+    if (this.args.editable)
+      this.editing = true;
+  }
+
+  @action
+  stopEditing() {
+    this.editing = false;
+  }
 
   get label() {
     return this.args.label || humanize(this.args.property);

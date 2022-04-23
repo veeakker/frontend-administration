@@ -4,7 +4,7 @@
   <h1>{{@model.label}}<small>, product in detail</small></h1>
 
   <div class="row">
-    <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8">
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12 col-md-8">
       <:title>Details</:title>
       <:body as |C|>
         <C.Property @property="plu" @label="PLU" />
