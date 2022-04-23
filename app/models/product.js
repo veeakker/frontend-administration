@@ -26,10 +26,12 @@ export default class ProductModel extends Model {
   @hasMany('offering') offerings;
   @belongsTo('unit-price-specification', {
     show: 'rendering/show/unit-price-specification',
+    edit: 'rendering/edit/unit-price-specification',
   })
   unitPrice;
   @belongsTo('quantitative-value', {
     show: 'rendering/show/quantitative-value',
+    edit: 'rendering/edit/quantitative-value',
   })
   targetUnit;
   // @belongsTo('file') thumbnail;

@@ -1,0 +1,24 @@
+{{#let (get @resource @property) as |qv|}}
+  <span class="input-group">
+    <input {{on "change" (e/pipe (e/number-val) (e/set-prop qv "value"))}}
+      type="number"
+      value={{qv.value}}
+      class="form-control"
+    />
+    <span class="form-control" disabled>per</span>
+    <select class="form-control" name="unit">
+      {{#each (list "C62" "KGM" "GRM") as |unit|}}
+        <option
+          {{on "click" (e/pipe (e/str-val) (e/set-prop qv "unit"))}}
+          selected={{eq unit qv.unit}}
+          value={{unit}}
+        >
+          {{human-unit unit}}
+        </option>
+      {{/each}}
+    </select>
+    <BsButton {{on "click" @exitEditing}} @type="primary">
+      <i class="bi bi-check" />
+    </BsButton>
+  </span>
+{{/let}}

@@ -3,7 +3,9 @@ import Controller from '@ember/controller';
 
 export default class ProductsEditController extends Controller {
   @action
-  persist(event) {
-    event.preventDefault();
+  async persist() {
+    await this.model.save();
+    await (await this.model.targetUnit)?.save();
+    await (await this.model.unitPrice)?.save();
   }
 }
