@@ -24,8 +24,14 @@ export default class ProductModel extends Model {
   @boolean() isEnabled;
   @hasMany('product-group') productGroups;
   @hasMany('offering') offerings;
-  @belongsTo('unit-price-specification') unitPrice;
-  @belongsTo('quantitative-value') targetUnit;
+  @belongsTo('unit-price-specification', {
+    show: 'rendering/show/unit-price-specification',
+  })
+  unitPrice;
+  @belongsTo('quantitative-value', {
+    show: 'rendering/show/quantitative-value',
+  })
+  targetUnit;
   // @belongsTo('file') thumbnail;
   @belongsTo('file', {
     show: 'rendering/show/thumbnail',

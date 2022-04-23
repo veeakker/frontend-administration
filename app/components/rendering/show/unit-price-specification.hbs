@@ -1,0 +1,8 @@
+<span {{on "click" @startEditing}}>
+  {{#let
+       (get (get @resource @property) "unit")
+       (get (get @resource @property) "value")
+       as |unit value|}}
+    €{{value}} per {{human-unit unit}}
+  {{/let}}
+</span>

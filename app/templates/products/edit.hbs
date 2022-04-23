@@ -31,23 +31,22 @@
         <C.Property @renderLabel={{false}} @property="thumbnail" />
       </:body>
     </Ux::DetailsCard>
-    <Ui::Card @title="Prices" class="col-12 col-md-6" as |card|>
-      <card.Section @title="defaults">
-        <div class="row col-md-6 col-12">
-          Cost: <Product::UnitPrice @value={{@model.unitPrice}} />
-        </div>
-        <div class="row col-md-6 col-12">
-          Amount: {{@model.targetUnit.value}} {{human-unit @model.targetUnit.unit}}
-        </div>
-      </card.Section>
-      <card.Section @title="offers">
-        <ul>
-          {{#each @model.offerings as |offering|}}
-            <li><Product::Price @offering={{offering}} /></li>
-          {{/each}}
-        </ul>
-      </card.Section>
-    </Ui::Card>
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12 col-md-6">
+      <:title>Prices</:title>
+      <:body as |C|>
+        <C.Card.Section @title="defaults">
+          <C.Property @property="targetUnit" @label="Amount" />
+          <C.Property @property="unitPrice" @label="Price" />
+        </C.Card.Section>
+        <C.Card.Section @title="Offers">
+          <ul>
+            {{#each @model.offerings as |offering|}}
+              <li><Product::Price @offering={{offering}} /></li>
+            {{/each}}
+          </ul>
+        </C.Card.Section>
+      </:body>
+    </Ux::DetailsCard>
     <Ui::Card @title="Product groups" class="col-12 col-md-6">
       <ul>
         {{#each @model.productGroups as |productGroup|}}
@@ -57,7 +56,6 @@
         {{/each}}
       </ul>
     </Ui::Card>
-    <Ui::Card @title="world" class="col-12 col-md-4">Yolo</Ui::Card>
     <BsButton type="submit" @type="primary">Save</BsButton>
   </form>
 </div>
