@@ -7,17 +7,10 @@
     />
     {{#let (gen-id) as |id|}}
       <label for={{id}} class="input-group-text" disabled>per</label>
-      <select id={{id}} class="form-control" name="unit">
-        {{#each (list "C62" "KGM" "GRM") as |unit|}}
-          <option
-            {{on "click" (e/pipe (e/str-val) (e/set-prop qv "unit"))}}
-            selected={{eq unit qv.unit}}
-            value={{unit}}
-          >
-            {{human-unit unit}}
-          </option>
-        {{/each}}
-      </select>
+      <Product::SelectUnit
+        @id={{id}}
+        @selected={{qv.unit}}
+        @onChange={{e/set-prop qv "unit"}} />
     {{/let}}
     <BsButton {{on "click" @exitEditing}} @type="primary">
       <i class="bi bi-check" />

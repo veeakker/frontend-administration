@@ -22,17 +22,10 @@
               value={{typeAndQuantity.value}}
               class="form-control"
             />
-            <select id={{id}} class="form-control" name="unit">
-              {{#each (list "C62" "KGM" "GRM") as |unit|}}
-                <option
-                  {{on "input" (e/pipe (e/str-val) (e/set-prop typeAndQuantity "unit"))}}
-                  selected={{eq unit typeAndQuantity.unit}}
-                  value={{unit}}
-                >
-                  {{human-unit unit}}
-                </option>
-              {{/each}}
-            </select>
+            <Product::SelectUnit
+              @id={{id}}
+              @onChange={{e/set-prop typeAndQuantity "unit"}}
+              @selected={{typeAndQuantity.unit}} />
           {{/let}}
           <BsButton @type="danger" {{on "click" (fn this.remove offering)}}>
             Remove
