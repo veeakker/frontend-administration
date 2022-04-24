@@ -7,13 +7,12 @@ export default class RenderingEditThumbnailComponent extends Component {
 
   @action
   async uploadThumbnail(file) {
-    const result = await file.upload("/files");
+    const result = await file.upload('/files');
     this.store.pushPayload('file', result.body);
     const uploadedFile = this.store.peekRecord('file', result.body.data.id);
     const product = this.args.resource;
     product.thumbnail = uploadedFile;
     await product.save();
     this.args.exitEditing();
-
   }
 }
