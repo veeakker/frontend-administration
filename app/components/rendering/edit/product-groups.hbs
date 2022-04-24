@@ -1,13 +1,13 @@
-<ul>
+<ul class="list-group list-group-flush">
   {{#each (get @resource @property) as |productGroup|}}
-    <li class="input-group">
-      <Ux::Link @model={{productGroup}} class="input-group-text" />
+    <li class="list-group-item">
       <BsButton
         {{on "click" (fn this.removeGroup productGroup)}}
         @type="danger"
       >
-        Remove
+        X
       </BsButton>
+      <Ux::Link @model={{productGroup}} />
     </li>
   {{/each}}
 </ul>
@@ -24,18 +24,16 @@
     </span>
   </form>
 
-  <ul>
+  <ul class="list-group list-group-flush">
     {{#each this.newGroups as |group|}}
-      <li class="input-group">
-        <Ux::Link @model={{group}} class="input-group-text" />
-        <span class="input-group-append">
-          <BsButton
-            {{on "click" (fn this.addGroup group)}}
-            @type="success"
-          >
-            Add
-          </BsButton>
-        </span>
+      <li class="list-group-item">
+        <BsButton
+          {{on "click" (fn this.addGroup group)}}
+          @type="success"
+        >
+          +
+        </BsButton>
+        <Ux::Link @model={{group}} />
       </li>
     {{/each}}
   </ul>

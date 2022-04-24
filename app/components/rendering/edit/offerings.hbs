@@ -4,33 +4,31 @@
          (get offering "typeAndQuantity")
          as |unitPrice typeAndQuantity|}}
       <li class="input-group">
-        <!-- <span class="input-group"> -->
-          {{#let (gen-id) as |id|}}
-            <label for={{id}} class="input-group-text">€</label>
-            <input
-              id={{id}}
-              class="form-control"
-              type="number"
-              value={{unitPrice.value}}
-              {{on "input" (e/pipe (e/number-val) (e/set-prop unitPrice "value"))}}
-            />
-          {{/let}}
-          {{#let (gen-id) as |id|}}
-            <label for={{id}} class="input-group-text">per</label>
-            <input {{on "change" (e/pipe (e/number-val) (e/set-prop typeAndQuantity "value"))}}
-              type="number"
-              value={{typeAndQuantity.value}}
-              class="form-control"
-            />
-            <Product::SelectUnit
-              @id={{id}}
-              @onChange={{e/set-prop typeAndQuantity "unit"}}
-              @selected={{typeAndQuantity.unit}} />
-          {{/let}}
-          <BsButton @type="danger" {{on "click" (fn this.remove offering)}}>
-            Remove
-          </BsButton>
-          <!-- </span> -->
+        {{#let (gen-id) as |id|}}
+          <label for={{id}} class="input-group-text">€</label>
+          <input
+            id={{id}}
+            class="form-control"
+            type="number"
+            value={{unitPrice.value}}
+            {{on "input" (e/pipe (e/number-val) (e/set-prop unitPrice "value"))}}
+          />
+        {{/let}}
+        {{#let (gen-id) as |id|}}
+          <label for={{id}} class="input-group-text">per</label>
+          <input {{on "change" (e/pipe (e/number-val) (e/set-prop typeAndQuantity "value"))}}
+            type="number"
+            value={{typeAndQuantity.value}}
+            class="form-control"
+          />
+          <Product::SelectUnit
+            @id={{id}}
+            @onChange={{e/set-prop typeAndQuantity "unit"}}
+            @selected={{typeAndQuantity.unit}} />
+        {{/let}}
+        <BsButton @type="danger" {{on "click" (fn this.remove offering)}}>
+          Remove
+        </BsButton>
       </li>
     {{/let}}
   {{/each}}
