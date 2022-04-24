@@ -19,7 +19,9 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    lintFix: false
+  },
   overrides: [
     // node files
     {
