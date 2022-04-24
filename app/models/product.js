@@ -22,7 +22,11 @@ export default class ProductModel extends Model {
   @number() plu;
   @attr('uri-set') productLabels;
   @boolean() isEnabled;
-  @hasMany('product-group') productGroups;
+  @hasMany('product-group', {
+    inverse: false,
+    show: 'rendering/show/product-groups',
+    edit: 'rendering/edit/product-groups'
+  }) productGroups;
   @hasMany('offering', {
     show: 'rendering/show/offerings',
     edit: 'rendering/edit/offerings'

@@ -1,0 +1,44 @@
+<ul>
+  {{#each (get @resource @property) as |productGroup|}}
+    <li class="input-group">
+      <Ux::Link @model={{productGroup}} class="input-group-text" />
+      <BsButton
+        {{on "click" (fn this.removeGroup productGroup)}}
+        @type="danger"
+      >
+        Remove
+      </BsButton>
+    </li>
+  {{/each}}
+</ul>
+
+{{#let (obj content="") as |search|}}
+  <form {{on "submit" (e/pipe (e/prevent-default) (fn this.startSearch search.content))}}>
+    <span class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search here"
+        {{on "change" (e/pipe (e/str-val) (e/set-prop search "content"))}} />
+      <BsButton @type="primary"><i class="bi bi-search" /></BsButton>
+    </span>
+  </form>
+
+  <ul>
+    {{#each this.newGroups as |group|}}
+      <li class="input-group">
+        <Ux::Link @model={{group}} class="input-group-text" />
+        <span class="input-group-append">
+          <BsButton
+            {{on "click" (fn this.addGroup group)}}
+            @type="success"
+          >
+            Add
+          </BsButton>
+        </span>
+      </li>
+    {{/each}}
+  </ul>
+{{/let}}
+
+<BsButton {{on "click" @exitEditing}}>Done</BsButton>

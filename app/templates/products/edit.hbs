@@ -43,15 +43,12 @@
         </C.Card.Section>
       </:body>
     </Ux::DetailsCard>
-    <Ui::Card @title="Product groups" class="col-12 col-md-6">
-      <ul>
-        {{#each @model.productGroups as |productGroup|}}
-          <li>
-            <Ux::Link @model={{productGroup}} />
-          </li>
-        {{/each}}
-      </ul>
-    </Ui::Card>
+    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
+      <:title>Product groups</:title>
+      <:body as |C|>
+        <C.Property @property="productGroups" @renderLabel={{false}} />
+      </:body>
+    </Ux::DetailsCard>
     <BsButton type="submit" @type="primary">Save</BsButton>
   </form>
 </div>

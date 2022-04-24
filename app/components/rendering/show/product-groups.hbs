@@ -1,0 +1,9 @@
+<ul>
+  {{#each (get @resource @property) as |productGroup|}}
+    <li>
+      <Ux::Link @model={{productGroup}} />
+    </li>
+  {{/each}}
+</ul>
+
+<BsButton {{on "click" @startEditing}}>Edit</BsButton>
