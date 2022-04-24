@@ -1,1 +1,6 @@
-<dd class="col-sm-8">{{yield}}</dd>
+{{!-- TODO: It would be nicer if the parent component could handle not rendering the dd but that's more logic with the current construction so we're adding it here 🍝 --}}
+{{#if @renderedLabel}}
+  <dd class="col-sm-8">{{yield}}</dd>
+{{else}}
+  {{yield}}
+{{/if}}

@@ -1,0 +1,78 @@
+<ul>
+  {{#each (get @resource @property) as |offering|}}
+    {{#let (get offering "unitPrice")
+         (get offering "typeAndQuantity")
+         as |unitPrice typeAndQuantity|}}
+      <li class="input-group">
+        <!-- <span class="input-group"> -->
+          {{#let (gen-id) as |id|}}
+            <label for={{id}} class="input-group-text">€</label>
+            <input
+              id={{id}}
+              class="form-control"
+              type="number"
+              value={{unitPrice.value}}
+              {{on "input" (e/pipe (e/number-val) (e/set-prop unitPrice "value"))}}
+            />
+          {{/let}}
+          {{#let (gen-id) as |id|}}
+            <label for={{id}} class="input-group-text">per</label>
+            <input {{on "change" (e/pipe (e/number-val) (e/set-prop typeAndQuantity "value"))}}
+              type="number"
+              value={{typeAndQuantity.value}}
+              class="form-control"
+            />
+            <select id={{id}} class="form-control" name="unit">
+              {{#each (list "C62" "KGM" "GRM") as |unit|}}
+                <option
+                  {{on "input" (e/pipe (e/str-val) (e/set-prop typeAndQuantity "unit"))}}
+                  selected={{eq unit typeAndQuantity.unit}}
+                  value={{unit}}
+                >
+                  {{human-unit unit}}
+                </option>
+              {{/each}}
+            </select>
+          {{/let}}
+          <BsButton @type="danger" {{on "click" (fn this.remove offering)}}>
+            Remove
+          </BsButton>
+          <!-- </span> -->
+      </li>
+    {{/let}}
+  {{/each}}
+
+  {{#let (obj show=false price=0 unit="KGM" amount=0.5) as |form|}}
+    {{#if form.show}}
+      <span class="input-group">
+        {{#let (gen-id) as |id|}}
+          <label for={{id}} class="input-group-text">€</label>
+          <input
+            id={{id}}
+            class="form-control"
+            type="number"
+            value={{form.price}}
+            {{on "input" (e/pipe (e/number-val) (e/set-prop form "price"))}}
+          />
+        {{/let}}
+        {{#let (gen-id) as |id|}}
+          <label for={{id}} class="input-group-text">per</label>
+          <input {{on "change" (e/pipe (e/number-val) (e/set-prop form "amount"))}}
+            type="number"
+            value={{form.amount}}
+            class="form-control"
+          />
+          <Product::SelectUnit
+            @id={{id}}
+            @onChange={{e/set-prop form "unit"}}
+            @selected={{form.unit}} />
+        {{/let}}
+        <BsButton @type="success" {{on "click" (e/pipe (e/prevent-default) form.clone this.create form.reset)}}>Create</BsButton>
+        <BsButton @type="warning" {{on "click" form.reset}}>Cancel</BsButton>
+      </span>
+    {{else}}
+      <BsButton {{on "click" (fn (mut form.show) true)}}>Add</BsButton>
+    {{/if}}
+  {{/let}}
+</ul>
+<BsButton {{on "click" @exitEditing}}>Done</BsButton>

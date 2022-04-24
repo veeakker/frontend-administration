@@ -1,7 +1,7 @@
 {{#if this.renderLabel}}
   <Ux::DetailsCard::Dt>{{this.label}}</Ux::DetailsCard::Dt>
 {{/if}}
-<Ux::DetailsCard::Dd>
+<Ux::DetailsCard::Dd @renderedLabel={{this.renderLabel}}>
   {{#if (has-block)}}
     {{yield}}
   {{else}}

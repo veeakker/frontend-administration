@@ -23,7 +23,10 @@ export default class ProductModel extends Model {
   @attr('uri-set') productLabels;
   @boolean() isEnabled;
   @hasMany('product-group') productGroups;
-  @hasMany('offering') offerings;
+  @hasMany('offering', {
+    show: 'rendering/show/offerings',
+    edit: 'rendering/edit/offerings'
+  }) offerings;
   @belongsTo('unit-price-specification', {
     show: 'rendering/show/unit-price-specification',
     edit: 'rendering/edit/unit-price-specification',

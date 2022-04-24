@@ -1,0 +1,7 @@
+<ul {{on "click" @startEditing}}>
+  {{#each (get @resource @property) as |offering|}}
+    <li><Product::Price @offering={{offering}} /></li>
+  {{else}}
+    No offers
+  {{/each}}
+</ul>

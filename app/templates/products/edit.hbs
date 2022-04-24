@@ -38,12 +38,8 @@
           <C.Property @property="unitPrice" @label="Price" />
           <C.Property @property="targetUnit" @label="Amount" />
         </C.Card.Section>
-        <C.Card.Section @title="Offers">
-          <ul>
-            {{#each @model.offerings as |offering|}}
-              <li><Product::Price @offering={{offering}} /></li>
-            {{/each}}
-          </ul>
+        <C.Card.Section @title="offers">
+          <C.Property @property="offerings" @renderLabel={{false}} />
         </C.Card.Section>
       </:body>
     </Ux::DetailsCard>
