@@ -16,4 +16,10 @@ export default class ProductsEditController extends Controller {
       });
     await Promise.all(offeringSaves || []);
   }
+
+  @action
+  async applyDefaultPrices() {
+    const offerings = (await this.model.offerings);
+    offerings.map( (o) => o.calculatePricingSync( this.model ) );
+  }
 }
