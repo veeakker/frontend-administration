@@ -38,8 +38,8 @@ export default class OfferingModel extends Model {
           pricePerPiece =
             productPricePrice
             * productTargetUnitValue
-            * productTargetUnit.gramsPerUnit
-            / productPrice.gramsPerUnit; // divide last, probably better accuracy
+            * productTargetUnit.get("gramsPerUnit")
+            / productPrice.get("gramsPerUnit"); // divide last, probably better accuracy
         break;
     }
 
@@ -59,7 +59,7 @@ export default class OfferingModel extends Model {
           pricePerKg =
             productPricePrice
             / productTargetUnitValue
-            / ( 1000 / productTargetUnit.gramsPerUnit );
+            / ( 1000 / productTargetUnit.get("gramsPerUnit") );
     }
 
     // Convert to target values
