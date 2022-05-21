@@ -1,16 +1,33 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import Model from '@ember-data/model';
 import { computed } from '@ember/object';
 import link from '../decorators/link';
 
+import {
+  number,
+  string,
+  belongsTo,
+  hasMany,
+} from '../decorators/attributes';
+
 @link()
 export default class ProductGroupModel extends Model {
-  @attr() label;
-  @attr('number') sortIndex;
-  @attr() uri;
-  @belongsTo('product-group', { inverse: 'childGroups' }) parentGroup;
-  @hasMany('product-group', { inverse: 'parentGroup' }) childGroups;
+  @string() label;
+  @number() sortIndex;
+  @string() uri;
+  @belongsTo('product-group', {
+    inverse: null
+  }) parentGroup;
+  @hasMany('product-group', {
+    inverse: null,
+    show: 'rendering/show/product-groups',
+    edit: 'rendering/edit/product-groups'
+  }) childGroups;
   @hasMany('spotlight-product') spotlightProducts;
-  @hasMany('product', { inverse: 'productGroups' }) products;
+  @hasMany('product', {
+    inverse: 'productGroups',
+    show: 'rendering/show/products',
+    edit: 'rendering/edit/products'
+  }) products;
 
   @computed('childGroups.@each.sortIndex')
   get sortedChildren() {

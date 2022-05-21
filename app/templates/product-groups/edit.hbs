@@ -1,17 +1,105 @@
 {{page-title "Edit"}}
 
 <div class="container">
-  <h1>{{@model.label}}<small>, edit product group</small></h1>
+  <Ux::PageHeader @model={{@model}} @kind="edit" />
 
-  <div class="row">
-    <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
-      <C.Dt>Label</C.Dt>
-      <C.Dd><Input @value={{@model.label}} /></C.Dd>
-      <C.Dt>Sort index</C.Dt>
-      <C.Dd><Input @value={{@model.sortIndex}} @type="number" /></C.Dd>
-    </Ux::DetailsCard>
-  </div>
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}}>
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12" @title="Details" as |C|>
+        <C.Property @property="label" />
+        <C.Property @property="sortIndex" />
+      </Ux::DetailsCard>
+    </div>
 
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-6 col-s-12">
+        <:title>Products</:title>
+        <:body as |C|>
+          <C.Card.Section @title="Spotlight">
+            TODO
+          </C.Card.Section>
+          <C.Card.Section @title="All">
+            <C.Property @renderLabel={{false}} @property="products" />
+          </C.Card.Section>
+        </:body>
+      </Ux::DetailsCard>
+
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-6 col-s-12">
+        <:title>Nesting</:title>
+        <:body as |C|>
+          <C.Card.Section @title="Parent groups">
+            TODO
+          </C.Card.Section>
+          <C.Card.Section @title="Nested groups">
+            <C.Property @renderLabel={{false}} @property="childGroups" />
+          </C.Card.Section>
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+
+    <div class="row">
+      <Ui::Card @title="Products" class="col-12 col-md-6" as |C|>
+        <C.Section @title="Spotlight">
+          {{#if @model.spotlightProducts}}
+            <ul>
+              {{#each @model.spotlightProducts as |spotlight|}}
+                <li>
+                  <Ux::Link @model={{spotlight.product}} />
+                </li>
+              {{/each}}
+            </ul>
+        {{else}}
+            None
+          {{/if}}
+        </C.Section>
+        <C.Section @title="All">
+          {{#if @model.products}}
+            <ul>
+              {{#each @model.products as |product|}}
+                <li>
+                  <Ux::Link @model={{product}} />
+                </li>
+              {{/each}}
+            </ul>
+        {{else}}
+            None
+          {{/if}}
+        </C.Section>
+      </Ui::Card>
+      <Ui::Card @title="Nesting" class="col-12 col-md-6" as |C|>
+        <C.Section @title="parent group">
+          {{#if @model.parentGroup}}
+            <Ux::Link @model={{@model.parentGroup}} />
+          {{else}}
+            None
+          {{/if}}
+        </C.Section>
+        <C.Section @title="nested groups (ordered)">
+          {{#if @model.childGroups}}
+            <ul>
+              {{#each @model.sortedChildren as |child|}}
+                <li>
+                  [{{child.sortIndex}}] <Ux::Link @model={{child}} />
+                </li>
+              {{/each}}
+            </ul>
+        {{else}}
+            None
+          {{/if}}
+        </C.Section>
+      </Ui::Card>
+      <div class="row">
+        <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+        <BsButton
+          {{on "click" this.destroy}}
+          @type="danger"
+          type="button"
+          class="col-6 col-s-12">
+          Delete
+        </BsButton>
+      </div>
+    </div>
+  </form>
 </div>
 
 

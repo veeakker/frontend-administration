@@ -1,0 +1,16 @@
+{{page-title "New"}}
+
+<div class="container">
+  <Ux::PageHeader @class="product-group" @model={{@model}} @kind="new" />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}}>
+    <Ux::DetailsCard @editable={{true}} @class={{this.class}} @resource={{@model}} class="col-12 col-md-8" @title="Details" as |C|>
+      <C.Property @property="label" />
+      <C.Property @property="sortIndex" />
+    </Ux::DetailsCard>
+
+    <BsButton type="submit" @type="primary">Create base product group</BsButton>
+  </form>
+</div>
+
+{{outlet}}

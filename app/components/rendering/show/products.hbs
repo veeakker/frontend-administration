@@ -1,0 +1,9 @@
+<ul class="list-group list-group-flish">
+  {{#each (get @resource @property) as |product|}}
+    <li class="list-group-item">
+      <Ux::Link @model={{product}} />
+    </li>
+  {{/each}}
+</ul>
+
+<BsButton {{on "click" @startEditing}}>Edit</BsButton>
