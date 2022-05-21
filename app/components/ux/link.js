@@ -19,10 +19,12 @@ export default class UiLinkComponent extends Component {
   }
 
   get modelClass() {
-    if( this.args.class ) {
+    if( typeof this.args.class == "string" ) {
       const klass = this.store.modelFor(this.args.class);
       if( klass ) return klass;
       else console.error(`Could not find class for ${this.args.class} in Ux::Link`);
+    } else if ( this.args.class ) {
+      return this.args.class;
     } else {
       const model = this.args.model?.content || this.args.model;
       return model.constructor;

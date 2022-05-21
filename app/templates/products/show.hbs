@@ -1,7 +1,7 @@
 {{page-title "Show"}}
 
 <div class="container">
-  <h1>{{@model.label}}<small>, product in detail</small></h1>
+  <Ux::PageHeader @model={{@model}} @kind="show"/>
 
   <div class="row">
     <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12 col-md-8">

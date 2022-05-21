@@ -1,7 +1,7 @@
 {{page-title "New"}}
 
 <div class="container">
-  <h1>{{@model.label}}<small>{{#if @model.label}},{{/if}} new product</small></h1>
+  <Ux::PageHeader @kind="new" @class={{@model.class}} @model={{@model.product}} />
 
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
     <Ux::DetailsCard @editable={{true}} @class={{@model.class}} @resource={{@model.product}} class="col-12">

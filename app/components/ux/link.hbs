@@ -1,7 +1,17 @@
 {{#if this.kindHasModel}}
   <LinkTo @route={{this.route}} @model={{@model}} ...attributes>
-    {{this.label}}
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{this.label}}
+    {{/if}}
   </LinkTo>
 {{else}}
-  <LinkTo @route={{this.route}} ...attributes>{{this.label}}</LinkTo>
+  <LinkTo @route={{this.route}} ...attributes>
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{this.label}}
+    {{/if}}
+  </LinkTo>
 {{/if}}

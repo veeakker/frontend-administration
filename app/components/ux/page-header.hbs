@@ -1,0 +1,23 @@
+<div class="page-header">
+  {{#if (eq @kind "list")}}
+    <h1>Products<small>, as a list</small></h1>
+    <Ux::Link @class={{this.class}} @kind="new">New</Ux::Link>
+  {{else if (eq @kind "new")}}
+    {{#if this.label}}
+      <h1>{{this.label}}<small>, a new product</small></h1>
+    {{else}}
+      <h1>New product</h1>
+    {{/if}}
+    <Ux::Link @class={{this.class}} @kind="list">List</Ux::Link>
+  {{else if (eq @kind "edit")}}
+    <h1>{{this.label}}<small>, edit product detail</small></h1>
+    <Ux::Link @class={{this.class}} @kind="list">List</Ux::Link>
+    <Ux::Link @class={{this.class}} @kind="new">New</Ux::Link>
+    <Ux::Link @model={{@model}} @kind="show">Show</Ux::Link>
+  {{else if (eq @kind "show")}}
+    <h1>{{this.label}}<small>, show product detail</small></h1>
+    <Ux::Link @class={{this.class}} @kind="list">List</Ux::Link>
+    <Ux::Link @class={{this.class}} @kind="new">New</Ux::Link>
+    <Ux::Link @model={{@model}} @kind="edit">Edit</Ux::Link>
+  {{/if}}
+</div>
