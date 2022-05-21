@@ -4,7 +4,7 @@
   <h1>{{@model.label}}<small>{{#if @model.label}},{{/if}} new product</small></h1>
 
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
-    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+    <Ux::DetailsCard @editable={{true}} @class={{@model.class}} @resource={{@model.product}} class="col-12">
       <:title>Details</:title>
       <:body as |C|>
         <C.Property @property="plu" @label="PLU" />
