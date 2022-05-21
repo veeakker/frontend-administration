@@ -17,7 +17,9 @@ export default function link(options = {}) {
       show: options.show || `${basePath}.show`,
       edit: options.edit || `${basePath}.edit`,
       list: options.list || `${basePath}.index`,
-      listLabel: options.listlabel || humanize(camelize(basePath)),
+      new: options.new || `${basePath}.new`,
+      listLabel: options.listLabel || humanize(camelize(basePath)),
+      newLabel: options.newLabel || `new ${humanize(camelize(dashedName))}`,
       label: options.label || 'label',
     };
 

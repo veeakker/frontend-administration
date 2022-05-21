@@ -1,0 +1,20 @@
+{{page-title "New"}}
+
+<div class="container">
+  <h1>{{@model.label}}<small>{{#if @model.label}},{{/if}} new product</small></h1>
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
+    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="plu" @label="PLU" />
+        <C.Property @property="label" />
+        <C.Property @property="description" />
+        <C.Property @property="sortIndex" />
+      </:body>
+    </Ux::DetailsCard>
+    <BsButton type="submit" @type="primary">Create base product</BsButton>
+  </form>
+</div>
+
+{{outlet}}

@@ -3,6 +3,19 @@
 
 @import "./lexend-font";
 
+.page-header {
+  display: block;
+
+  h1 {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    float: right;
+    margin-top: 1em;
+  }
+}
 :root {
   --freddie-accent-color: lightgray; /* var(--bs-teal); */
   --bs-body-font-family: "Lexend Deca", sans-serif;
