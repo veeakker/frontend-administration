@@ -24,11 +24,18 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get renderType() {
-    return propertyType(this.args.resource, this.args.property);
+    return propertyType({
+      class: this.class,
+      property: this.args.property
+    });
+  }
+
+  get class() {
+    return this.args.class || this.args.resource.constructor;
   }
 
   get customShowComponent() {
-    const options = this.args.resource.constructor.propertyMeta;
+    const options = this.class.propertyMeta;
     return options && (options[this.args.property] || {}).show;
   }
 
@@ -41,7 +48,7 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get explicitEditComponentName() {
-    const options = this.args.resource.constructor.propertyMeta;
+    const options = this.class.propertyMeta;
     return options && (options[this.args.property] || {}).edit;
   }
 

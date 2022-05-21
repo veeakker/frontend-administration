@@ -11,7 +11,7 @@
             exitEditing=this.stopEditing
             resource=@resource
             property=@property}}
-      {{else if (is-property-type @resource @property "boolean")}}
+      {{else if (eq this.renderType "boolean")}}
         <div class="input-group">
           <div class="input-group-text">
             <input {{on "input" (e/pipe (e/boolean-val) (e/set-prop @resource @property))}}
@@ -25,7 +25,7 @@
             Confirm
           </BsButton>
         </div>
-      {{else if (is-property-type @resource @property "text")}}
+      {{else if (eq this.renderType "text")}}
         <span class="input-group">
           <textarea {{on "input" (e/pipe (e/str-val) (e/set-prop @resource @property))}}
             {{on "change" this.stopEditing}}
@@ -58,11 +58,11 @@
             startEditing=this.startEditing
             resource=@resource
             property=@property}}
-      {{else if (is-property-type @resource @property "boolean")}}
+      {{else if (eq this.renderType "boolean")}}
         <span {{on "click" this.startEditing}}>
           {{#if (get @resource @property)}}Yes{{else}}No{{/if}}
         </span>
-      {{else if (is-property-type @resource @property "text")}}
+      {{else if (eq this.renderType "text")}}
         <span {{on "click" this.startEditing}} style="min-width: 3em; min-height: 2em; display: inline-block">
           {{{get @resource @property}}}
         </span>
