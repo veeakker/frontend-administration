@@ -15,7 +15,11 @@ export default class UxPageHeaderComponent extends Component {
   }
 
   get label() {
-    const labelProp = this.class.linkOptions.label;
+    const labelProp = this.linkOptions.label;
     return get(this.args.model, labelProp);
+  }
+
+  get linkOptions() {
+    return this.class.linkOptions;
   }
 }
