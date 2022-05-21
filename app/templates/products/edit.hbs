@@ -50,7 +50,16 @@
         <C.Property @property="productGroups" @renderLabel={{false}} />
       </:body>
     </Ux::DetailsCard>
-    <BsButton type="submit" @type="primary">Save</BsButton>
+    <div class="row">
+      <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+      <BsButton
+        {{on "click" this.destroy}}
+        @type="danger"
+        type="button"
+        class="col-6 col-s-12">
+        Delete
+      </BsButton>
+    </div>
   </form>
 </div>
 
