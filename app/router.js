@@ -18,4 +18,9 @@ Router.map(function () {
     this.route('new');
   });
   this.route('accounts', function () {});
+  this.route('delivery-places', function() {
+    this.route('new');
+    this.route('show', { path: '/:delivery_place_id' });
+    this.route('edit', { path: '/:delivery_place_id/edit' });
+  });
 });

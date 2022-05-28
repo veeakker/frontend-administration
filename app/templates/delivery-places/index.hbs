@@ -1,0 +1,38 @@
+{{page-title "Index"}}
+
+<div class="container">
+  <Ux::PageHeader @class="delivery-place" @kind="list" />
+
+  <Ui::Table
+    @content={{@model}}
+    @fields="deliveryKind.label postalAddress.streetAddress postalAddress.locality"
+    @isLoading={{this.isLoadingModel}}
+    {{!-- @filter={{this.filter}} --}}
+    @sort={{this.sort}}
+    @page={{this.page}}
+    @size={{this.size}}
+    @links="delivery-places.edit:edit:pencil delivery-places.show:show:file-earmark-richtext"
+    @rowLink="delivery-places.show"
+    @updatePage={{fn (mut this.page)}}
+    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
+    {{!-- @updateFilter={{fn (mut this.filter)}} --}}
+    @updateSort={{fn (mut this.sort)}}
+    @customHeaders="deliveryKind.label postalAddress.streetAddress postalAddress.locality"
+  >
+    <:data-header as |header|>
+      {{#if (eq header.label "deliveryKind.label")}}
+        <th
+          scope="col"
+          role="button" {{on "click" header.inverseSorting}}
+          class={{concat "sortable" (if header.isSorted (concat " sorted " header.order) "")}}
+        >
+          Delivery kind
+        </th>
+      {{else if (eq header.label "postalAddress.streetAddress" "Location street")}}
+        <th>Address street</th>
+      {{else if (eq header.label "postalAddress.locality" "Location village")}}
+        <th>Address village</th>
+      {{/if}}
+    </:data-header>
+  </Ui::Table>
+</div>
