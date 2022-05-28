@@ -9,6 +9,7 @@
       {{#if this.hasCustomEditComponent}}
         {{component this.customEditComponentName
             exitEditing=this.stopEditing
+            editable=@editable
             resource=@resource
             property=@property}}
       {{else if (eq this.renderType "boolean")}}
@@ -56,6 +57,7 @@
       {{#if this.customShowComponent}}
         {{component this.customShowComponent
             startEditing=this.startEditing
+            editable=@editable
             resource=@resource
             property=@property}}
       {{else if (eq this.renderType "boolean")}}

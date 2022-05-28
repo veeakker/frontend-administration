@@ -3,7 +3,11 @@
     <li class="list-group-item">
       <Ux::Link @model={{productGroup}} />
     </li>
+  {{else}}
+    None
   {{/each}}
 </ul>
 
-<BsButton {{on "click" @startEditing}}>Edit</BsButton>
+{{#if @editable}}
+  <BsButton {{on "click" @startEditing}}>Edit</BsButton>
+{{/if}}

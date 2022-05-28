@@ -4,53 +4,59 @@
   <Ux::PageHeader @model={{@model}} @kind="edit"/>
 
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
-    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-8">
-      <:title>Details</:title>
-      <:body as |C|>
-        <C.Property @property="plu" @label="PLU" />
-        <C.Property @property="label" />
-        <C.Property @property="altLabel" />
-        <C.Property @property="description" />
-        <C.Property @property="ingredientsText" @label="Ingredients" />
-        <C.Property @property="allergensText" @label="Allergens" />
-        <C.Property @property="nutricionDataText" @label="Nutricion data" />
-        <C.Property @property="sortIndex" />
-        <C.Property @property="isEnabled" @label="Published?" />
-        <C.Property @property="productLabels">
-          {{#each @model.productLabels as |uri|}}
-            {{#let (product/label-info uri) as |label|}}
-              <img src={{label.image}} alt={{label.label}} />
-            {{/let}}
-          {{/each}}
-        </C.Property>
-      </:body>
-    </Ux::DetailsCard>
-    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-4">
-      <:title>Preview</:title>
-      <:body as |C|>
-        <C.Property @renderLabel={{false}} @property="thumbnail" />
-      </:body>
-    </Ux::DetailsCard>
-    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
-      <:title>Prices</:title>
-      <:body as |C|>
-        <C.Card.Section @title="defaults">
-          <C.Property @property="unitPrice" @label="Price" />
-          <C.Property @property="targetUnit" @label="Amount" />
-          <BsButton {{on "click" this.applyDefaultPrices}}>Apply</BsButton>
-        </C.Card.Section>
-        <C.Card.Section @title="offers">
-          <C.Property @property="offerings" @renderLabel={{false}} />
-        </C.Card.Section>
-      </:body>
-    </Ux::DetailsCard>
-    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
-      <:title>Product groups</:title>
-      <:body as |C|>
-        <C.Property @property="productGroups" @renderLabel={{false}} />
-      </:body>
-    </Ux::DetailsCard>
     <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-8">
+        <:title>Details</:title>
+        <:body as |C|>
+          <C.Property @property="plu" @label="PLU" />
+          <C.Property @property="label" />
+          <C.Property @property="altLabel" />
+          <C.Property @property="description" />
+          <C.Property @property="ingredientsText" @label="Ingredients" />
+          <C.Property @property="allergensText" @label="Allergens" />
+          <C.Property @property="nutricionDataText" @label="Nutricion data" />
+          <C.Property @property="sortIndex" />
+          <C.Property @property="isEnabled" @label="Published?" />
+          <C.Property @property="productLabels">
+            {{#each @model.productLabels as |uri|}}
+              {{#let (product/label-info uri) as |label|}}
+                <img src={{label.image}} alt={{label.label}} />
+              {{/let}}
+            {{/each}}
+          </C.Property>
+        </:body>
+      </Ux::DetailsCard>
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-4">
+        <:title>Preview</:title>
+        <:body as |C|>
+          <C.Property @renderLabel={{false}} @property="thumbnail" />
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
+        <:title>Prices</:title>
+        <:body as |C|>
+          <C.Card.Section @title="defaults">
+            <C.Property @property="unitPrice" @label="Price" />
+            <C.Property @property="targetUnit" @label="Amount" />
+            <BsButton {{on "click" this.applyDefaultPrices}}>Apply</BsButton>
+          </C.Card.Section>
+          <C.Card.Section @title="offers">
+            <C.Property @property="offerings" @renderLabel={{false}} />
+          </C.Card.Section>
+        </:body>
+      </Ux::DetailsCard>
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
+        <:title>Product groups</:title>
+        <:body as |C|>
+          <C.Property @property="productGroups" @renderLabel={{false}} />
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+
+    <div class="row p-2">
       <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
       <BsButton
         {{on "click" this.destroy}}

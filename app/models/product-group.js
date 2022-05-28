@@ -14,9 +14,12 @@ export default class ProductGroupModel extends Model {
   @string() label;
   @number() sortIndex;
   @string() uri;
-  @belongsTo('product-group', {
-    inverse: null
-  }) parentGroup;
+  @hasMany('product-group', {
+    inverse: null,
+    show: 'rendering/show/product-groups',
+    edit: 'rendering/edit/product-groups'
+
+  }) parentGroups;
   @hasMany('product-group', {
     inverse: null,
     show: 'rendering/show/product-groups',

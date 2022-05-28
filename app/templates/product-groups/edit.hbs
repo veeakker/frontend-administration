@@ -28,7 +28,7 @@
         <:title>Nesting</:title>
         <:body as |C|>
           <C.Card.Section @title="Parent groups">
-            TODO
+            <C.Property @renderLabel={{false}} @property="parentGroups" />
           </C.Card.Section>
           <C.Card.Section @title="Nested groups">
             <C.Property @renderLabel={{false}} @property="childGroups" />
@@ -37,67 +37,15 @@
       </Ux::DetailsCard>
     </div>
 
-    <div class="row">
-      <Ui::Card @title="Products" class="col-12 col-md-6" as |C|>
-        <C.Section @title="Spotlight">
-          {{#if @model.spotlightProducts}}
-            <ul>
-              {{#each @model.spotlightProducts as |spotlight|}}
-                <li>
-                  <Ux::Link @model={{spotlight.product}} />
-                </li>
-              {{/each}}
-            </ul>
-        {{else}}
-            None
-          {{/if}}
-        </C.Section>
-        <C.Section @title="All">
-          {{#if @model.products}}
-            <ul>
-              {{#each @model.products as |product|}}
-                <li>
-                  <Ux::Link @model={{product}} />
-                </li>
-              {{/each}}
-            </ul>
-        {{else}}
-            None
-          {{/if}}
-        </C.Section>
-      </Ui::Card>
-      <Ui::Card @title="Nesting" class="col-12 col-md-6" as |C|>
-        <C.Section @title="parent group">
-          {{#if @model.parentGroup}}
-            <Ux::Link @model={{@model.parentGroup}} />
-          {{else}}
-            None
-          {{/if}}
-        </C.Section>
-        <C.Section @title="nested groups (ordered)">
-          {{#if @model.childGroups}}
-            <ul>
-              {{#each @model.sortedChildren as |child|}}
-                <li>
-                  [{{child.sortIndex}}] <Ux::Link @model={{child}} />
-                </li>
-              {{/each}}
-            </ul>
-        {{else}}
-            None
-          {{/if}}
-        </C.Section>
-      </Ui::Card>
-      <div class="row">
-        <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
-        <BsButton
-          {{on "click" this.destroy}}
-          @type="danger"
-          type="button"
-          class="col-6 col-s-12">
-          Delete
-        </BsButton>
-      </div>
+    <div class="row p-2">
+      <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+      <BsButton
+        {{on "click" this.destroy}}
+        @type="danger"
+        type="button"
+        class="col-6 col-s-12">
+        Delete
+      </BsButton>
     </div>
   </form>
 </div>
