@@ -1,0 +1,14 @@
+{{#if this.asyncGeoCoordinate.isResolved}}
+  <LeafletMap
+    @lat={{this.centerLocation.latitude}}
+    @lng={{this.centerLocation.longitude}}
+    @zoom={{this.zoom}}
+    @onClick={{this.updateLocation}}
+    as |layers|
+  >
+    <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
+    {{#if this.hasGeo}}
+      <layers.marker @location={{this.markerLocation}} />
+    {{/if}}
+  </LeafletMap>
+{{/if}}

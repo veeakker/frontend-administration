@@ -3,6 +3,7 @@
 
 @import "./lexend-font";
 
+/** general layout **/
 .page-header {
   display: block;
 
@@ -35,6 +36,12 @@ body {
   --bs-body-font-weight: 300;
 }
 
+h1 > small {
+  font-size: 1.25rem;
+}
+
+/** cards **/
+
 .card-body {
   padding: 0;
   overflow: hidden;
@@ -64,6 +71,8 @@ body {
   }
 }
 
-h1 > small {
-  font-size: 1.25rem;
+/** Leaflet **/
+.leaflet-container {
+  width: 100%;
+  min-height: 800px;
 }

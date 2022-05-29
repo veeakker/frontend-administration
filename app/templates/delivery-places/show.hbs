@@ -4,12 +4,17 @@
   <Ux::PageHeader @model={{@model}} @kind="show"/>
 
   <div class="row">
-    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12 col-md-8">
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
       <:title>Details</:title>
       <:body as |C|>
         <C.Property @property="deliveryKind" @label="Delivery kind" />
         <C.Property @property="postalAddress" @label="Address" />
-        <C.Property @property="geoCoordinate" @label="Geo" />
+      </:body>
+    </Ux::DetailsCard>
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
+      <:title>Geo location</:title>
+      <:body as |C|>
+        <C.Property @property="geoCoordinate" @renderLabel={{false}} />
       </:body>
     </Ux::DetailsCard>
   </div>

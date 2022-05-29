@@ -1,3 +1,13 @@
 {{#let (get @resource @property) as |geo|}}
-  [ {{geo.latitude}} , {{geo.longitude}} ]
+  {{#if (and geo.latitude geo.longitude)}}
+    <LeafletMap @lat={{geo.latitude}} @lng={{geo.longitude}} @zoom={{11}} as |layers|>
+      <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
+      <layers.marker @location={{array geo.latitude geo.longitude}} />
+    </LeafletMap>
+  {{else}}
+    Geo Location not known
+  {{/if}}
+  {{#if @editable}}
+    <BsButton {{on "click" @startEditing}}>Edit</BsButton>
+  {{/if}}
 {{/let}}

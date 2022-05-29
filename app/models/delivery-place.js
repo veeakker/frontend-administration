@@ -1,4 +1,3 @@
-import { get } from '@ember/object';
 import Model from '@ember-data/model';
 import link from '../decorators/link';
 import { belongsTo } from '../decorators/attributes';
@@ -11,7 +10,7 @@ export default class DeliveryPlaceModel extends Model {
   }) deliveryKind;
   @belongsTo('geo-coordinate', {
     show: 'rendering/show/geo',
-    edit: 'rendering/show/geo'
+    edit: 'rendering/edit/geo'
   }) geoCoordinate;
   @belongsTo('postal-address', {
     show: 'rendering/show/label',
