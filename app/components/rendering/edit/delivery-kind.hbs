@@ -1,0 +1,22 @@
+{{#let (find-all 'delivery-kind') as |allDeliveryKinds|}}
+  {{#if allDeliveryKinds.isLoading}}
+    ... loading ...
+  {{else if allDeliveryKinds.isError}}
+    {{allDeliveryKinds.error}}
+  {{else}}
+    <select
+      {{on "change" (e/pipe (e/str-val) this.onChange)}}
+      id={{or @id (gen-id)}}
+      class="form-control"
+      name="delivery-kind"
+    >
+      {{#each allDeliveryKinds.records as |deliveryKind|}}
+        {{#if (eq deliveryKind.uri (get (get @resource @property) "uri"))}}
+          <option selected value={{deliveryKind.id}}>{{deliveryKind.simpleName}}</option>
+        {{else}}
+          <option value={{deliveryKind.id}}>{{deliveryKind.simpleName}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
+  {{/if}}
+{{/let}}

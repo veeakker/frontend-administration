@@ -7,13 +7,9 @@
     <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12 col-md-8">
       <:title>Details</:title>
       <:body as |C|>
-        <C.Property @property="deliveryKind.label" @label="Delivery kind" />
-        <C.Property @property="postalAddress.locality" @label="Village" />
-        <C.Property @property="postalAddress.postalCode" @label="Postal" />
-        <C.Property @property="postalAddress.streetAddress" @label="Street" />
-        <C.Property @property="geoCoordinate" @label="Geo">
-          [ {{@model.geoCoordinate.latitude}} , {{@model.geoCoordinate.longitude}} ]
-        </C.Property>
+        <C.Property @property="deliveryKind" @label="Delivery kind" />
+        <C.Property @property="postalAddress" @label="Address" />
+        <C.Property @property="geoCoordinate" @label="Geo" />
       </:body>
     </Ux::DetailsCard>
   </div>
