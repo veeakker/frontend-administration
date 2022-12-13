@@ -25,7 +25,7 @@ export default class RenderingEditOfferingsComponent extends Component {
     await unitPrice.save();
     const typeAndQuantity = this.store.createRecord(
       'type-and-quantity',
-      { unit, value: amount });
+      { unit, value: amount, product: this.args.resource });
     await typeAndQuantity.save();
 
     const offering = this.store.createRecord(
