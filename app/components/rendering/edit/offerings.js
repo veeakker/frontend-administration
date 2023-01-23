@@ -32,6 +32,9 @@ export default class RenderingEditOfferingsComponent extends Component {
       'offering',
       { unitPrice, typeAndQuantity });
     await offering.save();
+    const offerings = await get(this.args.resource, this.args.property);
+    offerings.pushObject(offering);
+    await this.args.resource.save();
 
     get(this.args.resource, this.args.property).pushObject(offering);
   }
