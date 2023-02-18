@@ -8,7 +8,7 @@ export default class ProductsNewController extends Controller {
 
   @action
   async persist() {
-    const { plu, label, description, sortIndex } = this.model;
+    const { plu, label, description, sortIndex } = this.model.product;
     const model = this.store.createRecord('product', {
       plu, label, description, sortIndex, isEnabled: false
     });
