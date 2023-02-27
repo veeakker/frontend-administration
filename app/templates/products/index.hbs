@@ -19,7 +19,7 @@
     @links="products.edit:edit:pencil products.show:open:file-earmark-richtext"
     @customHeaders="unitPrice isEnabled"
     @customFields="unitPrice isEnabled"
-    @rowLink="products.show"
+    @rowLink="products.edit"
     >
     <:data-header as |header|>
       {{#if (eq header.label "unitPrice")}}
