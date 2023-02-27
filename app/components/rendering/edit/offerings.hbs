@@ -10,6 +10,7 @@
             id={{id}}
             class="form-control"
             type="number"
+            step="any"
             value={{unitPrice.value}}
             {{on "input" (e/pipe (e/number-val) (e/set-prop unitPrice "value"))}}
           />
@@ -18,6 +19,7 @@
           <label for={{id}} class="input-group-text">per</label>
           <input {{on "change" (e/pipe (e/number-val) (e/set-prop typeAndQuantity "value"))}}
             type="number"
+            step="any"
             value={{typeAndQuantity.value}}
             class="form-control"
           />
@@ -42,6 +44,7 @@
             id={{id}}
             class="form-control"
             type="number"
+            step="any"
             value={{form.price}}
             {{on "input" (e/pipe (e/number-val) (e/set-prop form "price"))}}
           />
@@ -50,6 +53,7 @@
           <label for={{id}} class="input-group-text">per</label>
           <input {{on "change" (e/pipe (e/number-val) (e/set-prop form "amount"))}}
             type="number"
+            step="any"
             value={{form.amount}}
             class="form-control"
           />

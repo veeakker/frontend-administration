@@ -2,6 +2,7 @@
   <input {{on "input" (e/pipe (e/number-val) (e/set-prop @resource @property))}}
     class="form-control"
     type="number"
+    step="any"
     value={{get @resource @property}} />
   <BsButton
     {{on "click" @exitEditing}}

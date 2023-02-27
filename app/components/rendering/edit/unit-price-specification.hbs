@@ -2,6 +2,7 @@
   <span class="input-group">
     <input {{on "change" (e/pipe (e/number-val) (e/set-prop qv "value"))}}
       type="number"
+      step="any"
       value={{qv.value}}
       class="form-control"
     />
