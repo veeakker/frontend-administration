@@ -7,8 +7,10 @@
     <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
       <:title>Details</:title>
       <:body as |C|>
+        <C.Property @property="label" @label="Name" />
         <C.Property @property="deliveryKind" @label="Delivery kind" />
         <C.Property @property="postalAddress" @label="Address" />
+        <C.Property @property="isEnabled" @label="Enabled?" />
       </:body>
     </Ux::DetailsCard>
     <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">

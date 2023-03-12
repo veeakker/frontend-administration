@@ -1,9 +1,12 @@
 import Model from '@ember-data/model';
 import link from '../decorators/link';
-import { belongsTo } from '../decorators/attributes';
+import { belongsTo, string, boolean } from '../decorators/attributes';
 
 @link()
 export default class DeliveryPlaceModel extends Model {
+  @string() label;
+  @boolean() isEnabled;
+
   @belongsTo('delivery-kind', {
     show: 'rendering/show/label',
     edit: 'rendering/edit/delivery-kind'
@@ -21,6 +24,6 @@ export default class DeliveryPlaceModel extends Model {
     const kind = this.deliveryKind.get("label")?.toUpperCase();
     const address = this.postalAddress.get("locality");
 
-    return `[${kind}] ${address}`;
+    return this.label ||  `[${kind}] ${address}`;
   }
 }

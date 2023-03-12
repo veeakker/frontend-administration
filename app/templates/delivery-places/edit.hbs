@@ -6,6 +6,14 @@
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}}>
 
     <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
+        <:title>General</:title>
+        <:body as |C|>
+          <C.Property @property="label" @label="Name" />
+          <C.Property @property="deliveryKind" @label="Delivery kind" />
+          <C.Property @property="isEnabled" @label="enabled?" />
+        </:body>
+      </Ux::DetailsCard>
       <Ux::DetailsCard @editable={{true}} @resource={{@model.postalAddress}} class="col-12 col-md-6">
         <:title>Postal address</:title>
         <:body as |C|>
@@ -13,12 +21,6 @@
           <C.Property @property="postalCode" @label="Postal code" />
           <C.Property @property="locality" @label="Village" />
           <C.Property @property="streetAddress" @label="Street address" />
-        </:body>
-      </Ux::DetailsCard>
-      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
-        <:title>Kind</:title>
-        <:body as |C|>
-          <C.Property @property="deliveryKind" @label="Delivery kind" />
         </:body>
       </Ux::DetailsCard>
       <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
