@@ -5,7 +5,7 @@
 
   <Ui::Table
     @content={{@model}}
-    @fields="deliveryKind.label postalAddress.streetAddress postalAddress.locality"
+    @fields="label deliveryKind.label postalAddress.streetAddress postalAddress.locality"
     @isLoading={{this.isLoadingModel}}
     {{!-- @filter={{this.filter}} --}}
     @sort={{this.sort}}
