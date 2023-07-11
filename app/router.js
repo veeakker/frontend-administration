@@ -23,4 +23,9 @@ Router.map(function () {
     this.route('show', { path: '/:delivery_place_id' });
     this.route('edit', { path: '/:delivery_place_id/edit' });
   });
+  this.route('banners', function () {
+    this.route('show', { path: '/:banner_id' });
+    this.route('edit', { path: '/:banner_id/edit' });
+    this.route('new');
+  });
 });

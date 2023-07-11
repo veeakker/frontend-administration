@@ -1,0 +1,21 @@
+{{page-title "New"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="new" @class={{@model.class}} @model={{@model.banner}} />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
+    <Ux::DetailsCard @editable={{true}} @class={{@model.class}} @resource={{@model.banner}} class="col-12">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="isEnabled" @label="enabled" />
+        <C.Property @property="title" />
+        <C.Property @property="sortIndex" />
+      </:body>
+    </Ux::DetailsCard>
+
+    <BsButton type="submit" @type="primary">Create banner</BsButton>
+  </form>
+</div>
+
+
+{{outlet}}

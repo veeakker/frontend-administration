@@ -1,0 +1,33 @@
+{{page-title "Banners overview"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="list" @class="banner" />
+
+  <Ui::Table
+    @content={{@model}}
+    @fields="isEnabled title sortIndex"
+    @isLoading={{this.isLoadingModel}}
+    @filter={{this.filter}}
+    @sort={{this.sort}}
+    @page={{this.page}}
+    @size={{this.size}}
+    @autoSearch={{true}}
+    @updatePage={{fn (mut this.page)}}
+    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
+    @updateFilter={{fn (mut this.filter)}}
+    @updateSort={{fn (mut this.sort)}}
+    @links="banners.edit:edit:pencil banners.show:open:file-earmark-richtext"
+    @customFields="isEnabled"
+    @rowLink="banners.edit"
+  >
+    <:data-cell as |cell|>
+      <td>
+        {{#if (eq cell.label "isEnabled")}}
+          {{#if cell.value}}Public{{else}}Hidden{{/if}}
+        {{/if}}
+      </td>
+    </:data-cell>
+  </Ui::Table>
+</div>
+
+{{outlet}}

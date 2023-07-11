@@ -1,0 +1,27 @@
+{{page-title "Edit"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="edit" @model={{@model}} />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
+    <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="isEnabled" @label="enabled" />
+        <C.Property @property="title" />
+        <C.Property @property="sortIndex" />
+      </:body>
+    </Ux::DetailsCard>
+
+    <div class="row p-2">
+      <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+      <BsButton
+        {{on "click" this.destroy}}
+        @type="danger"
+        type="button"
+        class="col-6 col-s-12">
+        Delete
+      </BsButton>
+    </div>
+  </form>
+</div>

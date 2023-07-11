@@ -31,6 +31,14 @@
           </ddm.item>
         </dd.menu>
       </nav.dropdown>
+      <nav.dropdown as |dd|>
+        <dd.toggle>Website <span class="caret"></span></dd.toggle>
+        <dd.menu as |ddm|>
+          <ddm.item>
+            <ddm.link-to @route="banners">Banners</ddm.link-to>
+          </ddm.item>
+        </dd.menu>
+      </nav.dropdown>
       <nav.item>
         <nav.link-to @route="accounts">Accounts</nav.link-to>
       </nav.item>
