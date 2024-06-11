@@ -28,4 +28,5 @@ Router.map(function () {
     this.route('edit', { path: '/:banner_id/edit' });
     this.route('new');
   });
+  this.route('login');
 });
