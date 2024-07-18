@@ -22,7 +22,7 @@
   >
     <:data-cell as |cell|>
       <td>
-        {{#if (eq cell.label "isEnabled")}}
+        {{#if (eq cell.attribute "isEnabled")}}
           {{#if cell.value}}Public{{else}}Hidden{{/if}}
         {{/if}}
       </td>

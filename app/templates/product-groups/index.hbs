@@ -5,28 +5,24 @@
 
   <Ui::Table
     @content={{@model}}
-    @fields="label sortIndex parentGroup.label"
+    @fields="label sortIndex parentGroups:parent"
+    @sortableFields="label sortIndex"
+    @customFields="parentGroups"
+    @links="product-groups.edit:edit:pencil product-groups.show:show:file-earmark-richtext"
+    @rowLink="product-groups.show"
     @isLoading={{this.isLoadingModel}}
     @filter={{this.filter}}
     @sort={{this.sort}}
     @page={{this.page}}
     @size={{this.size}}
-    @links="product-groups.edit:edit:pencil product-groups.show:show:file-earmark-richtext"
-    @rowLink="product-groups.show"
     @updatePage={{fn (mut this.page)}}
     @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
     @updateFilter={{fn (mut this.filter)}}
     @updateSort={{fn (mut this.sort)}}
-    @customHeaders="parentGroup.label"
   >
-    <:data-header as |header|>
-      <th
-        scope="col"
-        role="button" {{on "click" header.inverseSorting}}
-        class={{concat "sortable" (if header.isSorted (concat " sorted " header.order) "")}}>
-        parent
-      </th>
-    </:data-header>
+    <:data-cell as |cell|>
+      <td>{{join ", " (map-by "label" cell.value)}}</td>
+    </:data-cell>
   </Ui::Table>
 </div>
 

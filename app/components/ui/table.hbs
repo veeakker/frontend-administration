@@ -10,13 +10,14 @@
   @selection={{@selection}}
   @noDataMessage={{@noDataMessage}}
   @isLoading={{@isloading}}
-  @lineNumbers={{@lineNumbers}}
+  @enableLineNumbers={{@enableLineNumbers}}
   @updatePage={{@updatePage}}
   @updatePageSize={{@updatePageSize}} {{!-- change to size or vice-versa? --}}
   @updateFilter={{@updateFilter}}
   @updateSort={{@updateSort}}
   @customHeaders={{@customHeaders}}
   @customFields={{@customFields}}
+  @sortableFields={{@sortableFields}}
   @links={{@links}}
   @onClickRow={{@onClickRow}}
   @rowLink={{@rowLink}}
@@ -64,18 +65,18 @@
         <div class="data-table-menu">
           {{!-- either we have a general block or we have to have a menu --}}
           <General as |general|>
-            {{#if general.data-table.selectionIsEmpty}}
-              {{yield general.data-table to="general-menu"}}
+            {{#if general.dataTable.selectionIsEmpty}}
+              {{yield general.dataTable to="general-menu"}}
             {{/if}}
           </General>
           <Selected as |selected|>
-            {{#unless selected.data-table.selectionIsEmpty}}
+            {{#unless selected.dataTable.selectionIsEmpty}}
               {{#if (has-block "selection-menu")}}
                 {{yield selected to="selection-menu"}}
               {{else}}
                 <span class="item-count">{{selected.selectionCount}} item(s) selected</span>
                 <button type="button" {{on "click" selected.clearSelection}}>Cancel</button>
-                {{yield (slice 0 selected.selectionCount selected.selection) selected.data-table
+                {{yield (slice 0 selected.selectionCount selected.selection) selected.dataTable
                     to="selection-menu-actions"}}
               {{/if}}
             {{/unless}}
@@ -108,21 +109,21 @@
                 {{#if (has-block "data-headers")}}
                   {{yield header.dataHeadersInfo to="data-headers"}}
                 {{else}}
-                  {{#each header.parsedFields as |field|}}
-                    <header.ThSortable @field={{field}} @label={{field}} as |dataHeader|>
-                      {{#if (and (has-block "data-header") dataHeader.isCustom)}}
+                  {{#each header.fields as |field|}}
+                    <header.ThSortable @field={{field}} @hasCustomBlock={{has-block "data-header"}} as |dataHeader|>
+                      {{#if dataHeader.renderCustomBlock}}
                         {{yield dataHeader to="data-header"}}
-                      {{else if (and (has-block "data-header") (not dataHeader.hasCustom))}}
-                        {{yield dataHeader to="data-header"}}
-                      {{else if (and (has-block "data-header") (not dataHeader.hasCustom))}}
-                         {{yield dataHeader to="data-header"}}
                       {{else}}
-                        <th
-                          scope="col"
-                          role="button" {{on "click" dataHeader.inverseSorting}}
-                          class={{concat "sortable" (if dataHeader.isSorted (concat " sorted " dataHeader.order) "")}}>
-                          {{dataHeader.label}}
-                        </th>
+                        {{#if dataHeader.isSortable}}
+                          <th
+                            scope="col"
+                            role="button" {{on "click" dataHeader.inverseSorting}}
+                            class={{concat "sortable" (if dataHeader.isSorted (concat " sorted " dataHeader.order) "")}}>
+                            {{dataHeader.label}}
+                          </th>
+                        {{else}}
+                          <th>{{dataHeader.label}}</th>
+                        {{/if}}
                       {{/if}}
                     </header.ThSortable>
                   {{/each}}
@@ -174,26 +175,9 @@
                             {{#if (has-block "data-cells")}}
                               {{yield dataCells to="data-cells"}}
                             {{else}}
-                              {{#if dataCells.firstColumn}}
-                                <dataCells.DataCell @column={{dataCells.firstColumn}} as |cell|>
-                                  {{#if (has-block "first-data-cell")}}
-                                    {{yield cell to="first-data-cell"}}
-                                  {{else if (and (has-block "data-cell") cell.isCustom)}}
-                                    {{yield cell to="data-cell"}}
-                                  {{else if (and (has-block "data-cell") (not cell.hasCustom))}}
-                                    {{yield cell to="data-cell"}}
-                                  {{else}}
-                                    <td>{{cell.value}}</td>
-                                  {{/if}}
-                                </dataCells.DataCell>
-                              {{/if}}
-                              {{#each dataCells.otherColumns as |column|}}
-                                <dataCells.DataCell @column={{column}} as |cell|>
-                                  {{#if (has-block "rest-data-cell")}}
-                                    {{yield cell to="rest-data-cell"}}
-                                  {{else if (and (has-block "data-cell") cell.isCustom)}}
-                                    {{yield cell to="data-cell"}}
-                                  {{else if (and (has-block "data-cell") (not cell.hasCustom))}}
+                              {{#each dataCells.fields as |column|}}
+                                <dataCells.DataCell @column={{column}} @hasCustomBlock={{has-block "data-cell"}} as |cell|>
+                                  {{#if cell.renderCustomBlock}}
                                     {{yield cell to="data-cell"}}
                                   {{else}}
                                     <td>
@@ -242,7 +226,6 @@
       </table>
     {{/if}}
   </dt.Content>
-
   {{!-- END: content --}}
 
   {{!-- START: pagination --}}
