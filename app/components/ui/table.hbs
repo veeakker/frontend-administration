@@ -19,8 +19,11 @@
   @customFields={{@customFields}}
   @sortableFields={{@sortableFields}}
   @links={{@links}}
+  @linksModelProperty={{@linksModelProperty}}
   @onClickRow={{@onClickRow}}
   @rowLink={{@rowLink}}
+  @rowLinkModelProperty={{@rowLinkModelProperty}}
+  @attributeToSortParams={{@attributeToSortParams}}
   as |dt|>
   {{!-- START: search --}}
   {{#if dt.enableSearch}}
@@ -30,7 +33,7 @@
       {{else}}
         <form {{on "submit" search.submitForm}}>
           <div class="input-group">
-            {{#if search.auto}}
+            {{#if search.autoSearch}}
               <input
                 value={{search.filter}}
                 {{on "input" search.handleAutoInput}}
@@ -117,7 +120,7 @@
                         {{#if dataHeader.isSortable}}
                           <th
                             scope="col"
-                            role="button" {{on "click" dataHeader.inverseSorting}}
+                            role="button" {{on "click" dataHeader.toggleSort}}
                             class={{concat "sortable" (if dataHeader.isSorted (concat " sorted " dataHeader.order) "")}}>
                             {{dataHeader.label}}
                           </th>
@@ -171,7 +174,7 @@
                           {{#if row.enableLineNumbers}}
                             <td>{{row.lineNumber}}</td>
                           {{/if}}
-                          <row.DataCells @item={{wrapper.item}} as |dataCells|>
+                          <row.DataCells @wrapper={{wrapper}} as |dataCells|>
                             {{#if (has-block "data-cells")}}
                               {{yield dataCells to="data-cells"}}
                             {{else}}
@@ -180,10 +183,18 @@
                                   {{#if cell.renderCustomBlock}}
                                     {{yield cell to="data-cell"}}
                                   {{else}}
-                                    <td>
-                                      {{!-- TODO: This should be based on the type of the field --}}
-                                      {{cell.value}}
-                                    </td>
+                                    {{!-- TODO: This should be based on the type of the field --}}
+                                    {{#if cell.rowLink}}
+                                      <td>
+                                        <LinkTo @route={{cell.rowLink}} @model={{cell.rowLinkModel}} style="display: inline-block; width: 100%; height: 100%; margin: 0; padding: 0;" >
+                                          {{cell.value}}
+                                        </LinkTo>
+                                      </td>
+                                    {{else}}
+                                      <td>
+                                        {{cell.value}}
+                                      </td>
+                                    {{/if}}
                                   {{/if}}
                                 </dataCells.DataCell>
                               {{/each}}
@@ -195,7 +206,7 @@
                             {{#if row.linkedRoutes}}
                               <td>
                                 {{#each row.linkedRoutes as |linkedRoute|}}
-                                  <LinkTo @route={{linkedRoute.route}} @model={{row.item}}>
+                                  <LinkTo @route={{linkedRoute.route}} @model={{linkedRoute.model}}>
                                     {{#if linkedRoute.icon}}
                                       <i class={{concat "bi bi-" linkedRoute.icon}}
                                         aria-label={{or linkedRoute.label "detail"}} />
@@ -241,7 +252,7 @@
                 class="page-link"
                 disabled={{pagination.isFirstPage}}
                 type="button"
-                {{on "click" (fn pagination.updatePage pagination.links.first)}}>
+                {{on "click" (fn (mut pagination.humanPage) pagination.firstPage)}}>
                 &laquo;
               </button>
             </li>
@@ -250,7 +261,7 @@
                 class="page-link"
                 type="button"
                 disabled={{pagination.isFirstPage}}
-                {{on "click" (fn pagination.updatePage pagination.links.prev)}}>
+                {{on "click" (fn (mut pagination.humanPage) pagination.previousPage)}}>
                 Previous
               </button>
             </li>
@@ -259,7 +270,7 @@
                 type="button"
                 class="page-link"
                 disabled={{pagination.isLastPage}}
-                {{on "click" (fn pagination.updatePage pagination.links.next)}}>
+                {{on "click" (fn (mut pagination.humanPage) pagination.nextPage)}}>
                 Next
               </button>
             </li>
@@ -268,7 +279,7 @@
                 type="button"
                 class="page-link"
                 disabled={{pagination.isLastPage}}
-                {{on "click" (fn pagination.updatePage pagination.links.last)}}>
+                {{on "click" (fn (mut pagination.humanPage) pagination.lastPage)}}>
                 &raquo;
               </button>
             </li>
