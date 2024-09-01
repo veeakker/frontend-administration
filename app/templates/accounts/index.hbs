@@ -7,23 +7,7 @@
   <Ui::Table
     @content={{@model}}
     @fields="firstName lastName email"
-    @isLoading={{this.isLoadingModel}}
-    @filter={{this.filter}}
-    @sort={{this.sort}}
-    @page={{this.page}}
-    @size={{this.size}}
-    @autoSearch={{true}}
-    @updatePage={{fn (mut this.page)}}
-    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
-    @updateFilter={{fn (mut this.filter)}}
-    @updateSort={{fn (mut this.sort)}}
-    {{!--
-      @links="products.edit:edit:pencil products.show:open:file-earmark-richtext"
-      @customHeaders="unitPrice isEnabled"
-      @customFields="unitPrice isEnabled"
-      @rowLink="products.show" --}}
-  >
-
-  </Ui::Table>
-
+    @autoSearch={{500}}
+    @view={{this.view}}
+  />
 </div>

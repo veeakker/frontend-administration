@@ -5,21 +5,13 @@
 
   <Ui::Table
     @content={{@model}}
+    @view={{this.view}}
     @fields="plu:PLU label isEnabled:published? unitPrice:price"
     @customFields="unitPrice isEnabled"
     @sortableFields="plu label isEnabled"
     @links="products.edit:edit:pencil products.show:open:file-earmark-richtext"
     @rowLink="products.edit"
-    @isLoading={{this.isLoadingModel}}
-    @filter={{this.filter}}
-    @sort={{this.sort}}
-    @page={{this.page}}
-    @size={{this.size}}
     @autoSearch={{500}}
-    @updatePage={{fn (mut this.page)}}
-    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
-    @updateFilter={{fn (mut this.filter)}}
-    @updateSort={{fn (mut this.sort)}}
   >
     <:data-cell as |cell|>
       {{#if (eq cell.attribute "unitPrice")}}

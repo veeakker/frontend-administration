@@ -7,16 +7,8 @@
     @content={{@model}}
     @fields="label deliveryKind.label:Delivery_kind postalAddress.streetAddress:Address_street postalAddress.locality:Address_village"
     @sortableFields="label deliveryKind.label"
-    @isLoading={{this.isLoadingModel}}
-    {{!-- @filter={{this.filter}} --}}
-    @sort={{this.sort}}
-    @page={{this.page}}
-    @size={{this.size}}
     @links="delivery-places.edit:edit:pencil delivery-places.show:show:file-earmark-richtext"
     @rowLink="delivery-places.show"
-    @updatePage={{fn (mut this.page)}}
-    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
-    {{!-- @updateFilter={{fn (mut this.filter)}} --}}
-    @updateSort={{fn (mut this.sort)}}
+    @view={{this.view}}
   />
 </div>
