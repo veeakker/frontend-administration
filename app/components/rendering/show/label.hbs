@@ -1,3 +1,9 @@
-<span {{on "click" (e/maybe @startEditing)}} style="min-width: 3em; min-height: 2em; display: inline-block">
-  {{get (get @resource @property) "label"}}
-</span>
+{{#if @startEditing}}
+  <span {{on "click" (e/maybe @startEditing)}} style="min-width: 3em; min-height: 2em; display: inline-block">
+    {{get (get @resource @property) "label"}}
+  </span>
+{{else}}
+  <Ux::Link @model={{get @resource @property}}>
+    {{get (get @resource @property) "label"}}
+  </Ux::Link>
+{{/if}}

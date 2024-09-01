@@ -5,11 +5,17 @@
 
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
     <div class="row">
-      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-6">
         <:title>Details</:title>
         <:body as |C|>
           <C.Property @property="label" @label="Name" />
           <C.Property @property="nextDeliveryDate" @label="Next delivery date" />
+        </:body>
+      </Ux::DetailsCard>
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-6">
+        <:title>Delivery places</:title>
+        <:body as |C|>
+          <C.Property @renderLabel={{false}} @property="deliveryPlaces" @label="Delivery places" />
         </:body>
       </Ux::DetailsCard>
     </div>

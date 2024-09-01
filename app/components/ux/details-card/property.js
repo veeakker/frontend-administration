@@ -4,6 +4,8 @@ import Component from '@glimmer/component';
 import humanize from 'freddie/utils/humanize';
 import propertyType from 'freddie/utils/property-type';
 import { getOwner } from '@ember/application';
+import { trackedFunction } from 'reactiveweb/function';
+import ObjectProxy from '@ember/object/proxy';
 
 export default class DetailsCardPropertyComponent extends Component {
   @tracked editing = false;
@@ -24,18 +26,49 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get renderType() {
-    return propertyType({
-      class: this.class,
-      property: this.args.property
-    });
+    if ( this.class ) {
+        return propertyType({
+            class: this.class,
+            property: this.args.property
+        });
+    } else {
+      return undefined;
+    }
+  }
+
+  asyncResource = trackedFunction( this, async () => {
+    if( this.args.resource instanceof ObjectProxy
+      && this.args.resource.promise ) {
+      await this.args.resource.promise;
+      return this.args.resource.content;
+    } else {
+      return this.args.resource;
+    }
+  } )
+
+  get resource() {
+    return this.asyncResource.isFinished && this.asyncResource.value;
+  }
+
+  get resourceAvailable() {
+    return this.asyncResource.isFinished;
   }
 
   get class() {
-    return this.args.class || this.args.resource.constructor;
+    if ( this.args.class )
+      return this.args.class;
+    else if ( this.resourceAvailable )
+      return this.resource.constructor;
+    else
+      return null;
+  }
+
+  get classAvailable() {
+    return ( this.args.class || this.resourceAvailable || false ) && true;
   }
 
   get customShowComponent() {
-    const options = this.class.propertyMeta;
+    const options = this.class?.propertyMeta;
     return options && (options[this.args.property] || {}).show;
   }
 
@@ -48,7 +81,7 @@ export default class DetailsCardPropertyComponent extends Component {
   }
 
   get explicitEditComponentName() {
-    const options = this.class.propertyMeta;
+    const options = this.class?.propertyMeta;
     return options && (options[this.args.property] || {}).edit;
   }
 

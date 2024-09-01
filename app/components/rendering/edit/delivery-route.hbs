@@ -1,3 +1,5 @@
+Current: {{get (get @resource @property) "label"}}
+
 {{#let (find-all 'delivery-route') as |allDeliveryRoutes|}}
   {{#if allDeliveryRoutes.isLoading}}
     ... loading ...
@@ -20,3 +22,5 @@
     </select>
   {{/if}}
 {{/let}}
+
+<BsButton type="button" {{on "click" @exitEditing}}>Done</BsButton>

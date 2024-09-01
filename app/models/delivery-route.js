@@ -10,5 +10,8 @@ import {
 export default class DeliveryRouteModel extends Model {
   @string() label;
   @date() nextDeliveryDate;
-  @hasMany('delivery-place') deliveryPlaces;
+  @hasMany('delivery-place', {
+    show: 'rendering/show/delivery-places',
+    edit: 'rendering/edit/delivery-places'
+  }) deliveryPlaces;
 }

@@ -1,0 +1,7 @@
+<Ux::Link @model={{get @resource @property}}>
+  {{get (get @resource @property) "label"}}
+</Ux::Link>
+
+{{#if @editable}}
+  <BsButton type="button" {{on "click" @startEditing}}>Edit</BsButton>
+{{/if}}

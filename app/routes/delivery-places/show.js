@@ -4,7 +4,10 @@ import Route from '@ember/routing/route';
 export default class DeliveryPlacesShowRoute extends Route {
   @service store;
 
-  model({ delivery_place_id }) {
-    return this.store.find('delivery-place', delivery_place_id);
+  async model({ delivery_place_id }) {
+    return (await this.store.query('delivery-place', {
+      'filter[:id:]': delivery_place_id,
+      include: 'delivery-route'
+    })).firstObject;
   }
 }

@@ -20,9 +20,9 @@ export default class DeliveryPlaceModel extends Model {
     edit: 'rendering/edit/postalAddress'
   }) postalAddress;
   @belongsTo('delivery-route', {
-    show: 'rendering/show/label',
+    show: 'rendering/show/link',
     edit: 'rendering/edit/delivery-route'
-  }) postalAddress;
+  }) deliveryRoute;
 
   get label() {
     const kind = this.deliveryKind.get("label")?.toUpperCase();
