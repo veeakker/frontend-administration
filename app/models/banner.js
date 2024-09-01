@@ -6,7 +6,8 @@ import {
   string,
 } from '../decorators/attributes';
 
-@link()export default class BannerModel extends Model {
+@link()
+export default class BannerModel extends Model {
   @string() title;
   @number() sortIndex;
   @boolean() isEnabled;
