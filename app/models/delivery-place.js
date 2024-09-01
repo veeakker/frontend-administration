@@ -19,6 +19,10 @@ export default class DeliveryPlaceModel extends Model {
     show: 'rendering/show/label',
     edit: 'rendering/edit/postalAddress'
   }) postalAddress;
+  @belongsTo('delivery-route', {
+    show: 'rendering/show/label',
+    edit: 'rendering/edit/delivery-route'
+  }) postalAddress;
 
   get label() {
     const kind = this.deliveryKind.get("label")?.toUpperCase();

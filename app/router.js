@@ -29,4 +29,10 @@ Router.map(function () {
     this.route('new');
   });
   this.route('login');
+
+  this.route('delivery-routes', function() {
+    this.route('show', { path: '/:delivery_route_id' });
+    this.route('edit', { path: '/:delivery_route_id/edit' });
+    this.route('new');
+  });
 });

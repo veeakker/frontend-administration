@@ -1,0 +1,27 @@
+{{page-title "Index"}}
+
+<div class="container">
+  <Ux::PageHeader @class="delivery-route" @kind="list" />
+
+  <Ui::Table
+    @content={{@model}}
+    @fields="label:Name nextDeliveryDate:Next_delivery_date"
+    @customFields="nextDeliveryDate"
+    @sortableFields="label date"
+    @isLoading={{this.isLoadingModel}}
+    {{!-- @filter={{this.filter}} --}}
+    @sort={{this.sort}}
+    @page={{this.page}}
+    @size={{this.size}}
+    @links="delivery-routes.edit:edit:pencil delivery-routes.show:show:file-earmark-richtext"
+    @rowLink="delivery-routes.show"
+    @updatePage={{fn (mut this.page)}}
+    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
+    {{!-- @updateFilter={{fn (mut this.filter)}} --}}
+    @updateSort={{fn (mut this.sort)}}
+  >
+    <:data-cell as |cell|>
+      <td>{{human-date cell.value}}</td>
+    </:data-cell>
+  </Ui::Table>
+</div>

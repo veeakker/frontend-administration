@@ -1,0 +1,13 @@
+{{page-title "Show"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="show" @model={{@model}} />
+
+  <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
+    <:title>Details</:title>
+    <:body as |C|>
+      <C.Property @property="label" @label="Name" />
+      <C.Property @property="nextDeliveryDate" @label="Next delivery date" />
+    </:body>
+  </Ux::DetailsCard>
+</div>

@@ -62,6 +62,13 @@ export function boolean(options) {
   };
 }
 
+export function date(options) {
+  return function (target, name, descriptor) {
+    setInfo(target, name, 'date', { show: "rendering/show/date" });
+    return attr('date', options)(target, name, descriptor);
+  };
+}
+
 export function string(options) {
   return function (target, name, descriptor) {
     setInfo(target, name, 'string');
