@@ -83,6 +83,13 @@ export function text(options) {
   };
 }
 
+export function url(options) {
+  return function (target, name, descriptor) {
+    setInfo(target, name, 'url');
+    return attr('string', options)(target, name, descriptor);
+  }
+}
+
 export function belongsTo(klass, options) {
   let meta;
   [options, meta] = extractMeta(options);
