@@ -1,0 +1,58 @@
+{{page-title "Baskets"}}
+
+<div class="container">
+  <Ui::Card class="col-12">
+    <:title>Select dates</:title>
+    <:body as |card|>
+      <dl class="row m-3">
+        <dt class="col-sm-4 text-end">From</dt>
+        <dd class="col-sm-8">
+          <input {{on "input" (e/pipe (e/date-val) (e/set-prop this "startDate"))}}
+            class="form-control"
+            type="date"
+            value={{this.startDateString}} />
+        </dd>
+        <dt class="col-sm-4 text-end">To</dt>
+        <dd class="col-sm-8">
+          <input {{on "input" (e/pipe (e/date-val) (e/set-prop this "endDate"))}}
+            class="form-control"
+            type="date"
+            value={{this.endDateString}} />
+        </dd>
+      </dl>
+    </:body>
+  </Ui::Card>
+  <Ui::Card class="col-12" @title="Effective orders">
+    Export effective orders
+    {{#if this.startDateString}} from {{this.startDateString}}{{/if}}
+    {{#if this.endDateString}} to {{this.endDateString}}{{/if}}
+    <button type="button" class="btn btn-primary" {{on "click" this.fetchEffectiveOrders}}>
+      fetch
+    </button>
+
+    <pre>{{this.effectiveOrders}}</pre>
+  </Ui::Card>
+  <Ui::Card class="col-12" @title="Draft orders">
+    Export draft orders with changes
+    {{#if this.startDateString}} from {{this.startDateString}}{{/if}}
+    {{#if this.endDateString}} to {{this.endDateString}}{{/if}}
+    <button type="button" class="btn btn-primary" {{on "click" this.fetchDraftOrders}}>
+      fetch
+    </button>
+
+    <pre>{{this.draftOrders}}</pre>
+  </Ui::Card>
+  <Ui::Card class="col-12" @title="Changed baskets">
+    Export changed baskets
+    {{#if this.startDateString}} from {{this.startDateString}}{{/if}}
+    {{#if this.endDateString}} to {{this.endDateString}}{{/if}}
+
+    <button type="button" class="btn btn-primary" {{on "click" this.fetchChangedBaskets}}>
+      fetch
+    </button>
+
+    <pre>{{this.changedBaskets}}</pre>
+  </Ui::Card>
+</div>
+
+{{outlet}}

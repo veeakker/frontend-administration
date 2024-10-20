@@ -3,27 +3,30 @@
 <div class="container">
   <Ux::PageHeader @class="product-group" @kind="list" />
 
-  <Ui::Table
-    @content={{@model}}
-    @fields="label sortIndex parentGroups:parent"
-    @sortableFields="label sortIndex"
-    @customFields="parentGroups"
-    @links="product-groups.edit:edit:pencil product-groups.show:show:file-earmark-richtext"
-    @rowLink="product-groups.show"
-    @isLoading={{this.isLoadingModel}}
-    @filter={{this.filter}}
-    @sort={{this.sort}}
-    @page={{this.page}}
-    @size={{this.size}}
-    @updatePage={{fn (mut this.page)}}
-    @updatePageSize={{fn (mut this.size)}} {{!-- change to size or vice-versa? --}}
-    @updateFilter={{fn (mut this.filter)}}
-    @updateSort={{fn (mut this.sort)}}
-  >
-    <:data-cell as |cell|>
-      <td>{{join ", " (map-by "label" cell.value)}}</td>
-    </:data-cell>
-  </Ui::Table>
+  {{#let (hash foo=(hash bar=false)) as |state|}}
+
+    <Ui::Table
+      @content={{@model}}
+      @fields="label sortIndex parentGroups:parent"
+      @sortableFields="label sortIndex"
+      @customFields="parentGroups"
+      @links="product-groups.edit:edit:pencil product-groups.show:show:file-earmark-richtext"
+      @rowLink="product-groups.show"
+      @isLoading={{this.isLoadingModel}}
+      @view={{this.view}}
+      @enableSelection={{state.foo.bar}}
+    >
+      <:general-menu as |dataTable|>
+        <button type="button" {{on "click" (fn (mut state.foo.bar) (not state.foo.bar))}}>Enable Selection</button>
+      </:general-menu>
+      <:selection-menu-actions as |selection dataTable|>
+        <button type="button">Delete {{selection.selectionCount}}</button>
+      </:selection-menu-actions>
+      <:data-cell as |cell|>
+        <td>{{join ", " (map-by "label" cell.value)}}</td>
+      </:data-cell>
+    </Ui::Table>
+  {{/let}}
 </div>
 
 {{outlet}}

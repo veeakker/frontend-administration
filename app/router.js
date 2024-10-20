@@ -35,4 +35,7 @@ Router.map(function () {
     this.route('edit', { path: '/:delivery_route_id/edit' });
     this.route('new');
   });
+  this.route('export', function() {
+    this.route('baskets');
+  });
 });

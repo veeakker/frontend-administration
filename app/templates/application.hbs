@@ -43,6 +43,14 @@
         </dd.menu>
       </nav.dropdown>
       <nav.dropdown as |dd|>
+        <dd.toggle>Export <span class="caret"></span></dd.toggle>
+        <dd.menu as |ddm|>
+          <ddm.item>
+            <ddm.link-to @route="export.baskets">Baskets</ddm.link-to>
+          </ddm.item>
+        </dd.menu>
+      </nav.dropdown>
+      <nav.dropdown as |dd|>
         <dd.toggle>Users <span class="caret"></span></dd.toggle>
         <dd.menu as |ddm|>
           <ddm.item>
