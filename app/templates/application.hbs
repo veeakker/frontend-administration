@@ -55,7 +55,11 @@
         <dd.menu as |ddm|>
           <ddm.item>
             <ddm.link-to @route="accounts">Accounts</ddm.link-to>
-            <ddm.link-to @route="login">Login</ddm.link-to>
+            {{#if this.session.isAuthenticated}}
+              <ddm.link-to {{on "click" this.logout}}>Logout</ddm.link-to>
+            {{else}}
+              <ddm.link-to @route="login">Login</ddm.link-to>
+            {{/if}}
           </ddm.item>
         </dd.menu>
       </nav.dropdown>
