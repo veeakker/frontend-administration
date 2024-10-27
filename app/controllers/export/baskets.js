@@ -75,7 +75,8 @@ export default class ExportBasketsController extends Controller {
   async fetchEffectiveOrders() {
     this.effectiveOrders =
       await (
-        await fetch(`/export/baskets${this.dateOptionsQueryString}`)
+        await fetch(`/export/baskets${this.dateOptionsQueryString}`,
+          { headers: { accept: 'application/vnd.api+json' } } )
       ).text();
 
     download(`confirmed-baskets-${toDateString(new Date())}.csv`, this.effectiveOrders);
@@ -90,7 +91,8 @@ export default class ExportBasketsController extends Controller {
 
     this.draftOrders =
       await (
-        await fetch(`/export/baskets?${options.join("&")}`)
+        await fetch(`/export/baskets?${options.join("&")}`,
+          { headers: { accept: 'application/vnd.api+json' } } )
       ).text();
 
     download(`draft-baskets-${toDateString(new Date())}.csv`, this.draftOrders);
@@ -102,7 +104,8 @@ export default class ExportBasketsController extends Controller {
   async fetchChangedBaskets() {
     this.changedBaskets =
       await (
-        await fetch(`/export/changed${this.dateOptionsQueryString}`)
+        await fetch(`/export/changed${this.dateOptionsQueryString}`,
+          { headers: { accept: 'application/vnd.api+json' } } )
       ).text();
 
     download(`changed-baskets-${toDateString(new Date())}.csv`, this.changedBaskets);
