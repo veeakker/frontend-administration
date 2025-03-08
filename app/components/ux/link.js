@@ -29,7 +29,7 @@ export default class UiLinkComponent extends Component {
 
   get model() {
     return !this.modelPending
-     && this.trackedModel.value;0
+     && this.trackedModel.value;
   }
 
   trackedModel = trackedFunction(this, async () => {
