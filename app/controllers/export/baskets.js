@@ -56,7 +56,7 @@ export default class ExportBasketsController extends Controller {
       options.push(`from=${this.startDate.toISOString()}`);
     if (this.endDate) {
       // We need to extend this with 1 day so we include the selected date
-      const nextDay = new Date();
+      const nextDay = new Date(this.endDate);
       nextDay.setDate( this.endDate.getDate() + 1 );
       options.push(`to=${nextDay.toISOString()}`);
     }
