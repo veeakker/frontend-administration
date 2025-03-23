@@ -1,12 +1,13 @@
 import Model from '@ember-data/model';
 import link from '../decorators/link';
-import { belongsTo, string, boolean } from '../decorators/attributes';
+import { belongsTo, string, boolean, url } from '../decorators/attributes';
 
 @link()
 export default class DeliveryPlaceModel extends Model {
   @string() label;
   @boolean() isEnabled;
 
+  @url() lfwLink;
   @belongsTo('delivery-kind', {
     show: 'rendering/show/label',
     edit: 'rendering/edit/delivery-kind'
