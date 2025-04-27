@@ -43,10 +43,11 @@
         </dd.menu>
       </nav.dropdown>
       <nav.dropdown as |dd|>
-        <dd.toggle>Export <span class="caret"></span></dd.toggle>
+        <dd.toggle>Data exchange <span class="caret"></span></dd.toggle>
         <dd.menu as |ddm|>
           <ddm.item>
-            <ddm.link-to @route="export.baskets">Baskets</ddm.link-to>
+            <ddm.link-to @route="export.baskets">Export baskets</ddm.link-to>
+            <ddm.link-to @route="import.lfw">Import LFW</ddm.link-to>
           </ddm.item>
         </dd.menu>
       </nav.dropdown>

@@ -38,4 +38,8 @@ Router.map(function () {
   this.route('export', function() {
     this.route('baskets');
   });
+
+  this.route('import', function() {
+    this.route('lfw');
+  });
 });

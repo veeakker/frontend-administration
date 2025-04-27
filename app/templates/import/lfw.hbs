@@ -1,0 +1,19 @@
+{{page-title "Import LFW"}}
+
+<div class="container">
+  <Ui::Card class="col-12">
+    <:title>Import LFW</:title>
+    <:body as |card|>
+      Run import from LFW
+
+      <button type="button" class="btn btn-primary" {{on "click" this.lfwImport}}>
+        fetch
+      </button>
+
+      <p>{{this.output}}</p>
+    </:body>
+  </Ui::Card>
+</div>
+
+
+{{outlet}}
