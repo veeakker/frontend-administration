@@ -42,4 +42,9 @@ Router.map(function () {
   this.route('import', function() {
     this.route('lfw');
   });
+  this.route('suppliers', function() {
+    this.route('edit', { path: '/:supplier_id/edit' });
+    this.route('new');
+    this.route('show', { path: '/:supplier_id' });
+  });
 });

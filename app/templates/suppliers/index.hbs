@@ -1,0 +1,17 @@
+{{page-title "Suppliers overview"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="list" @class="business-entity" />
+
+  <Ui::Table
+    @content={{@model}}
+    @view={{this.view}}
+    @fields="name"
+    {{!-- @sortableFields="plu label isEnabled" --}}
+    {{!-- @links="products.edit:edit:pencil products.show:open:file-earmark-richtext" --}}
+    @rowLink="suppliers.edit"
+    @autoSearch={{500}}
+  />
+</div>
+
+{{outlet}}

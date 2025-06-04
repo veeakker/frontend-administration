@@ -1,0 +1,27 @@
+{{page-title "Show"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="show" @model={{@model}} />
+
+  <div class="row">
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="name" />
+        <C.Property @property="email" />
+        <C.Property @property="description" />
+      </:body>
+    </Ux::DetailsCard>
+  </div>
+
+  <div class="row p-2">
+    <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+    <BsButton
+      {{on "click" this.destroy}}
+      @type="danger"
+      type="button"
+      class="col-6 col-s-12">
+      Delete
+    </BsButton>
+  </div>
+</div>
