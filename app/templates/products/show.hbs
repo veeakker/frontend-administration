@@ -26,7 +26,7 @@
       </:body>
     </Ux::DetailsCard>
     <Ux::DetailsCard @resource={{@model}} class="col-12 col-md-4">
-      <:title>Preview</:title>
+      <:title>Thumbnail</:title>
       <:body as |C|>
         <C.Property @renderLabel={{false}} @property="thumbnail" />
       </:body>
@@ -43,7 +43,12 @@
       <card.Section @title="offers">
         <ul>
           {{#each @model.offerings as |offering|}}
-            <li><Product::Price @offering={{offering}} /></li>
+            <li>
+              <Product::Price @offering={{offering}} />
+              {{#if offering.supplier}}
+                by <Ux::Link @model={{offering.supplier}} />
+              {{/if}}
+            </li>
           {{/each}}
         </ul>
       </card.Section>

@@ -1,6 +1,11 @@
 <ul {{on "click" @startEditing}}>
   {{#each (get @resource @property) as |offering|}}
-    <li><Product::Price @offering={{offering}} /></li>
+    <li class={{if offering.isEnabled "show-enabled-offering" "show-disabled-offering"}}>
+      <Product::Price @offering={{offering}} />
+      {{#if offering.supplier}}
+        by <Ux::Link @model={{offering.supplier}} />
+      {{/if}}
+    </li>
   {{else}}
     No offers
   {{/each}}

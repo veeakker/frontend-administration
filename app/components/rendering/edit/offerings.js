@@ -9,12 +9,23 @@ export default class RenderingEditOfferingsComponent extends Component {
 
   @action
   async remove(offering) {
-    const offerings = await get(this.args.resource, this.args.property);
-    set(
-      this.args.resource,
-      this.args.property,
-      offerings.rejectBy("id", offering.id)
-    );
+    if( confirm( "Delete offering?  Only execute this if this offering has just been created by mistake and no orders were made using it yet.  Disable the offering otherwise.  You can disable the whole product by selecting the \"Published?\" option in the Details section." ) ) {
+      const offerings = await get(this.args.resource, this.args.property);
+      set(
+        this.args.resource,
+        this.args.property,
+        offerings.rejectBy("id", offering.id)
+      );
+    }
+  }
+
+  @action
+  async setSupplier(offering, uuid) {
+    if( uuid ) {
+      offering.supplier = this.store.peekRecord('business-entity', uuid);
+    } else {
+      offering.supplier = null;
+    }
   }
 
   @action

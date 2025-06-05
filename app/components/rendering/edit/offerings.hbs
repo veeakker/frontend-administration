@@ -1,9 +1,19 @@
 <ul>
   {{#each (get @resource @property) as |offering|}}
     {{#let (get offering "unitPrice")
-         (get offering "typeAndQuantity")
-         as |unitPrice typeAndQuantity|}}
+           (get offering "typeAndQuantity")
+      as |unitPrice typeAndQuantity|}}
       <li class="input-group">
+        {{#let (gen-id) as |id|}}
+          <div class="input-group-text">
+            <input type="checkbox" class="form-check-input" id={{id}} checked={{offering.isEnabled}}
+              {{on "change" (e/pipe (e/boolean-val) (e/set-prop offering "isEnabled"))}}
+              />
+          </div>
+          <div class="input-group-text">
+            <label for={{id}} class="form-check-label">{{#if offering.isEnabled}}enabled{{else}}disabled{{/if}}</label>
+          </div>
+        {{/let}}
         {{#let (gen-id) as |id|}}
           <label for={{id}} class="input-group-text">€</label>
           <input
@@ -27,6 +37,30 @@
             @id={{id}}
             @onChange={{e/set-prop typeAndQuantity "unit"}}
             @selected={{typeAndQuantity.unit}} />
+        {{/let}}
+        {{#let (gen-id) (find-all "business-entity") as |id allSuppliers|}}
+          <label for={{id}} class="input-group-text">supplier</label>
+          {{#if allSuppliers.isLoading}}
+            ... loading ...
+            {{else if allSuppliers.isError}}
+            {{allSuppliers.error}}
+          {{else}}
+            <select
+              {{on "change" (e/pipe (e/str-val) (fn this.setSupplier offering))}}
+              id={{or @id (gen-id)}}
+              class="form-control"
+              name="supplier"
+            >
+              {{#each allSuppliers.records as |supplier|}}
+                {{#if (eq supplier.id offering.supplier.id)}} {{!-- it is the current supplier --}}
+                  <option selected value={{supplier.id}}>{{supplier.label}}</option>
+                {{else}}
+                  <option value={{supplier.id}}>{{supplier.label}}</option>
+                {{/if}}
+              {{/each}}
+              <option selected={{if (get offering "supplier") false true}} value={{null}}>=Geen leverancier=</option>
+            </select>
+          {{/if}}
         {{/let}}
         <BsButton @type="danger" {{on "click" (fn this.remove offering)}}>
           Remove

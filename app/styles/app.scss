@@ -41,7 +41,6 @@ h1 > small {
 }
 
 /** cards **/
-
 .card-body {
   padding: 0;
   overflow: hidden;
@@ -75,4 +74,11 @@ h1 > small {
 .leaflet-container {
   width: 100%;
   min-height: 800px;
+}
+
+/** Pages **/
+
+/*** products offerings ***/
+.show-disabled-offering {
+  text-decoration: line-through;
 }

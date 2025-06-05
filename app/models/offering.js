@@ -1,8 +1,14 @@
-import Model, { belongsTo } from '@ember-data/model';
+import Model from '@ember-data/model';
+import { belongsTo, boolean } from '../decorators/attributes';
+import link from '../decorators/link';
 
+@link()
 export default class OfferingModel extends Model {
   @belongsTo('unit-price-specification') unitPrice;
   @belongsTo('type-and-quantity') typeAndQuantity;
+  @belongsTo('business-entity') supplier;
+
+  @boolean() isEnabled;
 
   calculatePricingSync(product) {
     // TODO: Perhaps it would be simpler to convert into a (formula for)

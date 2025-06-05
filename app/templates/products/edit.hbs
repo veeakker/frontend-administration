@@ -24,10 +24,13 @@
               {{/let}}
             {{/each}}
           </C.Property>
+          <C.Card.Section @title="Product groups">
+            <C.Property @property="productGroups" @renderLabel={{false}} />
+          </C.Card.Section>
         </:body>
       </Ux::DetailsCard>
       <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-4">
-        <:title>Preview</:title>
+        <:title>Thumbnail</:title>
         <:body as |C|>
           <C.Property @renderLabel={{false}} @property="thumbnail" />
         </:body>
@@ -35,7 +38,7 @@
     </div>
 
     <div class="row">
-      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
         <:title>Prices</:title>
         <:body as |C|>
           <C.Card.Section @title="defaults">
@@ -47,12 +50,11 @@
             <C.Property @property="offerings" @renderLabel={{false}} />
           </C.Card.Section>
         </:body>
-      </Ux::DetailsCard>
-      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12 col-md-6">
-        <:title>Product groups</:title>
-        <:body as |C|>
-          <C.Property @property="productGroups" @renderLabel={{false}} />
-        </:body>
+        {{!--
+          <C.Card.Section @title="Supplier">
+            <C.Property @property="supplier" @renderLabel={{false}} />
+          </C.Card.Section>
+        --}}
       </Ux::DetailsCard>
     </div>
 
