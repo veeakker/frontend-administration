@@ -5,6 +5,6 @@ export default class WebsiteBannersShowRoute extends Route {
   @service store;
 
   async model( {banner_id} ) {
-    return await this.store.find('banner', banner_id);
+    return await this.store.findRecord('banner', banner_id);
   }
 }

@@ -9,18 +9,22 @@ export default class DeliveryPlaceModel extends Model {
 
   @url() lfwLink;
   @belongsTo('delivery-kind', {
+    inverse: "deliveryPlaces",
     show: 'rendering/show/label',
     edit: 'rendering/edit/delivery-kind'
   }) deliveryKind;
   @belongsTo('geo-coordinate', {
+    inverse: null,
     show: 'rendering/show/geo',
     edit: 'rendering/edit/geo'
   }) geoCoordinate;
   @belongsTo('postal-address', {
+    inverse: null,
     show: 'rendering/show/label',
     edit: 'rendering/edit/postalAddress'
   }) postalAddress;
   @belongsTo('delivery-route', {
+    inverse: 'deliveryPlaces',
     show: 'rendering/show/link',
     edit: 'rendering/edit/delivery-route'
   }) deliveryRoute;

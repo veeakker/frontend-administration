@@ -1,9 +1,7 @@
-import { set } from '@ember/object';
+import { set, action, get } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { action } from '@ember/object';
-import { get } from '@ember/object';
 import Component from '@glimmer/component';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 
 export default class RenderingEditGeoComponent extends Component {
   asyncGeoCoordinate = trackedFunction(this, () => get( this.args.resource, this.args.property ));

@@ -18,14 +18,13 @@ export default class ProductGroupModel extends Model {
     inverse: null,
     show: 'rendering/show/product-groups',
     edit: 'rendering/edit/product-groups'
-
   }) parentGroups;
   @hasMany('product-group', {
     inverse: null,
     show: 'rendering/show/product-groups',
     edit: 'rendering/edit/product-groups'
   }) childGroups;
-  @hasMany('spotlight-product') spotlightProducts;
+  @hasMany('spotlight-product', { inverse: "productGroups", async: true }) spotlightProducts;
   @hasMany('product', {
     inverse: 'productGroups',
     show: 'rendering/show/products',

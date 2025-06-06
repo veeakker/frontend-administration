@@ -13,6 +13,7 @@ export default class DeliveryRouteModel extends Model {
   @date() nextDeliveryDate;
   @url() lfwLink;
   @hasMany('delivery-place', {
+    inverse: 'deliveryRoute',
     show: 'rendering/show/delivery-places',
     edit: 'rendering/edit/delivery-places'
   }) deliveryPlaces;

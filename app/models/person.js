@@ -6,5 +6,5 @@ export default class PersonModel extends Model {
   @attr('string') email;
   @attr('string') phone;
 
-  @belongsTo('account') accounts;
+  @belongsTo('account', {async: true, inverse: "person"}) accounts;
 }

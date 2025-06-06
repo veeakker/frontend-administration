@@ -23,7 +23,7 @@
         <button type="button">Delete {{selection.selectionCount}}</button>
       </:selection-menu-actions>
       <:data-cell as |cell|>
-        <td>{{join ", " (map-by "label" cell.value)}}</td>
+        <td>{{#if cell.value.map}}{{join ", " (map-by "label" cell.value)}}{{/if}}</td>
       </:data-cell>
     </Ui::Table>
   {{/let}}

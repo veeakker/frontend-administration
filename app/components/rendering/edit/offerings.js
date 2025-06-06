@@ -1,7 +1,5 @@
 import { inject as service } from '@ember/service';
-import { set } from '@ember/object';
-import { get } from '@ember/object';
-import { action } from '@ember/object';
+import { set, get, action } from '@ember/object';
 import Component from '@glimmer/component';
 
 export default class RenderingEditOfferingsComponent extends Component {

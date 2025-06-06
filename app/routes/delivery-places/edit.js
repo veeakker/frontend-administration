@@ -5,6 +5,6 @@ export default class DeliveryPlacesEditRoute extends Route {
   @service store;
 
   model({ delivery_place_id }) {
-    return this.store.find('delivery-place', delivery_place_id);
+    return this.store.findRecord('delivery-place', delivery_place_id);
   }
 }

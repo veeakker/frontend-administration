@@ -4,9 +4,9 @@ import link from '../decorators/link';
 
 @link()
 export default class OfferingModel extends Model {
-  @belongsTo('unit-price-specification') unitPrice;
-  @belongsTo('type-and-quantity') typeAndQuantity;
-  @belongsTo('business-entity') supplier;
+  @belongsTo('unit-price-specification', { inverse: null }) unitPrice;
+  @belongsTo('type-and-quantity', { inverse: null }) typeAndQuantity;
+  @belongsTo('business-entity', { inverse: null }) supplier;
 
   @boolean() isEnabled;
 

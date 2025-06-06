@@ -5,6 +5,6 @@ export default class DeliveryRoutesShowRoute extends Route {
   @service store;
 
   async model( { delivery_route_id } ) {
-    return await this.store.find('delivery-route', delivery_route_id);
+    return await this.store.findRecord('delivery-route', delivery_route_id);
   }
 }

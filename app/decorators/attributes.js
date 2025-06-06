@@ -44,7 +44,7 @@ function extractMeta(sourceOptions) {
 
     return [options, meta];
   } else {
-    return [sourceOptions, {}];
+    return [{}, {}];
   }
 }
 
@@ -93,6 +93,7 @@ export function url(options) {
 export function belongsTo(klass, options) {
   let meta;
   [options, meta] = extractMeta(options);
+  if( ! Object.hasOwn(options, 'async') ) { options.async = true; }
 
   return function (target, name, descriptor) {
     setInfo(target, name, 'belongsTo', meta);
@@ -103,6 +104,8 @@ export function belongsTo(klass, options) {
 export function hasMany(klass, options) {
   let meta;
   [options, meta] = extractMeta(options);
+
+  if( !Object.hasOwn(options, 'async') ) { options.async = true; }
 
   return function (target, name, descriptor) {
     setInfo(target, name, 'hasMany', meta);

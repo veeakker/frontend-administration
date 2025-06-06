@@ -5,6 +5,6 @@ export default class ProductGroupsShowRoute extends Route {
   @service store;
 
   model({ product_group_id }) {
-    return this.store.find('product-group', product_group_id);
+    return this.store.findRecord('product-group', product_group_id);
   }
 }

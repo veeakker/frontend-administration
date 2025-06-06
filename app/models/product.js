@@ -23,28 +23,33 @@ export default class ProductModel extends Model {
   @attr('uri-set') productLabels;
   @boolean() isEnabled;
   @hasMany('product-group', {
-    inverse: false,
+    inverse: null,
     show: 'rendering/show/product-groups',
-    edit: 'rendering/edit/product-groups'
+    edit: 'rendering/edit/product-groups',
+    inverse: 'products'
   }) productGroups;
   @hasMany('offering', {
     show: 'rendering/show/offerings',
-    edit: 'rendering/edit/offerings'
+    edit: 'rendering/edit/offerings',
+    inverse: null
   }) offerings;
   @belongsTo('unit-price-specification', {
     show: 'rendering/show/unit-price-specification',
     edit: 'rendering/edit/unit-price-specification',
+    inverse: null
   })
   unitPrice;
   @belongsTo('quantitative-value', {
     show: 'rendering/show/quantitative-value',
     edit: 'rendering/edit/quantitative-value',
+    inverse: null
   })
   targetUnit;
   // @belongsTo('file') thumbnail;
   @belongsTo('file', {
     show: 'rendering/show/thumbnail',
     edit: 'rendering/edit/thumbnail',
+    inverse: null
   })
   thumbnail;
 

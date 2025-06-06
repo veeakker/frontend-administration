@@ -5,7 +5,7 @@ export default class DeliveryKindModel extends Model {
   @attr() label;
   @attr() uri;
   @attr() description;
-  @hasMany('delivery-place') deliveryPlaces;
+  @hasMany('delivery-place', { async: true, inverse: "deliveryKind"}) deliveryPlaces;
 
   @computed('uri')
   get simpleName() {

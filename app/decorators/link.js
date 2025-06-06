@@ -1,6 +1,6 @@
 import { dasherize, camelize } from '@ember/string';
 import humanize from '../utils/humanize';
-import { pluralize } from 'ember-inflector';
+import Inflector from 'ember-inflector';
 
 export default function link(options = {}) {
   return function (constructor) {
@@ -9,7 +9,7 @@ export default function link(options = {}) {
       (_match, part) => part
     );
     // converts ProductGroupModel into product-groups
-    const defaultBasePathName = pluralize(dashedName);
+    const defaultBasePathName = Inflector.inflector.pluralize(dashedName);
 
     const basePath = options.basePath || defaultBasePathName;
 
