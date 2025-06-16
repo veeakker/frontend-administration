@@ -4,8 +4,9 @@ LABEL maintainer="info@redpencil.io"
 
 WORKDIR /app
 COPY package.json .
+COPY package-lock.json .
 COPY .npmrc-build /root/.npmrc
-RUN npm install --legacy-peer-deps
+RUN npm ci
 COPY . .
 RUN npx browserslist@latest --update-db
 RUN ember build -dev
