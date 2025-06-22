@@ -5,6 +5,7 @@ import { belongsTo, string, boolean, url } from '../decorators/attributes';
 @link()
 export default class DeliveryPlaceModel extends Model {
   @string() label;
+  @string() slug;
   @boolean() isEnabled;
 
   @url() lfwLink;
