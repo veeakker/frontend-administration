@@ -12,7 +12,7 @@ export default class RenderingEditOfferingsComponent extends Component {
       set(
         this.args.resource,
         this.args.property,
-        offerings.rejectBy("id", offering.id)
+        offerings.filter( (x) => x.id !== offering.id )
       );
     }
   }
@@ -42,9 +42,7 @@ export default class RenderingEditOfferingsComponent extends Component {
       { unitPrice, typeAndQuantity });
     await offering.save();
     const offerings = await get(this.args.resource, this.args.property);
-    offerings.pushObject(offering);
+    set(this.args.resource, this.args.property, [offering, ...offerings]);
     await this.args.resource.save();
-
-    get(this.args.resource, this.args.property).pushObject(offering);
   }
 }
