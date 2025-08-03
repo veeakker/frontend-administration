@@ -25,17 +25,21 @@
   </form>
 
   <ul class="list-group list-group-flush">
-    {{#each this.newProducts as |product|}}
-      <li class="list-group-item">
-        <BsButton
-          {{on "click" (fn this.add product)}}
-          @type="success"
-        >
-          +
-        </BsButton>
-        <Ux::Link @model={{product}} target="_blank" />
-      </li>
-    {{/each}}
+    {{#if this.newProductsTF.isResolved}}
+      {{#each this.newProductsTF.value as |product|}}
+        <li class="list-group-item">
+          <BsButton
+            {{on "click" (fn this.add product)}}
+            @type="success"
+          >
+            +
+          </BsButton>
+          <Ux::Link @model={{product}} target="_blank" />
+        </li>
+      {{/each}}
+    {{else}}
+      ... finding products
+    {{/if}}
   </ul>
 {{/let}}
 
