@@ -1,5 +1,5 @@
 import Model from '@ember-data/model';
-import { belongsTo, boolean } from '../decorators/attributes';
+import { belongsTo, hasMany, boolean } from '../decorators/attributes';
 import link from '../decorators/link';
 
 @link()
@@ -7,6 +7,7 @@ export default class OfferingModel extends Model {
   @belongsTo('unit-price-specification', { inverse: null }) unitPrice;
   @belongsTo('type-and-quantity', { inverse: null }) typeAndQuantity;
   @belongsTo('business-entity', { inverse: null }) supplier;
+  @hasMany('business-entity', { inverse: null }) availableAtOrFrom;
 
   @boolean() isEnabled;
 
