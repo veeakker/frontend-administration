@@ -29,6 +29,11 @@ export default class DeliveryPlaceModel extends Model {
     show: 'rendering/show/link',
     edit: 'rendering/edit/delivery-route'
   }) deliveryRoute;
+  @belongsTo('business-entity', {
+    inverse: 'deliveryPlaces',
+    show: 'rendering/show/link',
+    edit: 'rendering/edit/business-entity'
+  }) businessEntity;
 
   get label() {
     const kind = this.deliveryKind.get("label")?.toUpperCase();
