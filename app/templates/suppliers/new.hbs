@@ -1,2 +1,20 @@
 {{page-title "New"}}
+
+<div class="container">
+  <Ux::PageHeader @kind="new" @class={{@model.class}} @model={{@model.businessEntity}} />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
+    <Ux::DetailsCard @editable={{true}} @class={{@model.class}} @resource={{@model.businessEntity}} class="col-12">
+      <:title>Details</:title>
+      <:body as |C|>
+        <C.Property @property="name" />
+        <C.Property @property="email" />
+        <C.Property @property="description" />
+      </:body>
+    </Ux::DetailsCard>
+    <BsButton type="submit" @type="primary">Create supplier</BsButton>
+  </form>
+</div>
+
+
 {{outlet}}

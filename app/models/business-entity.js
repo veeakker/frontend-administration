@@ -7,7 +7,7 @@ export default class BusinessEntityModel extends Model {
   @string() name;
   @string() email;
   @text() description;
-  @hasMany('delivery-place') deliveryPlaces;
+  @hasMany('delivery-place', { inverse: "businessEntity" }) deliveryPlaces;
 
   get label() {
     return this.name;
