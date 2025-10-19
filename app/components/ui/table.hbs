@@ -70,19 +70,19 @@
         {{!-- either we have a general block or we have to have a menu --}}
         <General as |general|>
           {{#if general.selectionIsEmpty}}
-            {{yield general to="generalMenu"}}
+            {{yield general to="general-menu"}}
           {{/if}}
         </General>
         {{#if enableSelection}}
           <Selected as |selected|>
             {{#unless selected.selectionIsEmpty}}
-              {{#if (has-block "selectionMenu")}}
-                {{yield selected to="selectionMenu"}}
+              {{#if (has-block "selection-menu")}}
+                {{yield selected to="selection-menu"}}
               {{else}}
-                {{#if (has-block "selectionMenuActions")}}
+                {{#if (has-block "selection-menu-actions")}}
                   <span class="item-count">{{selected.selectionCount}} item(s) selected</span>
                   <button type="button" {{on "click" selected.clearSelection}}>Cancel</button>
-                  {{yield selected to="selectionMenuActions"}}
+                  {{yield selected to="selection-menu-actions"}}
                 {{/if}}
               {{/if}}
             {{/unless}}
@@ -101,8 +101,8 @@
       <table class="table table-hover table-sm">
         {{!-- START: headers --}}
         <content.Header as |header|>
-          {{#if (has-block "fullHeader")}}
-            {{yield header to="fullHeader"}}
+          {{#if (has-block "full-header")}}
+            {{yield header to="full-header"}}
           {{else}}
             <thead>
               <tr>
@@ -112,13 +112,13 @@
                 {{#if header.enableLineNumbers}}
                   <th>#{{!-- Linenumbers --}}</th>
                 {{/if}}
-                {{#if (has-block "dataHeaders")}}
-                  {{yield header.dataHeadersInfo to="dataHeaders"}}
+                {{#if (has-block "data-headers")}}
+                  {{yield header.dataHeadersInfo to="data-headers"}}
                 {{else}}
                   {{#each header.fields as |field|}}
-                    <header.ThSortable @field={{field}} @hasCustomBlock={{has-block "dataHeader"}} as |dataHeader|>
+                    <header.ThSortable @field={{field}} @hasCustomBlock={{has-block "data-header"}} as |dataHeader|>
                       {{#if dataHeader.renderCustomBlock}}
-                        {{yield dataHeader to="dataHeader"}}
+                        {{yield dataHeader to="data-header"}}
                       {{else}}
                         {{#if dataHeader.isSortable}}
                           <th
@@ -134,8 +134,8 @@
                     </header.ThSortable>
                   {{/each}}
                 {{/if}}
-                {{#if (has-block "actionsHeader")}}
-                  {{yield header to="actionsHeader"}}
+                {{#if (has-block "actions-header")}}
+                  {{yield header to="actions-header"}}
                 {{else}}
                   {{#if header.hasLinks}}
                     <th></th>
@@ -154,8 +154,8 @@
           {{else}}
             <tbody>
               {{#if body.isLoading}}
-                {{#if (has-block "bodyLoading")}}
-                  {{yield to="bodyLoading"}}
+                {{#if (has-block "body-loading")}}
+                  {{yield to="body-loading"}}
                 {{else}}
                   <tr><td colspan="100%" class="is-loading-data">Loading...</td></tr>
                 {{/if}}
@@ -178,13 +178,13 @@
                             <td>{{row.lineNumber}}</td>
                           {{/if}}
                           <row.DataCells @wrapper={{wrapper}} as |dataCells|>
-                            {{#if (has-block "dataCells")}}
-                              {{yield dataCells to="dataCells"}}
+                            {{#if (has-block "data-cells")}}
+                              {{yield dataCells to="data-cells"}}
                             {{else}}
                               {{#each dataCells.fields as |column|}}
-                                <dataCells.DataCell @column={{column}} @hasCustomBlock={{has-block "dataCell"}} as |cell|>
+                                <dataCells.DataCell @column={{column}} @hasCustomBlock={{has-block "data-cell"}} as |cell|>
                                   {{#if cell.renderCustomBlock}}
-                                    {{yield cell to="dataCell"}}
+                                    {{yield cell to="data-cell"}}
                                   {{else}}
                                     {{!-- TODO: This should be based on the type of the field --}}
                                     {{#if cell.rowLink}}
@@ -226,8 +226,8 @@
                     </body.Row>
                   {{/each}}
                 {{else}}
-                  {{#if (has-block "noDataMessage")}}
-                    {{yield to="noDataMessage"}}
+                  {{#if (has-block "no-data-message")}}
+                    {{yield to="no-data-message"}}
                   {{else}}
                     <tr><td colspan="100%" class="no-data-message"><p>{{@noDataMessage}}</p></td></tr>
                   {{/if}}
