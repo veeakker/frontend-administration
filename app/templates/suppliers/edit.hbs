@@ -5,12 +5,19 @@
 
   <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}} class="row">
     <div class="row">
-      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-md-6 col-s-12">
         <:title>Details</:title>
         <:body as |C|>
           <C.Property @property="name" />
           <C.Property @property="email" />
           <C.Property @property="description" />
+        </:body>
+      </Ux::DetailsCard>
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-md-6 col-s-12">
+        <:title>Product groups</:title>
+        <:body as |C|>
+          Clearing everything here will ensure all products are visible.  It takes a while to calculate the first groups added, do it when there's few users.
+          <C.Property @property="disallowedProductGroups" @label="No product from" />
         </:body>
       </Ux::DetailsCard>
     </div>
