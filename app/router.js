@@ -28,6 +28,11 @@ Router.map(function () {
     this.route('edit', { path: '/:banner_id/edit' });
     this.route('new');
   });
+  this.route('shops', function () {
+    this.route('show', { path: '/:shop_id' });
+    this.route('edit', { path: '/:shop_id/edit' });
+    this.route('new');
+  });
   this.route('login');
 
   this.route('delivery-routes', function() {

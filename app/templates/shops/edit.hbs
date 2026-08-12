@@ -1,0 +1,48 @@
+{{page-title "Edit"}}
+
+<div class="container">
+  <Ux::PageHeader @model={{@model}} @kind="edit" />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}}>
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+        <:title>Details</:title>
+        <:body as |C|>
+          <C.Property @property="label" @label="Name" />
+          <C.Property @property="slug" @label="URL slug" />
+          <C.Property @property="style" @label="Custom CSS" />
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+        <:title>Images</:title>
+        <:body as |C|>
+          <C.Property @property="logo" @label="Logo" />
+          <C.Property @property="topImage" @label="Top image" />
+          <C.Property @property="placeholderImage" @label="Placeholder image" />
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+    <div class="row">
+      <Ux::DetailsCard @editable={{true}} @resource={{@model}} class="col-12">
+        <:title>Delivery locations</:title>
+        <:body as |C|>
+          <C.Property @property="deliveryPlaces" @renderLabel={{false}} />
+        </:body>
+      </Ux::DetailsCard>
+    </div>
+    <div class="row p-2">
+      <BsButton type="submit" @type="primary" class="col-6 col-s-12">Save</BsButton>
+      <BsButton
+        {{on "click" this.destroy}}
+        @type="danger"
+        type="button"
+        class="col-6 col-s-12">
+        Delete
+      </BsButton>
+    </div>
+  </form>
+</div>
+
+{{outlet}}

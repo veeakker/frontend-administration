@@ -47,8 +47,8 @@ export default class ProductModel extends Model {
   targetUnit;
   // @belongsTo('file') thumbnail;
   @belongsTo('file', {
-    show: 'rendering/show/thumbnail',
-    edit: 'rendering/edit/thumbnail',
+    show: 'rendering/show/image',
+    edit: 'rendering/edit/image',
     inverse: null
   })
   thumbnail;

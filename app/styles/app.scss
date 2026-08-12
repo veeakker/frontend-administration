@@ -82,3 +82,11 @@ h1 > small {
 .show-disabled-offering {
   text-decoration: line-through;
 }
+
+/** image previews in detail cards */
+.image-preview {
+  height: 64px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}

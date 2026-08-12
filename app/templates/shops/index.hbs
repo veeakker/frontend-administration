@@ -1,0 +1,17 @@
+{{page-title "Index"}}
+
+<div class="container">
+  <Ux::PageHeader @class="shop" @kind="list" />
+
+  <Ui::Table
+    @content={{@model}}
+    @fields="label slug"
+    @sortableFields="label slug"
+    @links="shops.edit:edit:pencil shops.show:show:file-earmark-richtext"
+    @rowLink="shops.show"
+    @isLoading={{this.isLoadingModel}}
+    @view={{this.view}}
+  />
+</div>
+
+{{outlet}}

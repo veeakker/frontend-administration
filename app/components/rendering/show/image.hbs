@@ -1,0 +1,15 @@
+{{#if (get @resource @property)}}
+  {{#let (get @resource @property) as |file|}}
+    {{#if @editable}}
+      <button type="button" {{on "click" @startEditing}} class="btn p-0 border-0 bg-transparent">
+        <img src={{file.downloadUrl}} alt={{@resource.label}} class="image-preview" />
+      </button>
+    {{else}}
+      <img src={{file.downloadUrl}} alt={{@resource.label}} class="image-preview" />
+    {{/if}}
+  {{/let}}
+{{else if @editable}}
+  <BsButton {{on "click" @startEditing}}>Add</BsButton>
+{{else}}
+  None
+{{/if}}

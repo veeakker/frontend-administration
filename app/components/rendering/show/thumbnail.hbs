@@ -1,7 +1,0 @@
-{{#if @resource.thumbnail}}
-  <span {{on "click" @startEditing}}>
-    <img src={{@resource.thumbnail.downloadUrl}} alt={{concat @resource.label " on white background"}} style="max-width: 100%" />
-  </span>
-{{else}}
-  <BsButton {{on "click" @startEditing}}>Add</BsButton>
-{{/if}}

@@ -1,0 +1,12 @@
+{{#let (file-queue name=@property onFileAdded=this.uploadImage) as |queue|}}
+  <label class="btn btn-primary">
+    Upload image
+    <input
+      type="file"
+      accept="image/*"
+      class="d-none"
+      {{queue.selectFile}} />
+  </label>
+{{/let}}
+
+<BsButton {{on "click" @exitEditing}}>Cancel</BsButton>

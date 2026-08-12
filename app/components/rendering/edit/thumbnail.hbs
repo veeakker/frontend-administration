@@ -1,8 +1,0 @@
-{{#let (file-queue name="photos" onFileAdded=this.uploadThumbnail) as |queue|}}
-  <input
-    type="file"
-    accept="image/*"
-    {{queue.selectFile}} />
-{{/let}}
-
-<BsButton {{on "click" @exitEditing}}>Cancel</BsButton>

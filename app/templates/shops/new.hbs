@@ -1,0 +1,26 @@
+{{page-title "New"}}
+
+<div class="container">
+  <Ux::PageHeader @class="shop" @model={{@model}} @kind="new" />
+
+  <form {{on "submit" (e/pipe (e/prevent-default) this.persist)}}>
+    <Ux::DetailsCard @editable={{true}} @class={{this.class}} @resource={{@model}} class="col-12" @title="Details" as |C|>
+      <C.Property @property="label" @label="Name" />
+      <C.Property @property="slug" @label="URL slug" />
+      <C.Property @property="style" @label="Custom CSS" />
+    </Ux::DetailsCard>
+
+    <div class="row p-2">
+      <BsButton type="submit" @type="primary" class="col-6 col-s-12">Create</BsButton>
+      <BsButton
+        {{on "click" this.cancel}}
+        @type="danger"
+        type="button"
+        class="col-6 col-s-12">
+        Cancel
+      </BsButton>
+    </div>
+  </form>
+</div>
+
+{{outlet}}
