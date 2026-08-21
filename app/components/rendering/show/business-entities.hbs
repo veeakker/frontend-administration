@@ -1,0 +1,13 @@
+<ul class="list-group list-group-flush">
+  {{#each (get @resource @property) as |businessEntity|}}
+    <li class="list-group-item">
+      <Ux::Link @model={{businessEntity}} />
+    </li>
+  {{else}}
+    None
+  {{/each}}
+</ul>
+
+{{#if @editable}}
+  <BsButton {{on "click" @startEditing}}>Edit</BsButton>
+{{/if}}

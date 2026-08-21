@@ -27,4 +27,14 @@ export default class ShopModel extends Model {
     edit: 'rendering/edit/delivery-places',
     inverse: null
   }) deliveryPlaces;
+  @hasMany('product-group', {
+    show: 'rendering/show/product-groups',
+    edit: 'rendering/edit/product-groups',
+    inverse: null
+  }) disallowedProductGroups;
+  @hasMany('business-entity', {
+    show: 'rendering/show/business-entities',
+    edit: 'rendering/edit/business-entities',
+    inverse: null
+  }) suppliers;
 }

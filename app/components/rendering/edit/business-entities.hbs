@@ -1,0 +1,43 @@
+<ul class="list-group list-group-flush">
+  {{#each (get @resource @property) as |businessEntity|}}
+    <li class="list-group-item">
+      <BsButton
+        {{on "click" (fn this.removeEntity businessEntity)}}
+        @type="danger"
+      >
+        X
+      </BsButton>
+      <Ux::Link @model={{businessEntity}} />
+    </li>
+  {{/each}}
+</ul>
+
+{{#let (obj content="") as |search|}}
+  <form {{on "submit" (e/pipe (e/prevent-default) (fn this.startSearch search.content))}}>
+    <span class="input-group">
+      <label class="input-group-text">Search suppliers</label>
+      <input
+        type="text"
+        class="form-control"
+        aria-label="Search suppliers"
+        {{on "change" (e/pipe (e/str-val) (e/set-prop search "content"))}} />
+      <BsButton @type="primary"><i class="bi bi-search" /></BsButton>
+    </span>
+  </form>
+
+  <ul class="list-group list-group-flush">
+    {{#each this.newEntities as |entity|}}
+      <li class="list-group-item">
+        <BsButton
+          {{on "click" (fn this.addEntity entity)}}
+          @type="success"
+        >
+          +
+        </BsButton>
+        <Ux::Link @model={{entity}} target="_blank" />
+      </li>
+    {{/each}}
+  </ul>
+{{/let}}
+
+<BsButton {{on "click" @exitEditing}}>Done</BsButton>

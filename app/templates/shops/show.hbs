@@ -32,4 +32,20 @@
       </:body>
     </Ux::DetailsCard>
   </div>
+  <div class="row">
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
+      <:title>Product visibility</:title>
+      <:body as |C|>
+        <C.Property @property="disallowedProductGroups" @label="Hidden product groups" />
+      </:body>
+    </Ux::DetailsCard>
+  </div>
+  <div class="row">
+    <Ux::DetailsCard @editable={{false}} @resource={{@model}} class="col-12">
+      <:title>Suppliers</:title>
+      <:body as |C|>
+        <C.Property @property="suppliers" @renderLabel={{false}} />
+      </:body>
+    </Ux::DetailsCard>
+  </div>
 </div>
