@@ -3,6 +3,25 @@
 <div class="container">
   <Ux::PageHeader @kind="list" @class="product" />
 
+  <div class="d-flex gap-2 mb-3">
+    <div class="flex-grow-1">
+      <Ui::TypeaheadSelect
+        @records={{find-all "shop"}}
+        @selectedId={{this.shop}}
+        @onSelect={{e/set-prop this "shop"}}
+        @allLabel="All shops"
+      />
+    </div>
+    <div class="flex-grow-1">
+      <Ui::TypeaheadSelect
+        @records={{find-all "business-entity"}}
+        @selectedId={{this.supplier}}
+        @onSelect={{e/set-prop this "supplier"}}
+        @allLabel="All suppliers"
+      />
+    </div>
+  </div>
+
   <Ui::Table
     @content={{@model}}
     @view={{this.view}}

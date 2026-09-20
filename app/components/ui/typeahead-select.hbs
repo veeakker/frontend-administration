@@ -1,0 +1,29 @@
+<div class="position-relative">
+  <input
+    type="text"
+    class="form-control form-control-sm"
+    value={{this.displayValue}}
+    placeholder={{or @allLabel "All"}}
+    aria-label={{or @allLabel "Filter"}}
+    autocomplete="off"
+    {{on "input" this.onInput}}
+    {{on "focus" this.onFocus}}
+    {{on "blur" this.onBlur}}
+  />
+  {{#if this.open}}
+    <ul class="list-group position-absolute w-100 shadow" style="z-index: 1000; max-height: 250px; overflow-y: auto;">
+      <li class="list-group-item list-group-item-action py-1" role="button"
+        {{on "mousedown" (e/prevent-default)}}
+        {{on "click" this.clear}}>
+        {{or @allLabel "All"}}
+      </li>
+      {{#each this.filteredRecords as |record|}}
+        <li class="list-group-item list-group-item-action py-1 {{if (eq record.id @selectedId) 'active'}}" role="button"
+          {{on "mousedown" (e/prevent-default)}}
+          {{on "click" (fn this.select record.id)}}>
+          {{record.label}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>
