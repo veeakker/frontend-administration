@@ -6,7 +6,7 @@
     @onClick={{this.updateLocation}}
     as |layers|
   >
-    <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
+    <layers.maplibre />
     {{#if this.hasGeo}}
       <layers.marker @location={{this.markerLocation}} />
     {{/if}}

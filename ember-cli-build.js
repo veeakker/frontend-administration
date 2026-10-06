@@ -4,6 +4,12 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
+    // Leaflet is loaded as a vendor script by ember-leaflet; externalizing it
+    // lets @maplibre/maplibre-gl-leaflet bind to that same instance instead of
+    // webpack bundling a second, incompatible copy.
+    autoImport: {
+      externals: ['leaflet'],
+    },
     'ember-bootstrap': {
       bootstrapVersion: 5,
       importBootstrapCSS: false,

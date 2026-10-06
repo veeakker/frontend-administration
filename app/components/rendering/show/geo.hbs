@@ -1,7 +1,7 @@
 {{#let (get @resource @property) as |geo|}}
   {{#if (and geo.latitude geo.longitude)}}
     <LeafletMap @lat={{geo.latitude}} @lng={{geo.longitude}} @zoom={{11}} as |layers|>
-      <layers.tile @url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
+      <layers.maplibre />
       <layers.marker @location={{array geo.latitude geo.longitude}} />
     </LeafletMap>
   {{else}}
