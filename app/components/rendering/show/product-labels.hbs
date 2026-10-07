@@ -1,0 +1,9 @@
+<span {{on "click" (e/maybe @startEditing)}}>
+  {{#each (get @resource @property) as |labelUri|}}
+    {{#let (product/label-info labelUri) as |label|}}
+      <img class="product-label-icon" src={{label.image}} alt={{label.label}} />
+    {{/let}}
+  {{else}}
+    None
+  {{/each}}
+</span>

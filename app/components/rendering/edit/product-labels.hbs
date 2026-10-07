@@ -1,0 +1,25 @@
+<ul class="list-group list-group-flush">
+  {{#each this.productLabels as |entry|}}
+    <li class="list-group-item">
+      {{#let (gen-id) as |id|}}
+        <div class="input-group">
+          <div class="input-group-text">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id={{id}}
+              checked={{entry.selected}}
+              {{on "change" (e/pipe (e/boolean-val) (fn this.toggle entry))}}
+            />
+          </div>
+          <label for={{id}} class="form-check-label">
+            <img class="product-label-icon" src={{entry.image}} alt={{entry.label}} />
+            {{entry.label}}
+          </label>
+        </div>
+      {{/let}}
+    </li>
+  {{/each}}
+</ul>
+
+<BsButton {{on "click" @exitEditing}}>Done</BsButton>

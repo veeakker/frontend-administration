@@ -17,13 +17,7 @@
           <C.Property @property="nutricionDataText" @label="Nutricion data" />
           <C.Property @property="sortIndex" />
           <C.Property @property="isEnabled" @label="Published?" />
-          <C.Property @property="productLabels">
-            {{#each @model.productLabels as |uri|}}
-              {{#let (product/label-info uri) as |label|}}
-                <img src={{label.image}} alt={{label.label}} />
-              {{/let}}
-            {{/each}}
-          </C.Property>
+          <C.Property @property="productLabels" @label="Product labels" />
           <C.Card.Section @title="Product groups">
             <C.Property @property="productGroups" @renderLabel={{false}} />
           </C.Card.Section>

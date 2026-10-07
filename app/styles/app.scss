@@ -82,3 +82,10 @@ h1 > small {
 .show-disabled-offering {
   text-decoration: line-through;
 }
+
+/*** product labels ***/
+img.product-label-icon {
+  max-height: 1.5em;
+  width: auto;
+  object-fit: contain;
+}

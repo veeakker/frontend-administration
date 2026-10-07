@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model from '@ember-data/model';
 import fetchProp from '../decorators/fetch-prop';
 import link from '../decorators/link';
 import {
@@ -8,6 +8,7 @@ import {
   text,
   belongsTo,
   hasMany,
+  uriset,
 } from '../decorators/attributes';
 
 @link()
@@ -20,7 +21,10 @@ export default class ProductModel extends Model {
   @text() nutricionDataText;
   @number() sortIndex;
   @number() plu;
-  @attr('uri-set') productLabels;
+  @uriset({
+    show: 'rendering/show/product-labels',
+    edit: 'rendering/edit/product-labels'
+  }) productLabels;
   @boolean() isEnabled;
   @hasMany('product-group', {
     inverse: null,

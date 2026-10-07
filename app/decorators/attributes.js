@@ -76,6 +76,16 @@ export function string(options) {
   };
 }
 
+export function uriset(options = {}) {
+  let meta;
+  [options, meta] = extractMeta(options);
+
+  return function (target, name, descriptor) {
+    setInfo(target, name, 'uri-set', meta);
+    return attr('uri-set', options)(target, name, descriptor);
+  };
+}
+
 export function text(options) {
   return function (target, name, descriptor) {
     setInfo(target, name, 'text');
